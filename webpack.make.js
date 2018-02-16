@@ -51,7 +51,10 @@ module.exports = function makeWebpackConfig(options) {
                 'angular-socket-io',
                 'angular-ui-bootstrap',
                 'angular-ui-router',
-                'lodash'
+                'lodash',
+                'leaflet',
+                'angular-simple-logger',
+                'ui-leaflet'
             ]
         };
     }

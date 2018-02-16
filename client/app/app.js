@@ -30,7 +30,7 @@ import './app.scss';
 
 angular.module('starlingApp', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter,
   uiBootstrap, _Auth, account, admin, 'validation.match', navbar, footer, main, constants,
-  socket, util
+  socket, util, 'nemLogging', 'ui-leaflet'
 ])
   .config(routeConfig)
   .run(function($rootScope, $location, Auth) {
