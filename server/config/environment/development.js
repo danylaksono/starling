@@ -7,15 +7,15 @@ module.exports = {
 
   // MongoDB connection options
   mongo: {
-    uri: 'mongodb://localhost/starling-dev'
+    uri: 'mongodb://127.0.0.1/starling-dev'
   },
 
   // Sequelize connection opions
   sequelize: {
-    uri: 'sqlite://',
+    uri: 'postgres://postgres:postgres@localhost:5432/sqlmdb',
     options: {
       logging: false,
-      storage: 'dev.sqlite',
+      //storage: 'dev.sqlite',
       define: {
         timestamps: false
       }
