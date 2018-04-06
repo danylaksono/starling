@@ -1,126 +1,40 @@
-<div class="wrapper">
-  <div class="navbar-default sidebar" role="navigation">
-    <div class="sidebar-nav navbar-collapse">
-      <ul class="nav" id="side-menu">
-        <li class="sidebar-search">
-          <div class="row">
-            <div class="col-md-4">
-              <img src="/assets/images/starling.png" class="headimg pull-left">
-            </div>
-            <div class="col-md-8">
-              <p class="lead">The Starling</p>
-              <div class="col-md-12 text-center">
-                  <p>A WebGIS framework for Serious Developers</p>
-                </div>
-            </div>
-          </div>
-
-
-        </li>
-        <li class="sidebar-search">
-          <div class="input-group custom-search-form">
-            <input type="text" class="form-control" placeholder="Search...">
-            <span class="input-group-btn">
-              <button class="btn btn-default" type="button">
-                <i class="fa fa-search"></i>
-              </button>
-            </span>
-          </div>
-          <!-- /input-group -->
-        </li>
-        <li>
-          <a href="/main">
-            <i class="fa fa-edit fa-fw"></i> Basemaps</a>
-        </li>
-        <li>
-          <a href="#">
-            <i class="fa fa-bar-chart-o fa-fw"></i> Charts
-            <span class="fa arrow"></span>
-          </a>
-          <ul class="nav nav-second-level">
-            <li>
-              <a href="flot.html">Flot Charts</a>
-            </li>
-            <li>
-              <a href="morris.html">Morris.js Charts</a>
-            </li>
-          </ul>
-
-        </li>
-        <li>
-          <a href="/testing500">
-            <i class="fa fa-edit fa-fw"></i> 500 Points</a>
-        </li>
-        <li>
-          <a href="/testing5000">
-            <i class="fa fa-edit fa-fw"></i> 5.000 Points</a>
-        </li>
-
-        <li>
-          <a href="/testing50000">
-            <i class="fa fa-edit fa-fw"></i> 50.000 Points</a>
-        </li>
-
-        <li>
-          <a href="/testing500000">
-            <i class="fa fa-edit fa-fw"></i> 500.000 Points</a>
-        </li>
-
-      </ul>
-    </div>
-    <!-- /.sidebar-collapse -->
-  </div>
-
-  <div id="page-wrapper">
-    <div class="mapcontainer">
-      <leaflet height="100vh" width="100%" center="center">
-      </leaflet>
-    </div>
-  </div>
-</div>
-
-
-
-
-<div class="infowindow" ng-show="openinfowindow">
-  <div class="container" style="word-wrap: break-word;">
-    <h3 style="text-align:center"> {{infocontent.nama}} </h3>
-    <img class="img-data" src="../assets/images/data/{{gambar}}"></img>
-    <p style="text-align:center">
-      <i> Koordinat: {{infocontent.lat}} - {{infocontent.lng}} </i>
-    </p>
-    <br>
-    <p ng-if="infocontent.lanal"> Wilayah Kerja:
-      <span ng-repeat="lanal in infocontent.lanal">
-        <a href=# ng-click="findMarker(lanal)">
-          {{lanal}} </a>|
-      </span>
-    </p>
-    <h4 ng-show="infocontent.keterangan"> Keterangan </h4>
-    <p ng-show="infocontent.keterangan.labuhlaut">
-      <strong>Labuh Laut </strong>
-    </p>
-    <ul ng-repeat="(key, value) in infocontent.keterangan.labuhlaut">
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      The Starling
+      <small>A WebGIS for Serious Developers</small>
+    </h1>
+    <ol class="breadcrumb">
       <li>
-        <strong>{{key}}:</strong> {{value}}</li>
-    </ul>
-  </div>
-</div>
-
-<script type="text/ng-template" id="myModalContent.html">
-  <div class="modal-header">
-    <h3 class="modal-title" id="modal-title">I'm a modal!</h3>
-  </div>
-  <div class="modal-body" id="modal-body">
-    <ul>
-      <li ng-repeat="item in $ctrl.items">
-        <a href="#" ng-click="$event.preventDefault(); $ctrl.selected.item = item">{{ item }}</a>
+        <a href="#">
+          <i class="fa fa-dashboard"></i> Main</a>
       </li>
-    </ul>
-    Selected: <b>{{ $ctrl.selected.item }}</b>
-  </div>
-  <div class="modal-footer">
-    <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
-    <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
-  </div>
-</script>
+      <li class="active">Dashboard</li>
+    </ol>
+  </section>
+
+  <!-- Main content -->
+  <section class="content container-fluid">
+    <div class="row">
+      <section class="col-lg-12 connectedSortable ui-sortable">
+        <div class="box box-solid bg-light-blue-gradient">
+          
+          <div class="box-body">
+            <leaflet height="60vh" width="100%" center="center">
+            </leaflet>
+          </div>
+        </div>
+      </section>
+    </div>
+
+
+    <!--------------------------
+          | Your Page Content Here |
+          -------------------------->
+
+  </section>
+  <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->

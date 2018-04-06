@@ -42,6 +42,7 @@ module.exports = function makeWebpackConfig(options) {
             polyfills: './client/polyfills.js',
             vendor: [
                 'angular',
+                'admin-lte',
                 'angular-animate',
                 'angular-aria',
                 'angular-cookies',
@@ -54,8 +55,8 @@ module.exports = function makeWebpackConfig(options) {
                 'lodash',
                 'leaflet',
                 'angular-simple-logger',
-                'ui-leaflet',
-                'admin-lte'
+                'ui-leaflet'
+                
             ]
         };
     }
