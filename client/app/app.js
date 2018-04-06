@@ -25,11 +25,12 @@ import main from './main/main.component';
 import constants from './app.constants';
 import util from '../components/util/util.module';
 import socket from '../components/socket/socket.service';
+import AdminlteComponent from './adminlte/adminlte.component';
 
 import './app.scss';
 
 angular.module('starlingApp', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter,
-  uiBootstrap, _Auth, account, admin, 'validation.match', navbar, footer, main, constants,
+  uiBootstrap, _Auth, account, admin, 'validation.match', navbar, footer, main, constants, AdminlteComponent,
   socket, util, 'nemLogging', 'ui-leaflet'
 ])
   .config(routeConfig)

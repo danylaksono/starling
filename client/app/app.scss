@@ -3,6 +3,8 @@ $icon-font-path: '/assets/fonts/bootstrap/';
 $fa-font-path: '/assets/fonts/font-awesome/';
 @import '~font-awesome/scss/font-awesome';
 @import '~leaflet/dist/leaflet.css';
+@import '~admin-lte/dist/css/AdminLTE.css';
+@import '~admin-lte/dist/css/skins/_all-skins.css';
 
 // @import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,900|Roboto:300,500,700,900);
 
@@ -40,7 +42,7 @@ html {
 
 
 //----------------------------------------------------
-
+/*
 //sbadmin
 #wrapper {
   width: 100%;
@@ -425,12 +427,14 @@ table.dataTable thead .sorting:after {
     border-left-width: 0;
   }
 }
+*/
 
 //----------------------------------------------------
 
 // Component styles are injected through gulp
 /* inject:scss */
 @import 'admin/admin';
+@import 'adminlte/adminlte';
 @import 'main/main';
 @import '../components/footer/footer';
 @import '../components/modal/modal';

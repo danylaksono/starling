@@ -54,7 +54,8 @@ module.exports = function makeWebpackConfig(options) {
                 'lodash',
                 'leaflet',
                 'angular-simple-logger',
-                'ui-leaflet'
+                'ui-leaflet',
+                'admin-lte'
             ]
         };
     }
