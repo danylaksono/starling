@@ -42,6 +42,9 @@ module.exports = function makeWebpackConfig(options) {
             polyfills: './client/polyfills.js',
             vendor: [
                 'angular',
+                'script-loader!popper.js',
+                'script-loader!jquery',
+                'script-loader!bootstrap',
                 'admin-lte',
                 'angular-animate',
                 'angular-aria',
@@ -50,12 +53,13 @@ module.exports = function makeWebpackConfig(options) {
 
                 'angular-sanitize',
                 'angular-socket-io',
-                'angular-ui-bootstrap',
+                //'angular-ui-bootstrap',
                 'angular-ui-router',
                 'lodash',
                 'leaflet',
                 'angular-simple-logger',
                 'ui-leaflet'
+                
                 
             ]
         };
