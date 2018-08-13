@@ -13,6 +13,7 @@ export class MainController {
     $scope.data = [];
     $scope.infocontent = {};
     $scope.openinfowindow = false;
+    $scope.collapseSidebar = false;
 
     $scope.center = {
       lat: -7.0866007882805485,

@@ -9,7 +9,7 @@ import ngSanitize from 'angular-sanitize';
 import 'angular-socket-io';
 
 import uiRouter from 'angular-ui-router';
-import uiBootstrap from 'angular-ui-bootstrap';
+//import uiBootstrap from 'angular-ui-bootstrap';
 import 'angular-validation-match';
 
 import {
@@ -25,11 +25,12 @@ import main from './main/main.component';
 import constants from './app.constants';
 import util from '../components/util/util.module';
 import socket from '../components/socket/socket.service';
+import AdminlteComponent from './adminlte/adminlte.component';
 
 import './app.scss';
 
 angular.module('starlingApp', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter,
-  uiBootstrap, _Auth, account, admin, 'validation.match', navbar, footer, main, constants,
+  _Auth, account, admin, 'validation.match', navbar, footer, main, constants, AdminlteComponent,
   socket, util, 'nemLogging', 'ui-leaflet'
 ])
   .config(routeConfig)
