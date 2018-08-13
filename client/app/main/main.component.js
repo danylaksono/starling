@@ -15,8 +15,8 @@ export class MainController {
     $scope.openinfowindow = false;
 
     $scope.center = {
-      lat: -6.866007882805485,
-      lng: 117.44335937499999,
+      lat: -7.0866007882805485,
+      lng: 118.44335937499999,
       zoom: 5
     };
 
