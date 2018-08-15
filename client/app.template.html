@@ -27,7 +27,7 @@
       ga('send', 'pageview');
     </script>
 
-    <navbar></navbar>
+    <navbar ng-if="authIsLoggedIn"></navbar>
     <div ui-view=""></div>
     <footer></footer>
 </body>

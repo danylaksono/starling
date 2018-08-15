@@ -40,6 +40,7 @@ angular.module('starlingApp', [ngCookies, ngResource, ngSanitize, 'btford.socket
 
     $rootScope.$on('$stateChangeStart', function(event, next) {
       Auth.isLoggedIn(function(loggedIn) {
+        $rootScope.authIsLoggedIn = loggedIn;
         if(next.authenticate && !loggedIn) {
           $location.path('/login');
         }

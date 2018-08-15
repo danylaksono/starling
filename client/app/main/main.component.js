@@ -71,11 +71,14 @@ export class MainController {
   }
 
   $onInit() {
+
+    /*    
     this.$http.get('/api/things')
       .then(response => {
         this.awesomeThings = response.data;
         this.socket.syncUpdates('thing', this.awesomeThings);
       });
+      */
   }
 
   addThing() {
@@ -97,5 +100,6 @@ export default angular.module('starlingApp.main', [uiRouter])
   .component('main', {
     template: require('./main.html'),
     controller: MainController
+    
   })
   .name;

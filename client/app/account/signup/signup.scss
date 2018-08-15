@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css?family=Merriweather|Roboto:700');
+$btnText: #fff;
+$btnTextAlt: #000;
+
+.big-icon-no-animate {
+  font-size: 7em;
+  color: dodgerBlue;
+}
+
+.panel-heading {
+  text-align: center;
+  font-weight: 900;
+  font-family: cursive;
+}
+
+.logo-login {
+  min-height: 100px;
+  width: 100%;
+  display: block;
+  background-image: url("../assets/images/logo.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+  padding-bottom: 40px;
+}
+
+.app-title {
+  text-align: center;
+  color: white;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.5em;
+}
+
+.app-subtitle {
+  text-align: center;
+  color: white;
+  font-family: 'Roboto', sans-serif;
+  font-size: 2.1em;
+}
+
+.signin-title {
+  font-family: 'Merriweather', serif;
+  text-align: center;
+  font-size: 2em;
+  padding-bottom: 10px;
+  color: cornflowerblue;
+}
+
+html {
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.logbox-container {
+  border-radius: 2px;
+  display: block;
+  margin: 20px 14px;
+  position: relative;
+  z-index: 999;
+}
+
+.signin-info {
+  background: #444;
+  display: block;
+  overflow: hidden;
+  padding: 20px 30px;
+  text-align: center;
+}
+
+.signin-form {
+  background: #fff;
+  display: block;
+  padding: 30px;
+  position: relative;
+}
+@media (min-width:768px) {
+  .logbox-container {
+    display: table;
+    margin: 80px auto;
+    width: 650px;
+    table-layout: fixed;
+  }
+
+  .signin-info {
+    display: table-cell;
+    padding: 30px;
+    text-align: left;
+    vertical-align: top;
+    width: 42%;
+  }
+
+  .signin-form {
+    display: table-cell;
+    vertical-align: top;
+    width: 60%;
+  }
+}
+
+.logbox {
+  padding-top: 120px !important;
+}
+
+.bg {
+  /* The image used */
+  background-image: url("../assets/images/danau.jpg");
+  /* Set rules to fill background */
+  min-height: 100%;
+  //min-width: 1024px;
+  overflow: hidden;
+  /* Set up proportionate scaling */
+  width: 100%;
+  height: auto;
+  /* Set up positioning */
+  position: fixed;
+  top: 0;
+  left: 0;
+  /* Full height */
+  height: 100%;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+}
+
+.row {
+  opacity: 0.8;
+}
