@@ -106,15 +106,16 @@ html {
   /* The image used */
   background-image: url("../assets/images/danau.jpg");
   /* Set rules to fill background */
-  min-height: 100%;
+  //min-height: 100%;
   //min-width: 1024px;
-  overflow: hidden;
+  overflow-y: scroll;
   /* Set up proportionate scaling */
   width: 100%;
-  height: auto;
+  //height: auto;
   /* Set up positioning */
   position: fixed;
   top: 0;
+//  bottom:0;
   left: 0;
   /* Full height */
   height: 100%;
@@ -128,4 +129,12 @@ html {
 
 .row {
   opacity: 0.8;
+}
+
+@media screen and (max-width: 768px) {
+  .row {
+    overflow-y: scroll;
+    height:100%
+  }
+
 }
