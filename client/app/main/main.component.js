@@ -21,7 +21,7 @@ export class MainController {
       zoom: 5
     };
 
-    $scope.$on('$destroy', function() {
+    $scope.$on('$destroy', function () {
       socket.unsyncUpdates('thing');
     });
 
@@ -71,18 +71,15 @@ export class MainController {
   }
 
   $onInit() {
-
-    /*    
-    this.$http.get('/api/things')
+    this.$http.post('/api/lombokdatas')
       .then(response => {
-        this.awesomeThings = response.data;
-        this.socket.syncUpdates('thing', this.awesomeThings);
+        console.log(response);
       });
-      */
+
   }
 
   addThing() {
-    if(this.newThing) {
+    if (this.newThing) {
       this.$http.post('/api/things', {
         name: this.newThing
       });
@@ -100,6 +97,6 @@ export default angular.module('starlingApp.main', [uiRouter])
   .component('main', {
     template: require('./main.html'),
     controller: MainController
-    
+
   })
   .name;

@@ -9,6 +9,7 @@ import path from 'path';
 
 export default function(app) {
   // Insert routes below
+  app.use('/api/lombokdatas', require('./api/lombokdata'));
   app.use('/api/things', require('./api/thing'));
   app.use('/api/users', require('./api/user'));
 

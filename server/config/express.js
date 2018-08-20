@@ -75,7 +75,7 @@ export default function(app) {
         includeSubDomains: true,
         preload: true
       },
-      xssProtection: true
+      xssProtection: true //change back to true on prod
     }));
   }
 
