@@ -1,0 +1,40 @@
+<!--mat-sidenav-container>
+
+	
+	<mat-sidenav #drawer fixedInViewport="true" [mode]="side" [opened]="true">
+		<mat-toolbar color="primary">Menu</mat-toolbar>
+		<mat-nav-list>
+			<a mat-list-item href="#">ITEM1</a>
+			<a mat-list-item href="#">ITEM2</a>
+			<a mat-list-item href="#">ITEM3</a>
+			<a mat-list-item href="#">ITEM4</a>
+		</mat-nav-list>
+	</mat-sidenav>
+	
+	<mat-sidenav-content>
+		<mat-toolbar color="primary" class="position-fixed">
+			<button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span class="mat-spacer"></span>
+      <span>HELLO APPLICATION</span>
+    </mat-toolbar>
+
+    <div class="content">
+        <app-maps></app-maps>
+    </div>
+
+  </mat-sidenav-content>
+  
+
+</mat-sidenav-container>
+-->
+<app-nav></app-nav>
+
+
+
+<router-outlet></router-outlet>
