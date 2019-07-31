@@ -12,6 +12,7 @@ import { MapsComponent } from './maps/maps.component';
 import { NavComponent } from './nav/nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
+import { TodoComponent } from './todo/todo.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, Mat
     MainViewComponent,
     LandingComponent,
     MapsComponent,
-    NavComponent
+    NavComponent,
+    TodoComponent
   ],
   imports: [
     BrowserModule,
