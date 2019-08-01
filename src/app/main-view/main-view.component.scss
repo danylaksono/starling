@@ -1,11 +1,16 @@
-.position-fixed{
-    position: fixed
-  }
-  
-  .mat-spacer{
-    flex: 1 1 auto;
-  }
-  
-  .content {
-    margin-top: 58px
-  }
+
+
+mat-sidenav-container, mat-sidenav-content, mat-sidenav {
+    height: 100%;
+}
+ 
+mat-sidenav {
+    width: 300px;
+    padding-top:50px;
+}
+
+.mat-drawer {
+  top: 50px !important;
+  padding-top:10px;
+}
+ 

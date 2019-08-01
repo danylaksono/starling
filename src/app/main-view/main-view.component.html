@@ -1,4 +1,23 @@
-<!--mat-sidenav-container>
+<mat-sidenav-container>
+    <mat-sidenav #sidenav role="navigation">
+        <!--this is a place for us to add side-nav code-->
+        <app-sidenav-list></app-sidenav-list>
+      </mat-sidenav>
+  <mat-sidenav-content>
+    <app-header (sidenavToggle)="sidenav.toggle()"></app-header>
+    <!--in here all the content must reside. We will add a navigation header as well-->
+    
+    <main>
+      <app-maps></app-maps>
+      <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-content>
+
+  
+</mat-sidenav-container>
+
+
+  <!--mat-sidenav-container>
 
 	
 	<mat-sidenav #drawer fixedInViewport="true" [mode]="side" [opened]="true">
@@ -33,8 +52,6 @@
 
 </mat-sidenav-container>
 -->
-<!--app-nav></app-nav-->
+  <!--app-nav></app-nav-->
 
-<app-maps></app-maps>
-
-<router-outlet></router-outlet>
+  <!--app-maps></app-maps-->

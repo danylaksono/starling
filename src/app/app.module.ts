@@ -12,7 +12,9 @@ import { MapsComponent } from './maps/maps.component';
 import { NavComponent } from './nav/nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
-import { TodoComponent } from './todo/todo.component';
+import { HeaderComponent } from './navigation/header/header.component';
+import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
+
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import { TodoComponent } from './todo/todo.component';
     LandingComponent,
     MapsComponent,
     NavComponent,
-    TodoComponent
+    HeaderComponent,
+    SidenavListComponent
   ],
   imports: [
     BrowserModule,
@@ -34,6 +37,7 @@ import { TodoComponent } from './todo/todo.component';
     MatSidenavModule,
     MatIconModule,
     MatListModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
