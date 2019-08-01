@@ -1,7 +1,12 @@
-@import '../../../node_modules/ol/ol.css';
+//@import '../../../node_modules/ol/ol.css';
 @import '../../../node_modules/ol-layerswitcher/src/ol-layerswitcher.css';
+
 
 .map {
   width: 100%;
   height: calc(100vh - 50px);
+};
+
+.sidebar {
+  top:55px;
 }

@@ -30,7 +30,7 @@
     "ol": "^5.3.3",
     "ol-layerswitcher": "^3.3.0",
     "rxjs": "~6.4.0",
-    "sidebar-v2": "git+https://github.com/Turbo87/sidebar-v2.git",
+    "sidebar-v2": "github:umbe1987/sidebar-v2#ol5-sidebar",
     "tslib": "^1.9.0",
     "zone.js": "~0.9.1"
   },
