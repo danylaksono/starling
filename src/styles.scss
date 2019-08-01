@@ -1,8 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
-@import 'sidebar-v2/css/ol3-sidebar.css';   
-@import 'ol-layerswitcher/src/ol-layerswitcher.css';
+
+// node module's css-es need to be added here instead of to each component
+@import '../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import '../node_modules/sidebar-v2/css/ol3-sidebar.css';   
+@import '../node_modules/ol-layerswitcher/src/ol-layerswitcher.css';
 
 
 

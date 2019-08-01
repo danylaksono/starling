@@ -1,6 +1,24 @@
-# Sitaru2
+# Sitaru v.2
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.1.
+
+## NOTES ON DEVELOPMENT
+
+Due to generally unavailable support between Angular 8, Openlayers 5 and Leaflet Sidebar V2 used in this webGIS (see [this issue](https://github.com/Turbo87/sidebar-v2/issues/143)), you need to manually insert this line to ol/control.js (as per stackoverflow):
+
+`export {default as Sidebar} from 'sidebar-v2/js/ol5-sidebar.js';`
+
+also add this line to the component's header:
+
+`import { Sidebar } from 'ol/control.js';`
+
+This way, the sidebar could be used as such:
+    `var sidebar = new Sidebar({ element: 'sidebar', position: 'right' });`
+    `var scale = new Control.ScaleLine;`
+    `this.map.addControl(sidebar);`
+
+
+
 
 ## Development server
 

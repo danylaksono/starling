@@ -1,5 +1,5 @@
 //@import '../../../node_modules/ol/ol.css';
-@import '../../../node_modules/ol-layerswitcher/src/ol-layerswitcher.css';
+
 
 
 .map {
@@ -9,4 +9,8 @@
 
 .sidebar {
   top:55px;
+}
+
+.layer-switcher {
+  position: relative;
 }
