@@ -7,17 +7,12 @@ import OlTileLayer from 'ol/layer/Tile';
 import OlView from 'ol/View';
 import * as Control from 'ol/Control';
 import { Sidebar } from 'ol/control.js';
+import SearchNominatim from 'ol-ext/control/SearchNominatim';
+import LayerSwitcher from 'ol-ext/control/LayerSwitcher';
+import { fromLonLat } from 'ol/proj';
 
-import LayerGroup from 'ol/layer/Group';
-import LayerImage from 'ol/layer/Image';
-import LayerTile from 'ol/layer/Tile';
-import SourceImageArcGISRest from 'ol/source/ImageArcGISRest';
-import SourceOSM from 'ol/source/OSM';
-import SourceStamen from 'ol/source/Stamen';
-import LayerSwitcher from 'ol-layerswitcher';
-
-
-import { fromLonLat } from 'ol/proj'
+import {BasemaplayerService } from '../service/basemaplayer.service';
+import { OverlaylayerService } from './../service/overlaylayer.service';
 
 
 
@@ -27,29 +22,43 @@ import { fromLonLat } from 'ol/proj'
   templateUrl: './maps.component.html',
   styleUrls: ['./maps.component.scss']
 })
+
+
 export class MapsComponent implements OnInit, AfterViewInit {
 
   map: OlMap;
   source: OlXYZ;
   layer: OlTileLayer;
   view: OlView;
+  basemap:any[];
+  overlay:{};
+  
   @ViewChild('switcher', { static: false }) switcher: ElementRef;
 
-  constructor() {
+  constructor(
+    public basemaplayers: BasemaplayerService,
+    private overlaylayers: OverlaylayerService
+    ) {
   } // constructor
 
-  ngOnInit() {
-    this.source = new OlXYZ({
-      url: 'http://tile.osm.org/{z}/{x}/{y}.png'
-    });
-    this.layer = new OlTileLayer({
-      title: 'OpenStreetMap',
-      source: this.source
+  
 
-    });
+  
+  getOverlays(){
+    this.overlay = this.overlaylayers.overlayServgices(); 
+    return this.basemap;
+  };
+    
+
+  ngOnInit() {
+ 
     this.view = new OlView({
       center: fromLonLat([110.3738942, -7.8049497]),
       zoom: 13
+    });
+
+    this.layer = new OlTileLayer({
+      source: this.source
     });
 
     // map definitions
@@ -59,59 +68,11 @@ export class MapsComponent implements OnInit, AfterViewInit {
         rotate: false,
         zoom: true
       }),
-      //layers: [this.layer],
       layers: [
-        new LayerGroup({
-          'title': 'Base maps',
-          layers: [
-            new LayerGroup({
-              title: 'Water color with labels',
-              type: 'base',
-              combine: true,
-              visible: false,
-              layers: [
-                new LayerTile({
-                  source: new SourceStamen({
-                    layer: 'watercolor'
-                  })
-                }),
-                new LayerTile({
-                  source: new SourceStamen({
-                    layer: 'terrain-labels'
-                  })
-                })
-              ]
-            }),
-            new LayerTile({
-              title: 'Water color',
-              type: 'base',
-              visible: false,
-              source: new SourceStamen({
-                layer: 'watercolor'
-              })
-            }),
-            new LayerTile({
-              title: 'OSM',
-              type: 'base',
-              visible: true,
-              source: new SourceOSM()
-            })
-          ]
-        }),
-        new LayerGroup({
-          title: 'Overlays',
-          layers: [
-            new LayerImage({
-              title: 'Countries',
-              source: new SourceImageArcGISRest({
-                ratio: 1,
-                params: { 'LAYERS': 'show:0' },
-                url: "https://ons-inspire.esriuk.com/arcgis/rest/services/Administrative_Boundaries/Countries_December_2016_Boundaries/MapServer"
-              })
-            })
-          ]
-        })
+        this.basemaplayers.basemap,
+        this.overlaylayers.overlay
       ],
+      
       view: this.view
     });
 
@@ -124,13 +85,38 @@ export class MapsComponent implements OnInit, AfterViewInit {
     this.map.addControl(scale);
 
 
+    // Search control
+    const search = new SearchNominatim();
+    // Move to the position on selection in the control list
+    search.on('select', function (e) {
+      // console.log(e);
+      this.map.getView().animate({
+        center: e.coordinate,
+        zoom: Math.max(this.map.getView().getZoom(), 16)
+      });
+    });
+    this.map.addControl(search);
+
 
   } // oninint
 
   ngAfterViewInit() {
     this.map.setTarget('map');
     var toc = this.switcher.nativeElement; // getting switcher DOM    
-    LayerSwitcher.renderPanel(this.map, toc); // should be located here 
+    //LayerSwitcher.renderPanel(this.map, toc); // should be located in ngAfterViewInit instead of onInit
+
+    // Add a layer switcher outside the map
+    var switcher = new LayerSwitcher(
+      {
+        target: toc,
+        show_progress:true,
+        extent: true
+
+      });
+    this.map.addControl(switcher);
+
+
+
   } // afterview init
 
 }
