@@ -1,4 +1,5 @@
 
+
 import { Component, OnInit, Inject, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 
 import OlMap from 'ol/Map';
@@ -13,7 +14,9 @@ import { fromLonLat } from 'ol/proj';
 
 import {BasemaplayerService } from '../service/basemaplayer.service';
 import { OverlaylayerService } from './../service/overlaylayer.service';
+import { CheckattributeService } from './../service/checkattribute.service';
 
+import TileWMS from 'ol/source/TileWMS';
 
 
 
@@ -24,33 +27,33 @@ import { OverlaylayerService } from './../service/overlaylayer.service';
 })
 
 
-export class MapsComponent implements OnInit, AfterViewInit {
+export class MapsComponent implements OnInit, AfterViewInit { 
 
   map: OlMap;
   source: OlXYZ;
   layer: OlTileLayer;
   view: OlView;
-  basemap:any[];
-  overlay:{};
+  wmsSource: TileWMS;
+  
   
   @ViewChild('switcher', { static: false }) switcher: ElementRef;
 
   constructor(
     public basemaplayers: BasemaplayerService,
-    private overlaylayers: OverlaylayerService
+    private overlaylayers: OverlaylayerService,
+    private checkattribute: CheckattributeService
     ) {
   } // constructor
 
   
-
-  
-  getOverlays(){
-    this.overlay = this.overlaylayers.overlayServgices(); 
-    return this.basemap;
-  };
-    
-
   ngOnInit() {
+
+    this.wmsSource = new TileWMS({
+      url: 'http://gis.jogjaprov.go.id:8080/geoserver/geonode/wms',
+      params: {'LAYERS': 'geonode:pola_ruang_rdtr_kota_jogja', 'TILED': true},
+      serverType: 'geoserver',
+      crossOrigin: 'anonymous'
+    });
  
     this.view = new OlView({
       center: fromLonLat([110.3738942, -7.8049497]),
@@ -97,13 +100,12 @@ export class MapsComponent implements OnInit, AfterViewInit {
     });
     this.map.addControl(search);
 
-
   } // oninint
 
   ngAfterViewInit() {
     this.map.setTarget('map');
+    
     var toc = this.switcher.nativeElement; // getting switcher DOM    
-    //LayerSwitcher.renderPanel(this.map, toc); // should be located in ngAfterViewInit instead of onInit
 
     // Add a layer switcher outside the map
     var switcher = new LayerSwitcher(
@@ -116,7 +118,41 @@ export class MapsComponent implements OnInit, AfterViewInit {
     this.map.addControl(switcher);
 
 
+    this.map.on('singleclick', (evt) => {
+      //console.log(this.view.getResolution());
+      var viewResolution = /** @type {number} */ (this.view.getResolution());
+      var url = this.wmsSource.getGetFeatureInfoUrl(
+        evt.coordinate, viewResolution, 'EPSG:3857',
+        {'INFO_FORMAT': 'application/json'});
+      console.log(url);
+      this.checkAttribute(url);
+    });
+    
+/* //error on local CORS. reactivate on production
+
+    this.map.on('pointermove', (evt) => {
+      console.log(evt.coordinate);
+      if (evt.dragging) {
+        return;
+      }
+      var pixel = this.map.getEventPixel(evt.originalEvent);
+      var hit = this.map.forEachLayerAtPixel(pixel, function() {
+        return true;
+      });
+      this.map.getTargetElement().style.cursor = hit ? 'pointer' : '';
+    });
+
+  */  
 
   } // afterview init
+
+
+  checkAttribute(url) {
+    //this.checkattribute.printURL(url);
+    this.checkattribute.getResponse(url);
+    
+  }
+
+
 
 }
