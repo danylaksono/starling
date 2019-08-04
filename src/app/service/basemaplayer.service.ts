@@ -4,40 +4,37 @@ import LayerTile from 'ol/layer/Tile';
 import SourceOSM from 'ol/source/OSM';
 import SourceStamen from 'ol/source/Stamen';
 
-//import {LayerGroup} from './extendlayergroup.service'
-
-
-
 @Injectable({
   providedIn: 'root'
 })
 
-
-
 export class BasemaplayerService {
-  public basemap: LayerGroup = new LayerGroup({
-    title: 'Layer Dasar',
-//    openInLayerSwitcher: true,
+  public basemap = new LayerGroup({
+    //@ts-ignore
+    title:"Layer Dasar",
+    openInLayerSwitcher: true,
     layers: [
       new LayerTile({
-      //  title: 'Water color',
-        //baseLayer: true,
+        //@ts-ignore
+        title: 'Water color',
+        baseLayer: true,
         visible: false,
         source: new SourceStamen({
           layer: 'watercolor'
         })
       }),
       new LayerTile({
-        //title: 'OpenStreetMap (OSM)',
-        //baseLayer:true,
+        //@ts-ignore
+        title: 'OpenStreetMap (OSM)',
+        baseLayer:true,
         visible: true,
         source: new SourceOSM()
       })
     ]
   });
 
-  basemapServices(){
-  return this.basemap;
+  basemapServices() {
+    return this.basemap;
   };
 
 
@@ -49,8 +46,8 @@ export class BasemaplayerService {
 /*
 new LayerGroup({
         title: 'Water color with labels',
-        type: 'base', 
-        combine: true,  
+        type: 'base',
+        combine: true,
         visible: false,
         layers: [
           new LayerTile({

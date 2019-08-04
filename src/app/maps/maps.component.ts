@@ -12,9 +12,9 @@ import SearchNominatim from 'ol-ext/control/SearchNominatim';
 import LayerSwitcher from 'ol-ext/control/LayerSwitcher';
 import { fromLonLat } from 'ol/proj';
 
-import {BasemaplayerService } from '../service/basemaplayer.service';
+import { BasemaplayerService } from '../service/basemaplayer.service';
 import { OverlaylayerService } from './../service/overlaylayer.service';
-
+import { CheckattributeService } from './../service/checkattribute.service';
 
 
 
@@ -32,38 +32,43 @@ export class MapsComponent implements OnInit, AfterViewInit {
   layer: OlTileLayer;
   view: OlView;
   wmsSource: TileWMS;
-  basemap:any[];
-  overlay:{};
-  
+  basemap: any[];
+  overlay: {};
+
   @ViewChild('switcher', { static: false }) switcher: ElementRef;
 
   constructor(
     public basemaplayers: BasemaplayerService,
-    private overlaylayers: OverlaylayerService
-    ) {
+    private overlaylayers: OverlaylayerService,
+    private checkattribute: CheckattributeService
+  ) {
   } // constructor
 
-  
 
-  
-  getOverlays(){
-    this.overlay = this.overlaylayers.overlayServgices(); 
+
+
+  getOverlays() {
+    this.overlay = this.overlaylayers.overlayServgices();
     return this.basemap;
   };
-    
+
 
   ngOnInit() {
 
     this.wmsSource = new TileWMS({
-      url: 'http://gis.jogjaprov.go.id:8080/geoserver/geonode/wms',
-      params: {'LAYERS': 'geonode:pola_ruang_rdtr_kota_jogja', 'TILED': true},
+      url: 'http://geoportal.ppids.ft.ugm.ac.id/geoserver/sitaru/wms',
+      params: { 
+        'LAYERS': 'sitaru:sitaru2',
+         'TILED': true,
+         'VERSION': '1.1.1',
+         },
       serverType: 'geoserver',
       crossOrigin: 'anonymous'
     });
- 
+
     this.view = new OlView({
       center: fromLonLat([110.3738942, -7.8049497]),
-      zoom: 13
+      zoom: 14
     });
 
     this.layer = new OlTileLayer({
@@ -81,7 +86,7 @@ export class MapsComponent implements OnInit, AfterViewInit {
         this.basemaplayers.basemap,
         this.overlaylayers.overlay
       ],
-      
+
       view: this.view
     });
 
@@ -118,27 +123,46 @@ export class MapsComponent implements OnInit, AfterViewInit {
     var switcher = new LayerSwitcher(
       {
         target: toc,
-        show_progress:true,
+        show_progress: true,
         extent: true
 
       });
     this.map.addControl(switcher);
 
-    
     this.map.on('singleclick', (evt) => {
       //console.log(this.view.getResolution());
       var viewResolution = /** @type {number} */ (this.view.getResolution());
       var url = this.wmsSource.getGetFeatureInfoUrl(
         evt.coordinate, viewResolution, 'EPSG:3857',
-        {'INFO_FORMAT': 'application/json'});
-      console.log(url);
-      //this.checkAttribute(url);
+        { 
+          'INFO_FORMAT': 'application/json',
+          'QUERY_LAYERS': 'sitaru:pola_ruang_rdtr, sitaru:bidang_tanah_tujuh_edit',
+          'FEATURE_COUNT': 50
+      
+      });
+      //console.log(url);
+      //this.checkattribute.printURL(url);
+      this.checkattribute.getResponse(url);
+        //console.log(res.features);
+
     });
 
+    /*
+    this.map.on('pointermove', (evt) => {
+      if (evt.dragging) {
+        return;
+      }
+      var pixel = this.map.getEventPixel(evt.originalEvent);
+      var hit = this.map.forEachLayerAtPixel(pixel, function () {
+        return true;
+      });
+      this.map.getTargetElement().style.cursor = hit ? 'pointer' : '';
 
+    });
+    */
 
   } // afterview init
 
-  
+
 
 }

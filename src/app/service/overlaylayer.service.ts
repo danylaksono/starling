@@ -10,23 +10,45 @@ import SourceOSM from 'ol/source/OSM';
 })
 export class OverlaylayerService {
   public overlay =  new LayerGroup({
-    //title: 'Layer Peta',
-    //openInLayerSwitcher: true,
+    //@ts-ignore
+    title: 'Layer Peta',
+    openInLayerSwitcher: true,
     layers: [
       new LayerTile({
-      //  title: 'Rencana Detil Tata Ruang',       
+        //@ts-ignore
+        title: 'Bidang Tanah',       
         visible: true,
+        opacity: 0.6,
         source: new SourceWMS({
-          url: 'http://gis.jogjaprov.go.id:8080/geoserver/geonode/wms',
-          params: {'LAYERS': 'geonode:pola_ruang_rdtr_kota_jogja', 'TILED': true},
+          url: 'http://geoportal.ppids.ft.ugm.ac.id/geoserver/sitaru/wms',
+          params: {'LAYERS': 'sitaru:bidang_tanah_tujuh_edit', 'TILED': true},
+          serverType: 'geoserver',
+          transition: 0
+          
+        })
+      }),
+      new LayerTile({
+        //@ts-ignore
+        title: 'Rencana Detil Tata Ruang',       
+        visible: true,
+        opacity: 0.7,
+        source: new SourceWMS({
+          url: 'http://geoportal.ppids.ft.ugm.ac.id/geoserver/sitaru/wms',
+          params: {'LAYERS': 'sitaru:pola_ruang_rdtr', 'TILED': true},
           serverType: 'geoserver',
           transition: 0
         })
       }),
       new LayerTile({
-        //title: 'OSM',       
-        visible: false,
-        source: new SourceOSM()
+        //@ts-ignore
+        title: 'Jaringan Jalan',       
+        visible: true,
+        source: new SourceWMS({
+          url: 'http://geoportal.ppids.ft.ugm.ac.id/geoserver/sitaru/wms',
+          params: {'LAYERS': 'sitaru:jalan_gsb', 'TILED': true},
+          serverType: 'geoserver',
+          transition: 0
+        })
       })
     ]
   });

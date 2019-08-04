@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from  '@angular/common/http';
 
 import { MaterialModule } from './material/material.module';
 import { MainViewComponent } from './main-view/main-view.component';
@@ -32,12 +33,7 @@ import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.com
     BrowserAnimationsModule,
     MaterialModule,
     LayoutModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule
-    
+    HttpClientModule    
   ],
   providers: [],
   bootstrap: [AppComponent]
