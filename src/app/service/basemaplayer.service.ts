@@ -4,9 +4,15 @@ import LayerTile from 'ol/layer/Tile';
 import SourceOSM from 'ol/source/OSM';
 import SourceStamen from 'ol/source/Stamen';
 
+//import {LayerGroup} from './extendlayergroup.service'
+
+
+
 @Injectable({
   providedIn: 'root'
 })
+
+
 
 export class BasemaplayerService {
   public basemap: LayerGroup = new LayerGroup({
@@ -14,16 +20,16 @@ export class BasemaplayerService {
 //    openInLayerSwitcher: true,
     layers: [
       new LayerTile({
-        title: 'Water color',
-        baseLayer: true,
+      //  title: 'Water color',
+        //baseLayer: true,
         visible: false,
         source: new SourceStamen({
           layer: 'watercolor'
         })
       }),
       new LayerTile({
-        title: 'OpenStreetMap (OSM)',
-        baseLayer:true,
+        //title: 'OpenStreetMap (OSM)',
+        //baseLayer:true,
         visible: true,
         source: new SourceOSM()
       })

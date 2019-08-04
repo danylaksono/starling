@@ -10,11 +10,11 @@ import SourceOSM from 'ol/source/OSM';
 })
 export class OverlaylayerService {
   public overlay =  new LayerGroup({
-    title: 'Layer Peta',
-    openInLayerSwitcher: true,
+    //title: 'Layer Peta',
+    //openInLayerSwitcher: true,
     layers: [
       new LayerTile({
-        title: 'Rencana Detil Tata Ruang',       
+      //  title: 'Rencana Detil Tata Ruang',       
         visible: true,
         source: new SourceWMS({
           url: 'http://gis.jogjaprov.go.id:8080/geoserver/geonode/wms',
@@ -24,7 +24,7 @@ export class OverlaylayerService {
         })
       }),
       new LayerTile({
-        title: 'OSM',       
+        //title: 'OSM',       
         visible: false,
         source: new SourceOSM()
       })

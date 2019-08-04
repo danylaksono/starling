@@ -5,6 +5,7 @@ import OlMap from 'ol/Map';
 import OlXYZ from 'ol/source/XYZ';
 import OlTileLayer from 'ol/layer/Tile';
 import OlView from 'ol/View';
+import TileWMS from 'ol/source/TileWMS';
 import * as Control from 'ol/Control';
 import { Sidebar } from 'ol/control.js';
 import SearchNominatim from 'ol-ext/control/SearchNominatim';
@@ -30,6 +31,7 @@ export class MapsComponent implements OnInit, AfterViewInit {
   source: OlXYZ;
   layer: OlTileLayer;
   view: OlView;
+  wmsSource: TileWMS;
   basemap:any[];
   overlay:{};
   
@@ -51,6 +53,13 @@ export class MapsComponent implements OnInit, AfterViewInit {
     
 
   ngOnInit() {
+
+    this.wmsSource = new TileWMS({
+      url: 'http://gis.jogjaprov.go.id:8080/geoserver/geonode/wms',
+      params: {'LAYERS': 'geonode:pola_ruang_rdtr_kota_jogja', 'TILED': true},
+      serverType: 'geoserver',
+      crossOrigin: 'anonymous'
+    });
  
     this.view = new OlView({
       center: fromLonLat([110.3738942, -7.8049497]),
@@ -115,8 +124,21 @@ export class MapsComponent implements OnInit, AfterViewInit {
       });
     this.map.addControl(switcher);
 
+    
+    this.map.on('singleclick', (evt) => {
+      //console.log(this.view.getResolution());
+      var viewResolution = /** @type {number} */ (this.view.getResolution());
+      var url = this.wmsSource.getGetFeatureInfoUrl(
+        evt.coordinate, viewResolution, 'EPSG:3857',
+        {'INFO_FORMAT': 'application/json'});
+      console.log(url);
+      //this.checkAttribute(url);
+    });
+
 
 
   } // afterview init
+
+  
 
 }
