@@ -15,6 +15,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 
 
+[mat-dialog-title] {
+  margin: -24px -24px 0px -24px !important;
+  padding: 10px 24px;
+  background: #369;
+  color: #fff;
+  cursor: move;
+}
 
 
 .ol-layerswitcher.ol-collapsed {

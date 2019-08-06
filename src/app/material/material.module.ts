@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {MatToolbarModule, MatTabsModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
+import {MatToolbarModule, MatInputModule, MatTabsModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
 import {MatDialogModule} from '@angular/material/dialog';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import {MatAutocompleteModule} from '@angular/material/autocomplete'
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 @NgModule({
   imports: [
@@ -14,7 +16,11 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     MatIconModule, 
     MatListModule,
     MatDialogModule,
-    DragDropModule
+    DragDropModule,
+    MatAutocompleteModule,
+    MatFormFieldModule,
+    MatInputModule
+    
   ],
   exports: [
     MatButtonModule,
@@ -24,7 +30,10 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     MatIconModule, 
     MatListModule,
     MatDialogModule,
-    DragDropModule
+    DragDropModule,
+    MatAutocompleteModule,
+    MatFormFieldModule,
+    MatInputModule
   ]
 })
 export class MaterialModule { }
