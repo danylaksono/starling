@@ -1,4 +1,5 @@
 
+
 import { Component, OnInit, Inject, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 
 import OlMap from 'ol/Map';
@@ -12,9 +13,15 @@ import SearchNominatim from 'ol-ext/control/SearchNominatim';
 import LayerSwitcher from 'ol-ext/control/LayerSwitcher';
 import { fromLonLat } from 'ol/proj';
 
+//dialog components
+import { MatDialog, MatDialogConfig } from '@angular/material';
+import { CekizinComponent } from './../dialog/cekizin/cekizin.component';
+
 import { BasemaplayerService } from '../service/basemaplayer.service';
 import { OverlaylayerService } from './../service/overlaylayer.service';
 import { CheckattributeService } from './../service/checkattribute.service';
+import { DataitbxService } from './../service/dataitbx.service';
+import { DaftarkegiatanService } from '../service/daftarkegiatan.service';
 
 
 
@@ -34,13 +41,18 @@ export class MapsComponent implements OnInit, AfterViewInit {
   wmsSource: TileWMS;
   basemap: any[];
   overlay: {};
+  list: any[];
+
 
   @ViewChild('switcher', { static: false }) switcher: ElementRef;
 
   constructor(
     public basemaplayers: BasemaplayerService,
     private overlaylayers: OverlaylayerService,
-    private checkattribute: CheckattributeService
+    private checkattribute: CheckattributeService,
+    private dataitbx: DataitbxService,
+    private daftarkegiatan: DaftarkegiatanService,
+    public dialog: MatDialog
   ) {
   } // constructor
 
@@ -55,13 +67,27 @@ export class MapsComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
 
+    //getting itbx data
+    //console.log(this.dataitbx.getITBX());
+    this.daftarkegiatan.getKegiatan().subscribe(
+      res => {
+        this.list = res;
+        //console.log(this.list);
+      }
+    );
+
+
+    //getting gsb data
+    this.checkattribute.getJSONP();
+
+    // for get featureinfo
     this.wmsSource = new TileWMS({
       url: 'http://geoportal.ppids.ft.ugm.ac.id/geoserver/sitaru/wms',
-      params: { 
+      params: {
         'LAYERS': 'sitaru:sitaru2',
-         'TILED': true,
-         'VERSION': '1.1.1',
-         },
+        'TILED': true,
+        'VERSION': '1.1.1',
+      },
       serverType: 'geoserver',
       crossOrigin: 'anonymous'
     });
@@ -75,7 +101,7 @@ export class MapsComponent implements OnInit, AfterViewInit {
       source: this.source
     });
 
-    // map definitions
+    // --map definitions --
     this.map = new OlMap({
       target: 'map',
       controls: Control.defaults({
@@ -86,12 +112,11 @@ export class MapsComponent implements OnInit, AfterViewInit {
         this.basemaplayers.basemap,
         this.overlaylayers.overlay
       ],
-
       view: this.view
     });
 
 
-    // sidebar
+    // map sidebar
     var sidebar = new Sidebar({ element: 'sidebar', position: 'right' });
     var scale = new Control.ScaleLine;
 
@@ -102,7 +127,7 @@ export class MapsComponent implements OnInit, AfterViewInit {
     // Search control
     const search = new SearchNominatim();
     // Move to the position on selection in the control list
-    search.on('select', function (e) {
+    search.on('select', (e) => {
       // console.log(e);
       this.map.getView().animate({
         center: e.coordinate,
@@ -115,7 +140,9 @@ export class MapsComponent implements OnInit, AfterViewInit {
   } // oninint
 
   ngAfterViewInit() {
+    // for ol to work: set target in afterviewinit
     this.map.setTarget('map');
+
     var toc = this.switcher.nativeElement; // getting switcher DOM    
     //LayerSwitcher.renderPanel(this.map, toc); // should be located in ngAfterViewInit instead of onInit
 
@@ -129,21 +156,31 @@ export class MapsComponent implements OnInit, AfterViewInit {
       });
     this.map.addControl(switcher);
 
+
+    // control onclick event
     this.map.on('singleclick', (evt) => {
-      //console.log(this.view.getResolution());
+      // TODO: add check zoom function to ensure only two layers were selected
+
+
+      // test call modal
+      this.openModal();
+      
+      
       var viewResolution = /** @type {number} */ (this.view.getResolution());
       var url = this.wmsSource.getGetFeatureInfoUrl(
         evt.coordinate, viewResolution, 'EPSG:3857',
-        { 
+        {
           'INFO_FORMAT': 'application/json',
           'QUERY_LAYERS': 'sitaru:pola_ruang_rdtr, sitaru:bidang_tanah_tujuh_edit',
           'FEATURE_COUNT': 50
-      
-      });
+        });
       //console.log(url);
       //this.checkattribute.printURL(url);
       this.checkattribute.getResponse(url);
-        //console.log(res.features);
+      //this.checkattribute.getClosestFeature(evt.coordinate);
+      this.checkattribute.displaySnap(evt.coordinate);
+
+      //console.log(res.features);
 
     });
 
@@ -163,6 +200,22 @@ export class MapsComponent implements OnInit, AfterViewInit {
 
   } // afterview init
 
+
+  openModal() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+      id: 1,
+      title: 'Angular For Beginners',
+      article: 'the article'
+    };
+    const dialogRef = this.dialog.open(CekizinComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(result => {
+      console.log("Dialog closed")
+      console.log(result)
+    });
+  }
 
 
 }

@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from  '@angular/common/http';
+import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 
 import { MaterialModule } from './material/material.module';
 import { MainViewComponent } from './main-view/main-view.component';
@@ -13,8 +13,10 @@ import { MapsComponent } from './maps/maps.component';
 import { NavComponent } from './nav/nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
+import { MatDialogModule } from "@angular/material";
 import { HeaderComponent } from './navigation/header/header.component';
 import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
+import { CekizinComponent } from './dialog/cekizin/cekizin.component';
 
 
 @NgModule({
@@ -25,7 +27,11 @@ import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.com
     MapsComponent,
     NavComponent,
     HeaderComponent,
-    SidenavListComponent
+    SidenavListComponent,
+    CekizinComponent
+  ],
+  entryComponents: [
+    CekizinComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +39,9 @@ import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.com
     BrowserAnimationsModule,
     MaterialModule,
     LayoutModule,
-    HttpClientModule    
+    HttpClientModule,
+    HttpClientJsonpModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

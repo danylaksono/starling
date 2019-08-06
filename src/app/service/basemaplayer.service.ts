@@ -3,6 +3,7 @@ import LayerGroup from 'ol/layer/Group';
 import LayerTile from 'ol/layer/Tile';
 import SourceOSM from 'ol/source/OSM';
 import SourceStamen from 'ol/source/Stamen';
+import XYZ from 'ol/source/XYZ';
 
 @Injectable({
   providedIn: 'root'
@@ -27,8 +28,19 @@ export class BasemaplayerService {
         //@ts-ignore
         title: 'OpenStreetMap (OSM)',
         baseLayer:true,
-        visible: true,
+        visible: false,
         source: new SourceOSM()
+      }),
+      new LayerTile({
+        //@ts-ignore
+        title: 'ESRI World Imagery',
+        baseLayer:true,
+        visible: true,
+        source: new XYZ({
+          //@ts-ignore
+          url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+          attributions: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+        })
       })
     ]
   });
