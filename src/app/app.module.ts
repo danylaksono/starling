@@ -6,18 +6,19 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { MaterialModule } from './material/material.module';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MainViewComponent } from './main-view/main-view.component';
 import { LandingComponent } from './landing/landing.component';
 import { MapsComponent } from './maps/maps.component';
 import { NavComponent } from './nav/nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
 import { MatDialogModule } from "@angular/material";
 import { HeaderComponent } from './navigation/header/header.component';
 import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
 import { CekizinComponent } from './dialog/cekizin/cekizin.component';
+
+
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { CekizinComponent } from './dialog/cekizin/cekizin.component';
     HeaderComponent,
     SidenavListComponent,
     CekizinComponent
+    
   ],
   entryComponents: [
     CekizinComponent
@@ -45,7 +47,7 @@ import { CekizinComponent } from './dialog/cekizin/cekizin.component';
     MatDialogModule,
     FormsModule,
     ReactiveFormsModule
-    
+
   ],
   providers: [],
   bootstrap: [AppComponent]

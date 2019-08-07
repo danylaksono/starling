@@ -1,6 +1,7 @@
 
 
-import { Component, OnInit, Inject, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+
+import { Component, OnInit, NgZone, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 
 import OlMap from 'ol/Map';
 import OlXYZ from 'ol/source/XYZ';
@@ -12,6 +13,7 @@ import { Sidebar } from 'ol/control.js';
 import SearchNominatim from 'ol-ext/control/SearchNominatim';
 import LayerSwitcher from 'ol-ext/control/LayerSwitcher';
 import { fromLonLat } from 'ol/proj';
+import Popup from 'ol-popup';
 
 //dialog components
 import { MatDialog, MatDialogConfig } from '@angular/material';
@@ -22,7 +24,7 @@ import { OverlaylayerService } from './../service/overlaylayer.service';
 import { CheckattributeService } from './../service/checkattribute.service';
 import { DataitbxService } from './../service/dataitbx.service';
 import { DaftarkegiatanService } from '../service/daftarkegiatan.service';
-
+import { WarningSnackbarService } from './../dialog/warning-snackbar.service';
 
 
 @Component({
@@ -42,6 +44,8 @@ export class MapsComponent implements OnInit, AfterViewInit {
   basemap: any[];
   overlay: {};
   list: any[];
+  popup: any;
+  clickedfeature: any[];
 
 
   @ViewChild('switcher', { static: false }) switcher: ElementRef;
@@ -52,17 +56,11 @@ export class MapsComponent implements OnInit, AfterViewInit {
     private checkattribute: CheckattributeService,
     private dataitbx: DataitbxService,
     private daftarkegiatan: DaftarkegiatanService,
-    public dialog: MatDialog
+    private dialog: MatDialog,
+    private warning: WarningSnackbarService
   ) {
   } // constructor
 
-
-
-
-  getOverlays() {
-    this.overlay = this.overlaylayers.overlayServgices();
-    return this.basemap;
-  };
 
 
   ngOnInit() {
@@ -137,11 +135,17 @@ export class MapsComponent implements OnInit, AfterViewInit {
     this.map.addControl(search);
 
 
+
+
   } // oninint
 
   ngAfterViewInit() {
     // for ol to work: set target in afterviewinit
     this.map.setTarget('map');
+
+    //popup
+    this.popup = new Popup();
+    this.map.addOverlay(this.popup);
 
     var toc = this.switcher.nativeElement; // getting switcher DOM    
     //LayerSwitcher.renderPanel(this.map, toc); // should be located in ngAfterViewInit instead of onInit
@@ -157,39 +161,56 @@ export class MapsComponent implements OnInit, AfterViewInit {
     this.map.addControl(switcher);
 
 
-    // control onclick event
+    // =========MAIN EVENT ONCLICK================
     this.map.on('singleclick', (evt) => {
       // TODO: add check zoom function to ensure only two layers were selected
 
+      
 
       // test call modal
-      this.openModal();
-      
-      
+      //this.openModal(this.list);
+      //console.log(this.list);
+
       var viewResolution = /** @type {number} */ (this.view.getResolution());
       var url = this.wmsSource.getGetFeatureInfoUrl(
         evt.coordinate, viewResolution, 'EPSG:3857',
         {
           'INFO_FORMAT': 'application/json',
           'QUERY_LAYERS': 'sitaru:pola_ruang_rdtr, sitaru:bidang_tanah_tujuh_edit',
-          'FEATURE_COUNT': 50
+          'FEATURE_COUNT': 5
         });
-      //console.log(url);
-      //this.checkattribute.printURL(url);
-      this.checkattribute.getResponse(url);
+      
+      // getting GetFeatureInfo data
+      this.checkattribute.getResponse(url).subscribe(
+        res => {
+          this.clickedfeature = res;
+        }
+      );
+
+      // more than two features: no query
+      if (this.clickedfeature.numberReturned > 2) {
+        this.warning.open('Terpilih > 1 bidang tanah. Zoom untuk mengulang');
+        
+      } else {
+        console.log(this.clickedfeature);
+        this.popup.show(evt.coordinate, this.clickedfeature.features[0].id + '<br/>'+ this.clickedfeature.features[1].id );
+      }
+
+      
+      
       //this.checkattribute.getClosestFeature(evt.coordinate);
-      this.checkattribute.displaySnap(evt.coordinate);
+      //this.checkattribute.displaySnap(evt.coordinate);
 
       //console.log(res.features);
 
-    });
+    });  //==onclick
 
     /*
     this.map.on('pointermove', (evt) => {
       if (evt.dragging) {
         return;
       }
-      var pixel = this.map.getEventPixel(evt.originalEvent);
+      var pixel = this.map.;getEventPixel(evt.originalEvent);
       var hit = this.map.forEachLayerAtPixel(pixel, function () {
         return true;
       });
@@ -201,14 +222,15 @@ export class MapsComponent implements OnInit, AfterViewInit {
   } // afterview init
 
 
-  openModal() {
+  openModal(list) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.data = {
       id: 1,
-      title: 'Angular For Beginners',
-      article: 'the article'
+      title: 'Jenis Kegiatan',
+      article: 'the article',
+      list: list
     };
     const dialogRef = this.dialog.open(CekizinComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {

@@ -24,6 +24,7 @@ export class CekizinComponent implements OnInit {
   // modal dialog data
   modalTitle: string;
   modalArticle: string;
+  modalList: string[];
 
   //form autocomplete
   myControl = new FormControl();
@@ -33,7 +34,8 @@ export class CekizinComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
     this.modalTitle = data.title;
     this.modalArticle = data.article;
-    console.log(data)
+    this.modalList = data.list;
+    //console.log(data)
   }
 
   ngOnInit() {
