@@ -4,6 +4,7 @@ import { map, tap } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 
+import WMSGetFeatureInfo from 'ol/format/WMSGetFeatureInfo';
 import VectorSource from 'ol/source/Vector';
 import GeoJSON from 'ol/format/GeoJSON';
 import { LineString, Point } from 'ol/geom.js';
@@ -22,7 +23,7 @@ export class CheckattributeService {
 
   constructor(private http: HttpClient) { }
 
-  private url = 'http://geoportal.ppids.ft.ugm.ac.id/geoserver/sitaru/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=sitaru%3Ajalan_gsb&outputFormat=application%2Fjson&srsName:EPSG:4326';
+  //private url = 'http://geoportal.ppids.ft.ugm.ac.id/geoserver/sitaru/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=sitaru%3Ajalan_gsb&outputFormat=application%2Fjson&srsName:EPSG:4326';
   private vectorSource;
 
   //closest jalan 
@@ -40,7 +41,8 @@ export class CheckattributeService {
     return this.http.get<any[]>(url)
       .pipe(
         map(res => res),
-        tap(res => { res
+        tap(res => {
+          res;
           //console.log("users array", res);
         }
         )
@@ -55,9 +57,9 @@ export class CheckattributeService {
     // (err) => { console.log(err) });
   };
 
-  getJSONP() {
+  getJSONP(url) {
     //console.log("ssd");
-    this.http.get(this.url)
+    this.http.get(url)
       .subscribe((res) => {
         this.vectorSource = new VectorSource({
           features: (new GeoJSON).readFeatures(res)

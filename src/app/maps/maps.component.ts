@@ -1,24 +1,26 @@
-
-
-
 import { Component, OnInit, NgZone, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 
 import OlMap from 'ol/Map';
 import OlXYZ from 'ol/source/XYZ';
 import OlTileLayer from 'ol/layer/Tile';
 import OlView from 'ol/View';
+import OlVectorSource from 'ol/source/Vector';
+import OlVectorLayer from 'ol/layer/Vector';
+import OlGeoJSON from 'ol/format/GeoJSON';
+import OlFeature from 'ol/Feature';
 import TileWMS from 'ol/source/TileWMS';
-import * as Control from 'ol/Control';
+import * as Control from 'ol/control';
 import { Sidebar } from 'ol/control.js';
 import SearchNominatim from 'ol-ext/control/SearchNominatim';
 import LayerSwitcher from 'ol-ext/control/LayerSwitcher';
 import { fromLonLat } from 'ol/proj';
 import Popup from 'ol-popup';
+import { Fill, Stroke, Style, Text } from 'ol/style';
+
 
 //dialog components
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { CekizinComponent } from './../dialog/cekizin/cekizin.component';
-
 import { BasemaplayerService } from '../service/basemaplayer.service';
 import { OverlaylayerService } from './../service/overlaylayer.service';
 import { CheckattributeService } from './../service/checkattribute.service';
@@ -41,11 +43,14 @@ export class MapsComponent implements OnInit, AfterViewInit {
   layer: OlTileLayer;
   view: OlView;
   wmsSource: TileWMS;
+  VectorLayer: OlVectorLayer;
+
   basemap: any[];
   overlay: {};
   list: any[];
   popup: any;
   clickedfeature: any[];
+  private vectorSource;
 
 
   @ViewChild('switcher', { static: false }) switcher: ElementRef;
@@ -76,14 +81,15 @@ export class MapsComponent implements OnInit, AfterViewInit {
 
 
     //getting gsb data
-    this.checkattribute.getJSONP();
+    //this.checkattribute.getJSONP();
 
     // for get featureinfo
     this.wmsSource = new TileWMS({
       url: 'http://geoportal.ppids.ft.ugm.ac.id/geoserver/sitaru/wms',
       params: {
         'LAYERS': 'sitaru:sitaru2',
-        'TILED': true,
+        'FORMAT': 'image/png8',
+        'TILED': false,
         'VERSION': '1.1.1',
       },
       serverType: 'geoserver',
@@ -91,8 +97,9 @@ export class MapsComponent implements OnInit, AfterViewInit {
     });
 
     this.view = new OlView({
-      center: fromLonLat([110.3738942, -7.8049497]),
-      zoom: 14
+      center: fromLonLat([110.3708942, -7.8049497]),
+      zoom: 17,
+      //projection: 'EPSG:4326'
     });
 
     this.layer = new OlTileLayer({
@@ -117,7 +124,6 @@ export class MapsComponent implements OnInit, AfterViewInit {
     // map sidebar
     var sidebar = new Sidebar({ element: 'sidebar', position: 'right' });
     var scale = new Control.ScaleLine;
-
     this.map.addControl(sidebar);
     this.map.addControl(scale);
 
@@ -162,42 +168,47 @@ export class MapsComponent implements OnInit, AfterViewInit {
 
 
     // =========MAIN EVENT ONCLICK================
-    this.map.on('singleclick', (evt) => {
+    this.map.on('click', (evt) => {
       // TODO: add check zoom function to ensure only two layers were selected
-
-      
-
       // test call modal
       //this.openModal(this.list);
       //console.log(this.list);
 
       var viewResolution = /** @type {number} */ (this.view.getResolution());
       var url = this.wmsSource.getGetFeatureInfoUrl(
-        evt.coordinate, viewResolution, 'EPSG:3857',
+        evt.coordinate, viewResolution, this.view.getProjection(),//'EPSG:3857',
         {
           'INFO_FORMAT': 'application/json',
           'QUERY_LAYERS': 'sitaru:pola_ruang_rdtr, sitaru:bidang_tanah_tujuh_edit',
           'FEATURE_COUNT': 5
         });
-      
+
       // getting GetFeatureInfo data
       this.checkattribute.getResponse(url).subscribe(
         res => {
           this.clickedfeature = res;
+          this.highlightSelected(this.clickedfeature);
         }
       );
 
-      // more than two features: no query
-      if (this.clickedfeature.numberReturned > 2) {
-        this.warning.open('Terpilih > 1 bidang tanah. Zoom untuk mengulang');
-        
-      } else {
-        console.log(this.clickedfeature);
-        this.popup.show(evt.coordinate, this.clickedfeature.features[0].id + '<br/>'+ this.clickedfeature.features[1].id );
-      }
+      //this.checkFeature(this.clickedfeature);
+      
 
-      
-      
+      // more than two features: no query
+      /*
+      if (this.clickedfeature ){
+        if (this.clickedfeature.numberReturned > 2) {
+          this.warning.open('Terpilih > 1 bidang tanah. Zoom untuk mengulang');
+        } else if (this.clickedfeature.numberReturned < 2){
+          this.warning.open('Data bidang tanah atau RDTR tidak tersedia');
+        } else {
+          console.log(this.clickedfeature);
+          this.popup.show(evt.coordinate, this.clickedfeature.features[0].id + '<br/>'+ this.clickedfeature.features[1].properties.ID_BID );
+          this.highlightSelected(this.clickedfeature.features[1]);
+        }
+      }
+      */
+
       //this.checkattribute.getClosestFeature(evt.coordinate);
       //this.checkattribute.displaySnap(evt.coordinate);
 
@@ -237,6 +248,53 @@ export class MapsComponent implements OnInit, AfterViewInit {
       console.log("Dialog closed")
       console.log(result)
     });
+  }
+
+  checkFeature(features) {
+   // console.log(features);
+
+  }
+
+
+  highlightSelected(feature) {
+    if (this.VectorLayer) {
+      this.map.removeLayer(this.VectorLayer);
+    }
+
+    var geom = feature.features[1];
+     
+    var format = new OlGeoJSON({
+      dataProjection: 'EPSG:3857',
+      featureProjection:'EPSG:3857',
+      geometryName: 'the_geom'
+    });
+
+    var vectorSource = new OlVectorSource({
+      features:format.readFeatures(geom)
+    });
+    
+
+    var style = new Style({
+      fill: new Fill({
+        color: 'red'
+      })
+    });
+    
+    this.VectorLayer = new OlVectorLayer({
+      source: vectorSource,
+      style: style,
+      renderMode: 'image',
+      //@ts-ignore
+      title: 'Bidang Tanah Terpilih',
+      name: 'Selected'
+
+      //map: this.map
+    });    
+    
+    this.map.addLayer(this.VectorLayer);
+    this.map.render();
+    
+
   }
 
 

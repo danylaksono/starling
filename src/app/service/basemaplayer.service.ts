@@ -29,6 +29,7 @@ export class BasemaplayerService {
         title: 'OpenStreetMap (OSM)',
         baseLayer:true,
         visible: false,
+        projection: 'EPSG:3857',
         source: new SourceOSM()
       }),
       new LayerTile({
