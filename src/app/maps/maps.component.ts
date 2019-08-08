@@ -97,7 +97,7 @@ export class MapsComponent implements OnInit, AfterViewInit {
     });
 
     this.view = new OlView({
-      center: fromLonLat([110.3708942, -7.8049497]),
+      center: fromLonLat([110.3650042, -7.8049497]),
       zoom: 17,
       //projection: 'EPSG:4326'
     });
@@ -240,14 +240,23 @@ export class MapsComponent implements OnInit, AfterViewInit {
   }
 
   checkFeature(features, coordinate) {
+    var ketRDTR = features.features[0].properties;
+    var ketBidang = features.features[1].properties;
+    //console.log(features);
+
     if (features) {
       if (features.numberReturned > 2) {
-        this.warning.open('Terpilih > 1 bidang tanah. Zoom untuk mengulang');
+        this.warning.open('Terpilih > 1 bidang tanah. Perbesar tampilan peta');
       } else if (features.numberReturned < 2) {
         this.warning.open('Data bidang tanah atau RDTR tidak tersedia');
-      } else {
-        
-        this.popup.show(coordinate, features.features[0].id + '<br/>' + features.features[1].properties.ID_BID);
+      } else {       
+        this.popup.show(coordinate, 
+        '<h3>Bidang Tanah </h3>' + '<br>' +
+        'Zona RDTR: '+  ketRDTR.zona +  '<br>' +
+         'Tipe: ' + ketBidang.TIPE +  '<br>' +
+         'Luas Bidang (m<sup>2</sup>): ' + ketBidang.luas
+          
+          );
         this.highlightSelected(this.clickedfeature);
       }
     }
@@ -258,19 +267,15 @@ export class MapsComponent implements OnInit, AfterViewInit {
     if (this.VectorLayer) {
       this.map.removeLayer(this.VectorLayer);
     }
-
     var geom = feature.features[1];
-
     var format = new OlGeoJSON({
       dataProjection: 'EPSG:3857',
       featureProjection: 'EPSG:3857',
       geometryName: 'the_geom'
     });
-
     var vectorSource = new OlVectorSource({
       features: format.readFeatures(geom)
     });
-
     var style = new Style({
       fill: new Fill({
         color: 'yellow'
@@ -280,7 +285,6 @@ export class MapsComponent implements OnInit, AfterViewInit {
         width: 2
       })
     });
-
     this.VectorLayer = new OlVectorLayer({
       source: vectorSource,
       style: style,
@@ -288,14 +292,10 @@ export class MapsComponent implements OnInit, AfterViewInit {
       //@ts-ignore
       title: 'Bidang Tanah Terpilih',
       name: 'Selected'
-
       //map: this.map
     });
-
     this.map.addLayer(this.VectorLayer);
     this.map.render();
-
-
   } // highlight selected feature
 
 

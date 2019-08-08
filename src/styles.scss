@@ -16,6 +16,9 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 
+.ol-popup {
+  width: 280px !important;
+}
 
 [mat-dialog-title] {
   margin: -24px -24px 0px -24px !important;
