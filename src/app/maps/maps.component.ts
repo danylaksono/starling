@@ -187,27 +187,16 @@ export class MapsComponent implements OnInit, AfterViewInit {
       this.checkattribute.getResponse(url).subscribe(
         res => {
           this.clickedfeature = res;
-          this.highlightSelected(this.clickedfeature);
+          this.checkFeature(this.clickedfeature, evt.coordinate);
+          
         }
       );
 
-      //this.checkFeature(this.clickedfeature);
-      
+      //
 
-      // more than two features: no query
-      /*
-      if (this.clickedfeature ){
-        if (this.clickedfeature.numberReturned > 2) {
-          this.warning.open('Terpilih > 1 bidang tanah. Zoom untuk mengulang');
-        } else if (this.clickedfeature.numberReturned < 2){
-          this.warning.open('Data bidang tanah atau RDTR tidak tersedia');
-        } else {
-          console.log(this.clickedfeature);
-          this.popup.show(evt.coordinate, this.clickedfeature.features[0].id + '<br/>'+ this.clickedfeature.features[1].properties.ID_BID );
-          this.highlightSelected(this.clickedfeature.features[1]);
-        }
-      }
-      */
+
+
+
 
       //this.checkattribute.getClosestFeature(evt.coordinate);
       //this.checkattribute.displaySnap(evt.coordinate);
@@ -250,10 +239,19 @@ export class MapsComponent implements OnInit, AfterViewInit {
     });
   }
 
-  checkFeature(features) {
-   // console.log(features);
-
-  }
+  checkFeature(features, coordinate) {
+    if (features) {
+      if (features.numberReturned > 2) {
+        this.warning.open('Terpilih > 1 bidang tanah. Zoom untuk mengulang');
+      } else if (features.numberReturned < 2) {
+        this.warning.open('Data bidang tanah atau RDTR tidak tersedia');
+      } else {
+        
+        this.popup.show(coordinate, features.features[0].id + '<br/>' + features.features[1].properties.ID_BID);
+        this.highlightSelected(this.clickedfeature);
+      }
+    }
+  }; //check feature
 
 
   highlightSelected(feature) {
@@ -262,24 +260,27 @@ export class MapsComponent implements OnInit, AfterViewInit {
     }
 
     var geom = feature.features[1];
-     
+
     var format = new OlGeoJSON({
       dataProjection: 'EPSG:3857',
-      featureProjection:'EPSG:3857',
+      featureProjection: 'EPSG:3857',
       geometryName: 'the_geom'
     });
 
     var vectorSource = new OlVectorSource({
-      features:format.readFeatures(geom)
+      features: format.readFeatures(geom)
     });
-    
 
     var style = new Style({
       fill: new Fill({
-        color: 'red'
+        color: 'yellow'
+      }),
+      stroke: new Stroke({
+        color: 'red',
+        width: 2
       })
     });
-    
+
     this.VectorLayer = new OlVectorLayer({
       source: vectorSource,
       style: style,
@@ -289,13 +290,13 @@ export class MapsComponent implements OnInit, AfterViewInit {
       name: 'Selected'
 
       //map: this.map
-    });    
-    
+    });
+
     this.map.addLayer(this.VectorLayer);
     this.map.render();
-    
 
-  }
+
+  } // highlight selected feature
 
 
 }
