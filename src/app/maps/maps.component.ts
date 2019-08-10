@@ -4,21 +4,18 @@ import OlMap from 'ol/Map';
 import OlXYZ from 'ol/source/XYZ';
 import OlTileLayer from 'ol/layer/Tile';
 import OlView from 'ol/View';
-import OlVectorSource from 'ol/source/Vector';
 import OlVectorLayer from 'ol/layer/Vector';
-import OlGeoJSON from 'ol/format/GeoJSON';
-import OlFeature from 'ol/Feature';
 import TileWMS from 'ol/source/TileWMS';
 import * as Control from 'ol/control';
 import { Sidebar } from 'ol/control.js';
 import SearchNominatim from 'ol-ext/control/SearchNominatim';
 import LayerSwitcher from 'ol-ext/control/LayerSwitcher';
 import { fromLonLat } from 'ol/proj';
-import Popup from 'ol-popup';
-import { Fill, Stroke, Style, Text } from 'ol/style';
 
 
-//dialog components
+
+
+//components
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { CekizinComponent } from './../dialog/cekizin/cekizin.component';
 import { BasemaplayerService } from '../service/basemaplayer.service';
@@ -27,6 +24,8 @@ import { CheckattributeService } from './../service/checkattribute.service';
 import { DataitbxService } from './../service/dataitbx.service';
 import { DaftarkegiatanService } from '../service/daftarkegiatan.service';
 import { WarningSnackbarService } from './../dialog/warning-snackbar.service';
+
+import { HighlightfeatureService } from '../service/highlightfeature.service'
 
 
 @Component({
@@ -48,9 +47,7 @@ export class MapsComponent implements OnInit, AfterViewInit {
   basemap: any[];
   overlay: {};
   list: any[];
-  popup: any;
   clickedfeature: any[];
-  private vectorSource;
 
 
   @ViewChild('switcher', { static: false }) switcher: ElementRef;
@@ -62,6 +59,7 @@ export class MapsComponent implements OnInit, AfterViewInit {
     private dataitbx: DataitbxService,
     private daftarkegiatan: DaftarkegiatanService,
     private dialog: MatDialog,
+    private hightlight: HighlightfeatureService,
     private warning: WarningSnackbarService
   ) {
   } // constructor
@@ -100,10 +98,6 @@ export class MapsComponent implements OnInit, AfterViewInit {
       center: fromLonLat([110.3650042, -7.8049497]),
       zoom: 17,
       //projection: 'EPSG:4326'
-    });
-
-    this.layer = new OlTileLayer({
-      source: this.source
     });
 
     // --map definitions --
@@ -149,10 +143,6 @@ export class MapsComponent implements OnInit, AfterViewInit {
     // for ol to work: set target in afterviewinit
     this.map.setTarget('map');
 
-    //popup
-    this.popup = new Popup();
-    this.map.addOverlay(this.popup);
-
     var toc = this.switcher.nativeElement; // getting switcher DOM    
     //LayerSwitcher.renderPanel(this.map, toc); // should be located in ngAfterViewInit instead of onInit
 
@@ -169,10 +159,8 @@ export class MapsComponent implements OnInit, AfterViewInit {
 
     // =========MAIN EVENT ONCLICK================
     this.map.on('click', (evt) => {
-      // TODO: add check zoom function to ensure only two layers were selected
       // test call modal
       //this.openModal(this.list);
-      //console.log(this.list);
 
       var viewResolution = /** @type {number} */ (this.view.getResolution());
       var url = this.wmsSource.getGetFeatureInfoUrl(
@@ -187,16 +175,11 @@ export class MapsComponent implements OnInit, AfterViewInit {
       this.checkattribute.getResponse(url).subscribe(
         res => {
           this.clickedfeature = res;
-          this.checkFeature(this.clickedfeature, evt.coordinate);
+          //this.checkFeature(this.clickedfeature, evt.coordinate);
+          this.hightlight.checkFeature(this.clickedfeature, evt.coordinate, this.map);
           
         }
       );
-
-      //
-
-
-
-
 
       //this.checkattribute.getClosestFeature(evt.coordinate);
       //this.checkattribute.displaySnap(evt.coordinate);
@@ -239,6 +222,11 @@ export class MapsComponent implements OnInit, AfterViewInit {
     });
   }
 
+
+
+
+
+  /*
   checkFeature(features, coordinate) {
     var ketRDTR = features.features[0].properties;
     var ketBidang = features.features[1].properties;
@@ -254,7 +242,8 @@ export class MapsComponent implements OnInit, AfterViewInit {
         '<h3>Bidang Tanah </h3>' + '<br>' +
         'Zona RDTR: '+  ketRDTR.zona +  '<br>' +
          'Tipe: ' + ketBidang.TIPE +  '<br>' +
-         'Luas Bidang (m<sup>2</sup>): ' + ketBidang.luas
+         'Luas Bidang (m<sup>2</sup>): ' + ketBidang.luas + '<br>' +
+         '<button mat-raised-button color="primary" (click)=check()> Cek Bidang Ini </button>'
           
           );
         this.highlightSelected(this.clickedfeature);
@@ -298,5 +287,10 @@ export class MapsComponent implements OnInit, AfterViewInit {
     this.map.render();
   } // highlight selected feature
 
+  check(){
+    console.log("check");
+  }
+
+  */
 
 }
