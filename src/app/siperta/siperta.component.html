@@ -1,0 +1,57 @@
+<mat-sidenav-container>
+    <mat-sidenav #sidenav role="navigation">
+        <!--this is a place for us to add side-nav code-->
+        <app-sidenav-list></app-sidenav-list>
+      </mat-sidenav>
+  <mat-sidenav-content>
+    <app-header (sidenavToggle)="sidenav.toggle()"></app-header>
+    <!--in here all the content must reside. We will add a navigation header as well-->
+    
+    <main>
+      <app-siperta-maps></app-siperta-maps>
+      <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-content>
+
+  
+</mat-sidenav-container>
+
+
+  <!--mat-sidenav-container>
+
+	
+	<mat-sidenav #drawer fixedInViewport="true" [mode]="side" [opened]="true">
+		<mat-toolbar color="primary">Menu</mat-toolbar>
+		<mat-nav-list>
+			<a mat-list-item href="#">ITEM1</a>
+			<a mat-list-item href="#">ITEM2</a>
+			<a mat-list-item href="#">ITEM3</a>
+			<a mat-list-item href="#">ITEM4</a>
+		</mat-nav-list>
+	</mat-sidenav>
+	
+	<mat-sidenav-content>
+		<mat-toolbar color="primary" class="position-fixed">
+			<button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span class="mat-spacer"></span>
+      <span>HELLO APPLICATION</span>
+    </mat-toolbar>
+
+    <div class="content">
+        <app-maps></app-maps>
+    </div>
+
+  </mat-sidenav-content>
+  
+
+</mat-sidenav-container>
+-->
+  <!--app-nav></app-nav-->
+
+  <!--app-maps></app-maps-->

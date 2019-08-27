@@ -36,7 +36,7 @@ export class BasemaplayerService {
         //@ts-ignore
         title: 'ESRI World Imagery',
         baseLayer:true,
-        visible: false,
+        visible: true,
         source: new XYZ({
           //@ts-ignore
           url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',

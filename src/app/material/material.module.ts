@@ -1,6 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {MatToolbarModule, MatInputModule, MatTabsModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
+import {
+  MatToolbarModule, 
+  MatInputModule, 
+  MatTabsModule, 
+  MatButtonModule, 
+  MatSidenavModule, 
+  MatIconModule, 
+  MatListModule,
+  MatCardModule 
+
+} from '@angular/material';
 import {MatDialogModule} from '@angular/material/dialog';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {MatAutocompleteModule} from '@angular/material/autocomplete'
@@ -21,7 +31,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatAutocompleteModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatCardModule
     
   ],
   exports: [
@@ -36,7 +47,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatAutocompleteModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatCardModule
   ]
 })
 export class MaterialModule { }

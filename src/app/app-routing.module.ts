@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 //components to route into
 import { MainViewComponent } from './main-view/main-view.component';
+import { SipertaComponent } from './siperta/siperta.component';
 import { LandingComponent } from './landing/landing.component';
 
 const routes: Routes = [
@@ -10,6 +11,10 @@ const routes: Routes = [
     path: 'home', 
     component: MainViewComponent,
     children: [] // put children route here { path: '', component: LoginComponent },
+  },
+  { 
+    path: 'siperta', 
+    component: SipertaComponent
   },
   { path: '', component: LandingComponent}
 

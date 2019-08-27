@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { MaterialModule } from './material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { MainViewComponent } from './main-view/main-view.component';
 import { LandingComponent } from './landing/landing.component';
@@ -17,6 +18,8 @@ import { MatDialogModule } from "@angular/material";
 import { HeaderComponent } from './navigation/header/header.component';
 import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
 import { CekizinComponent } from './dialog/cekizin/cekizin.component';
+import { SipertaComponent } from './siperta/siperta.component';
+import { SipertaMapsComponent } from './siperta/siperta-maps/siperta-maps.component';
 
 
 
@@ -30,7 +33,9 @@ import { CekizinComponent } from './dialog/cekizin/cekizin.component';
     NavComponent,
     HeaderComponent,
     SidenavListComponent,
-    CekizinComponent
+    CekizinComponent,
+    SipertaComponent,
+    SipertaMapsComponent
     
   ],
   entryComponents: [
@@ -46,7 +51,8 @@ import { CekizinComponent } from './dialog/cekizin/cekizin.component';
     HttpClientJsonpModule,
     MatDialogModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FlexLayoutModule 
 
   ],
   providers: [],
