@@ -17,6 +17,7 @@ import { fromLonLat } from 'ol/proj';
 
 import { BasemaplayerService } from '../../service/basemaplayer.service';
 import { SipertaoverlayService } from './../../service/sipertaoverlay.service';
+import { CheckattributeService } from '../../service/checkattribute.service';
 
 @Component({
   selector: 'app-siperta-maps',
@@ -42,10 +43,25 @@ export class SipertaMapsComponent implements OnInit {
   constructor(
     public basemaplayers: BasemaplayerService,
     public overlaylayers: SipertaoverlayService,
+    private checkattribute: CheckattributeService,
 
   ) { }
 
   ngOnInit() {
+
+    // for get featureinfo
+    this.wmsSource = new TileWMS({
+      url: 'http://localhost:8080/geoserver/siperta/wms',
+      params: {
+        'LAYERS': 'siperta:LAHAN_PEMKOT_YOGYAKARTA',
+        'FORMAT': 'image/png8',
+        'TILED': false,
+        'VERSION': '1.1.1',
+      },
+      serverType: 'geoserver',
+      crossOrigin: 'anonymous'
+    });
+
 
     this.view = new OlView({
       center: fromLonLat([110.3650042, -7.8049497]),
@@ -75,7 +91,7 @@ export class SipertaMapsComponent implements OnInit {
 
   } //oninit
 
-  
+
   ngAfterViewInit() {
     // for ol to work: set target in afterviewinit
     this.map.setTarget('sipertamap');
@@ -92,7 +108,34 @@ export class SipertaMapsComponent implements OnInit {
 
       });
     this.map.addControl(switcher);
-  }
+
+    this.map.on('click', (evt) => {
+      console.log('cl')
+
+      var viewResolution = /** @type {number} */ (this.view.getResolution());
+      var url = this.wmsSource.getGetFeatureInfoUrl(
+        evt.coordinate, viewResolution, this.view.getProjection(),//'EPSG:3857',
+        {
+          'INFO_FORMAT': 'application/json',
+          'QUERY_LAYERS': 'siperta:LAHAN_PEMKOT_YOGYAKARTA',
+          'FEATURE_COUNT': 1
+        });
+
+      // getting GetFeatureInfo data
+      this.checkattribute.getResponse(url).subscribe(
+        res => {
+          this.clickedfeature = res;
+          //this.checkFeature(this.clickedfeature, evt.coordinate);
+          console.log(this.clickedfeature);
+        }
+      );
+    });
+
+
+
+
+
+  } //afterview
 
 
 
