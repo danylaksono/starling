@@ -6,7 +6,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgModule, } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
-
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -31,7 +31,8 @@ export class HeaderComponent implements OnInit {
   constructor(
     private cookie: CookieService,
     public dialog: MatDialog,
-    private auth: AuthService
+    private auth: AuthService,
+    private router: Router
   ) { }
 
 
@@ -49,6 +50,7 @@ export class HeaderComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.logOut();
+        this.router.navigateByUrl('');
       }
     });
   }
@@ -77,7 +79,6 @@ export class HeaderComponent implements OnInit {
   }
 
 
-
   ngOnInit() {
     setTimeout(() => {
       this.isLoggedIn = this.auth.isSignedIn();
@@ -88,9 +89,6 @@ export class HeaderComponent implements OnInit {
 
   }
 
-  ngAfterContentInit() {
-
-  }
 
 }
 

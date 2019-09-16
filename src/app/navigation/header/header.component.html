@@ -6,6 +6,12 @@
   </span>
   <span class="example-spacer"></span>
 
+  <button  matTooltip="Disclaimer"
+   mat-icon-button routerLink="/login" aria-label="sitaru admin">
+    <mat-icon  class="unlogged-icon" aria-hidden="false" aria-label="user verified icon">warning
+    </mat-icon>
+  </button>
+
   <button  matTooltip="Masuk sebagai admin"
   *ngIf="!isLoggedIn" mat-icon-button routerLink="/login" aria-label="sitaru admin">
     <mat-icon  class="unlogged-icon" aria-hidden="false" aria-label="user verified icon">person
@@ -19,7 +25,7 @@
     </mat-icon>
   </button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item>
+    <button routerLink="/signup" mat-menu-item>
       <mat-icon>build</mat-icon>
       <span>Pengaturan</span>
     </button>
@@ -28,6 +34,4 @@
       <span>Log Out</span>
     </button>
   </mat-menu>
-  
-
 </mat-toolbar>

@@ -8,12 +8,26 @@ import { AuthService } from './../../service/auth.service';
 })
 export class SignUpComponent implements OnInit {
 
+  public createEmail: string;
+  public createPassword: string;
+  public signInEmail: string;
+  public signInPassword: string;
+  public jwt: string;
+
   constructor(
-    private Auth: AuthService
+    private auth: AuthService
   ) { }
 
   getUser(){
-    this.Auth.isSignedIn();
+    this.auth.isSignedIn();
+  }
+
+  createAccount(){
+    let credentials = {
+      email: this.signInEmail,
+      password: this.signInPassword
+    }
+    this.auth.createAccount(credentials);
   }
 
   ngOnInit() {

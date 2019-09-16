@@ -26,6 +26,7 @@ import { SipertaMapsComponent } from './siperta/siperta-maps/siperta-maps.compon
 import { LoginComponent } from './Auth/login/login.component';
 import { SignUpComponent } from './Auth/sign-up/sign-up.component';
 import { YesnoComponent } from './dialog/yesno/yesno.component';
+import { LayerattributeComponent } from './dialog/layerattribute/layerattribute.component';
 
 
 
@@ -45,12 +46,14 @@ import { YesnoComponent } from './dialog/yesno/yesno.component';
     SipertaMapsComponent,
     LoginComponent,
     SignUpComponent,
-    YesnoComponent
+    YesnoComponent,
+    LayerattributeComponent
     
   ],
   entryComponents: [
     CekizinComponent,
-    YesnoComponent
+    YesnoComponent,
+    LayerattributeComponent
   ],
   imports: [
     BrowserModule,

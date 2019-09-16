@@ -1,3 +1,4 @@
+import { LayerattributeComponent } from './../dialog/layerattribute/layerattribute.component';
 import { Injectable, ElementRef, ViewChild } from '@angular/core';
 import Popup from 'ol-popup';
 import { Fill, Stroke, Style } from 'ol/style';
@@ -5,8 +6,10 @@ import OlVectorSource from 'ol/source/Vector';
 import OlVectorLayer from 'ol/layer/Vector';
 import OlGeoJSON from 'ol/format/GeoJSON';
 
+import { MatDialog, MatDialogConfig } from '@angular/material';
 import { WarningSnackbarService } from './../dialog/warning-snackbar.service';
 import { Overlay } from 'ol';
+
 
 @Injectable({
   providedIn: 'root'
@@ -21,13 +24,11 @@ export class HighlightfeatureService {
   overlay: Overlay;
 
   constructor(
-    private warning: WarningSnackbarService
+    private warning: WarningSnackbarService,
+    public dialog: MatDialog
   ) { }
 
-
-  
-  
-  
+ 
   checkFeature(features, coordinate, map) {
     this.popup = new Popup();
     map.addOverlay(this.popup);
@@ -53,8 +54,7 @@ export class HighlightfeatureService {
     this.content.nativeElement.innerHTML = '<p>You clicked here:</p><code>'+'the hash slinging' +  '</code>';
     */
 
-    
-    
+        
     var ketRDTR = features.features[0].properties;
     var ketBidang = features.features[1].properties;
     //console.log(features);
@@ -65,7 +65,9 @@ export class HighlightfeatureService {
       } else if (features.numberReturned < 2) {
         this.warning.open('Data bidang tanah atau RDTR tidak tersedia');
       } else {       
-        
+        this.openModal();
+
+        /*
         this.popup.show(coordinate, 
         '<h3>Bidang Tanah </h3>' + '<br>' +
         'Zona RDTR: '+  ketRDTR.zona +  '<br>' +
@@ -73,13 +75,19 @@ export class HighlightfeatureService {
          'Luas Bidang (m<sup>2</sup>): ' + ketBidang.luas + '<br>' +
          '<button mat-raised-button color="primary" (click)=check()> Cek Bidang Ini </button>'
           
-          );
+          ); */
           
         //this.overlay.setPosition(coordinate);
         this.highlightSelected(features, map);
       }
     }
   }; //check feature
+
+  clearHighlight(map){
+    if (this.VectorLayer) {
+      map.removeLayer(this.VectorLayer);
+    }
+  }
 
 
   highlightSelected(feature, map) {
@@ -118,5 +126,27 @@ export class HighlightfeatureService {
   } // highlight selected feature
 
 
+  openModal() {
+    let dialogConfig = new MatDialogConfig();
+    dialogConfig = {
+      disableClose : true,
+      autoFocus : true,
+      height : '400px',
+      width : '600px',
+      hasBackdrop: false      
+    }
+    dialogConfig.data = {
+      id: 1,
+      title: 'Log Out Admin',
+      article: 'Keluar dari Mode Administator?'
+
+    };
+    const dialogRef = this.dialog.open(LayerattributeComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log(result);
+      }
+    });
+  } //opendialog
 
 }

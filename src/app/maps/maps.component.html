@@ -4,15 +4,15 @@
   <!-- Nav tabs -->
   <div class="sidebar-tabs">
     <ul role="tablist">
-      <li><a href="#home" role="tab"><i class="fa fa-bars"></i></a></li>
-      <li><a href="#profile" role="tab"><i class="fa fa-user"></i></a></li>
-      <li class="disabled"><a href="#messages" role="tab"><i class="fa fa-envelope"></i></a></li>
-      <li><a href="https://github.com/Turbo87/sidebar-v2" role="tab" target="_blank"><i class="fa fa-github"></i></a>
+      <li><a matTooltip="Layer Peta" href="#home" role="tab"><i class="fa fa-map"></i></a></li>
+      <li><a matTooltip="Legenda" href="#profile" role="tab"><i class="fa fa-image"></i></a></li>
+      <li><a matTooltip="Hapus seleksi" (click)="clearSelected()" target="_blank"><i class="fa fa-eraser"></i></a></li>
+      <li><a matTooltip="Bookmark" href="#bookmark" role="tab"><i class="fa fa-bookmark"></i></a>
       </li>
     </ul>
 
     <ul role="tablist">
-      <li><a href="#settings" role="tab"><i class="fa fa-gear"></i></a></li>
+      <li *ngIf="isLoggedIn"><a href="#settings" role="tab"><i class="fa fa-gear"></i></a></li>
     </ul>
   </div>
 
@@ -30,10 +30,6 @@
 
     <div class="sidebar-pane" id="profile">
       <h1 class="sidebar-header">Profile<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
-    </div>
-
-    <div class="sidebar-pane" id="messages">
-      <h1 class="sidebar-header">Messages<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
     </div>
 
     <div class="sidebar-pane" id="settings">

@@ -1,3 +1,4 @@
+
 import { Component, OnInit, NgZone, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 
 import OlMap from 'ol/Map';
@@ -13,9 +14,7 @@ import LayerSwitcher from 'ol-ext/control/LayerSwitcher';
 import { fromLonLat } from 'ol/proj';
 
 
-
-
-//components
+//components & services
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { CekizinComponent } from './../dialog/cekizin/cekizin.component';
 import { BasemaplayerService } from '../service/basemaplayer.service';
@@ -26,6 +25,9 @@ import { DaftarkegiatanService } from '../service/daftarkegiatan.service';
 import { WarningSnackbarService } from './../dialog/warning-snackbar.service';
 import { HighlightfeatureService } from '../service/highlightfeature.service'
 import { CookieService } from 'ngx-cookie-service';
+import { AuthService } from './../service/auth.service';
+
+
 
 
 @Component({
@@ -43,7 +45,8 @@ export class MapsComponent implements OnInit, AfterViewInit {
   view: OlView;
   wmsSource: TileWMS;
   VectorLayer: OlVectorLayer;
-  loggedIn: Boolean = false;
+  public popup_is_open = false;
+  isLoggedIn: Boolean = false;
 
   basemap: any[];
   overlay: {};
@@ -62,13 +65,18 @@ export class MapsComponent implements OnInit, AfterViewInit {
     private dialog: MatDialog,
     private hightlight: HighlightfeatureService,
     private warning: WarningSnackbarService,
-    private cookie: CookieService
+    private cookie: CookieService,
+    private auth: AuthService
   ) {
   } // constructor
 
 
 
   ngOnInit() {
+
+    
+
+
 
     //getting itbx data
     //console.log(this.dataitbx.getITBX());
@@ -142,6 +150,14 @@ export class MapsComponent implements OnInit, AfterViewInit {
   } // oninint
 
   ngAfterViewInit() {
+
+    setTimeout(() => {
+      this.isLoggedIn = this.auth.isSignedIn();
+      console.log(this.isLoggedIn);
+    }, 1000
+    )
+
+
     // for ol to work: set target in afterviewinit
     this.map.setTarget('map');
 
@@ -179,7 +195,7 @@ export class MapsComponent implements OnInit, AfterViewInit {
           this.clickedfeature = res;
           //this.checkFeature(this.clickedfeature, evt.coordinate);
           this.hightlight.checkFeature(this.clickedfeature, evt.coordinate, this.map);
-          
+
         }
       );
 
@@ -205,6 +221,11 @@ export class MapsComponent implements OnInit, AfterViewInit {
     */
 
   } // afterview init
+
+
+  clearSelected() {
+    this.hightlight.clearHighlight(this.map);
+  }
 
 
   openModal(list) {
