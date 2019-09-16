@@ -1,0 +1,39 @@
+<div fxFill class="container">
+
+  <div fxLayout="column" fxLayoutAlign="center" style="padding: 20px">
+    <div fxLayoutAlign="end">
+      <button mat-fab (click)="getUser()">
+        <mat-icon>home</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="main-card" fxLayout="row wrap" fxLayoutAlign="center center" style="padding: 20px" fxLayoutWrap
+  fxLayoutGap="5%">
+  <div fxFlex="30%" *ngIf="showSignup">
+    <mat-card>
+      <mat-card-title fxLayoutAlign="center">
+        <h4>Pengguna Baru</h4>
+      </mat-card-title>
+
+      <mat-card-content>
+        <form class="example-form">
+          <mat-form-field class="example-full-width">
+            <input matInput [(ngModel)]="createEmail" name="createEmail" type="text" placeholder="email">
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <input matInput [(ngModel)]="createPassword" name="createPassword" type="password" placeholder="password">
+          </mat-form-field>
+
+          <!-->mat-form-field class="example-full-width">
+            <textarea matInput placeholder="Leave a comment"></textarea>
+          </!-->
+        </form>
+      </mat-card-content>
+      <mat-card-actions fxLayoutAlign="end">
+        <button (click)="createAccount()" mat-raised-button color="primary">LOGIN SITARU</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

@@ -19,6 +19,8 @@ import { map, startWith } from 'rxjs/operators';
     MaterialModule
   ]
 })
+
+
 export class CekizinComponent implements OnInit {
 
   // modal dialog data

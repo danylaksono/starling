@@ -24,8 +24,8 @@ import { CheckattributeService } from './../service/checkattribute.service';
 import { DataitbxService } from './../service/dataitbx.service';
 import { DaftarkegiatanService } from '../service/daftarkegiatan.service';
 import { WarningSnackbarService } from './../dialog/warning-snackbar.service';
-
 import { HighlightfeatureService } from '../service/highlightfeature.service'
+import { CookieService } from 'ngx-cookie-service';
 
 
 @Component({
@@ -43,6 +43,7 @@ export class MapsComponent implements OnInit, AfterViewInit {
   view: OlView;
   wmsSource: TileWMS;
   VectorLayer: OlVectorLayer;
+  loggedIn: Boolean = false;
 
   basemap: any[];
   overlay: {};
@@ -60,7 +61,8 @@ export class MapsComponent implements OnInit, AfterViewInit {
     private daftarkegiatan: DaftarkegiatanService,
     private dialog: MatDialog,
     private hightlight: HighlightfeatureService,
-    private warning: WarningSnackbarService
+    private warning: WarningSnackbarService,
+    private cookie: CookieService
   ) {
   } // constructor
 
@@ -83,7 +85,7 @@ export class MapsComponent implements OnInit, AfterViewInit {
 
     // for get featureinfo
     this.wmsSource = new TileWMS({
-      url: 'http://geoportal.ppids.ft.ugm.ac.id/geoserver/sitaru/wms',
+      url: 'http://peta.jogjakota.go.id:8080/geoserver/sitaru/wms',
       params: {
         'LAYERS': 'sitaru:sitaru2',
         'FORMAT': 'image/png8',

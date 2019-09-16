@@ -1,8 +1,33 @@
 <mat-toolbar style="max-height:50px" color="primary">
-  <div >
-      <button mat-icon-button (click)="onClicked()">
-          <mat-icon>menu</mat-icon>
-      </button>
-  </div>
+  <span>
+    <button mat-icon-button (click)="onClicked()">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </span>
+  <span class="example-spacer"></span>
+
+  <button  matTooltip="Masuk sebagai admin"
+  *ngIf="!isLoggedIn" mat-icon-button routerLink="/login" aria-label="sitaru admin">
+    <mat-icon  class="unlogged-icon" aria-hidden="false" aria-label="user verified icon">person
+    </mat-icon>
+  </button>
+
+
+  <button  matTooltip="Administrator Sitaru"
+  *ngIf="isLoggedIn" mat-icon-button [matMenuTriggerFor]="menu" aria-label="sitaru admin">
+    <mat-icon  class="logged-icon" aria-hidden="false" aria-label="user verified icon">verified_user
+    </mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>
+      <mat-icon>build</mat-icon>
+      <span>Pengaturan</span>
+    </button>
+    <button (click) = "openModal()" mat-menu-item>
+      <mat-icon>exit_to_app</mat-icon>
+      <span>Log Out</span>
+    </button>
+  </mat-menu>
   
+
 </mat-toolbar>

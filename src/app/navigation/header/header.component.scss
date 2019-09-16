@@ -1,24 +1,35 @@
 a {
-    text-decoration: none;
-    color: white;
+  text-decoration: none;
+  color: white;
 }
- 
-a:hover, a:active{
-    color: lightgray;
+
+a:hover,
+a:active {
+  color: lightgray;
 }
- 
-.navigation-items{
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
+
+.navigation-items {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
 }
- 
-mat-toolbar{
-    //border-radius: 3px;
+
+.example-spacer {
+  flex: 1 1 auto;
 }
- 
-@media(max-width: 959px){
-    mat-toolbar{
-        border-radius: 0px;
-    }
+
+.logged-icon {
+  color: lightgreen;
+}
+
+.unlogged-icon {
+  color: white;
+}
+
+
+
+@media(max-width: 959px) {
+  mat-toolbar {
+    border-radius: 0px;
+  }
 }

@@ -8,7 +8,8 @@ import {
   MatSidenavModule, 
   MatIconModule, 
   MatListModule,
-  MatCardModule 
+  MatCardModule,
+  MatTooltipModule
 
 } from '@angular/material';
 import {MatDialogModule} from '@angular/material/dialog';
@@ -16,6 +17,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
 import {MatAutocompleteModule} from '@angular/material/autocomplete'
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatMenuModule} from '@angular/material/menu';
 
 @NgModule({
   imports: [
@@ -32,7 +34,9 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatFormFieldModule,
     MatInputModule,
     MatSnackBarModule,
-    MatCardModule
+    MatCardModule,
+    MatMenuModule,
+    MatTooltipModule
     
   ],
   exports: [
@@ -48,7 +52,9 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatFormFieldModule,
     MatInputModule,
     MatSnackBarModule,
-    MatCardModule
+    MatCardModule,
+    MatMenuModule,
+    MatTooltipModule
   ]
 })
 export class MaterialModule { }

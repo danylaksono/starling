@@ -20,7 +20,8 @@ export class OverlaylayerService {
         visible: true,
         opacity: 0.6,
         source: new SourceWMS({
-          url: 'http://geoportal.ppids.ft.ugm.ac.id/geoserver/sitaru/wms',
+          //url: 'http://geoportal.ppids.ft.ugm.ac.id/geoserver/sitaru/wms',
+          url: 'http://peta.jogjakota.go.id:8080/geoserver/sitaru/wms', 
           params: {'LAYERS': 'sitaru:bidang_tanah_tujuh_edit', 'TILED': true},
           serverType: 'geoserver',
           transition: 0
@@ -33,7 +34,7 @@ export class OverlaylayerService {
         visible: true,
         opacity: 0.7,
         source: new SourceWMS({
-          url: 'http://geoportal.ppids.ft.ugm.ac.id/geoserver/sitaru/wms',
+          url: 'http://peta.jogjakota.go.id:8080/geoserver/sitaru/wms', 
           params: {'LAYERS': 'sitaru:pola_ruang_rdtr', 'TILED': true},
           serverType: 'geoserver',
           transition: 0
@@ -44,7 +45,7 @@ export class OverlaylayerService {
         title: 'Jaringan Jalan',       
         visible: true,
         source: new SourceWMS({
-          url: 'http://geoportal.ppids.ft.ugm.ac.id/geoserver/sitaru/wms',
+          url: 'http://peta.jogjakota.go.id:8080/geoserver/sitaru/wms', 
           params: {'LAYERS': 'sitaru:jalan_gsb', 'TILED': true},
           serverType: 'geoserver',
           transition: 0

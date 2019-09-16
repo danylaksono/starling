@@ -9,6 +9,9 @@ import { MaterialModule } from './material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
+
+import { CookieService } from 'ngx-cookie-service';
+
 import { MainViewComponent } from './main-view/main-view.component';
 import { LandingComponent } from './landing/landing.component';
 import { MapsComponent } from './maps/maps.component';
@@ -20,6 +23,10 @@ import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.com
 import { CekizinComponent } from './dialog/cekizin/cekizin.component';
 import { SipertaComponent } from './siperta/siperta.component';
 import { SipertaMapsComponent } from './siperta/siperta-maps/siperta-maps.component';
+import { LoginComponent } from './Auth/login/login.component';
+import { SignUpComponent } from './Auth/sign-up/sign-up.component';
+import { YesnoComponent } from './dialog/yesno/yesno.component';
+
 
 
 
@@ -35,11 +42,15 @@ import { SipertaMapsComponent } from './siperta/siperta-maps/siperta-maps.compon
     SidenavListComponent,
     CekizinComponent,
     SipertaComponent,
-    SipertaMapsComponent
+    SipertaMapsComponent,
+    LoginComponent,
+    SignUpComponent,
+    YesnoComponent
     
   ],
   entryComponents: [
-    CekizinComponent
+    CekizinComponent,
+    YesnoComponent
   ],
   imports: [
     BrowserModule,
@@ -52,10 +63,11 @@ import { SipertaMapsComponent } from './siperta/siperta-maps/siperta-maps.compon
     MatDialogModule,
     FormsModule,
     ReactiveFormsModule,
-    FlexLayoutModule 
+    FlexLayoutModule
+    
 
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
