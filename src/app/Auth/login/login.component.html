@@ -2,24 +2,25 @@
 
   <div fxLayoutGap="1%" fxLayout="row" style="padding: 20px" fxLayoutAlign="end">
       <div>
-        <button mat-fab color="accent" routerLink="/home">
+        <button matTooltip="Kembali ke Peta" mat-fab color="accent" routerLink="/home">
           <mat-icon>arrow_back</mat-icon>
         </button>
       </div>
       <div>
-        <button mat-fab color="primary" routerLink="">
+        <button matTooltip="Halaman Depan" mat-fab color="primary" routerLink="">
           <mat-icon>home</mat-icon>
         </button>
       </div>  
   </div>
-
+  <div fxLayout="row" style="padding: 20px"></div>
   <div class="main-card" fxLayout="row wrap" fxLayoutAlign="center center" style="padding: 20px" fxLayoutWrap
     fxLayoutGap="5%">
+    
 
-    <div fxFlex="30%">
+    <div fxFlex="30%" class="loginbox">
       <mat-card>
         <mat-card-title fxLayoutAlign="center ">
-          <h4>Login</h4>
+          <h4>Login Administrator</h4>
         </mat-card-title>
 
         <mat-card-content>

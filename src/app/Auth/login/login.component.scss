@@ -7,3 +7,24 @@
   .example-full-width {
     width: 100%;
   }
+
+.loginbox{
+  opacity: 0.9;
+}
+  
+.container {
+  justify-content: space-between;
+  
+  
+  background-image: url("../../../assets/images/jemparingan.jpg");
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+}
