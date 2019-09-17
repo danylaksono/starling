@@ -1,11 +1,14 @@
 <div mat-dialog-title color="primary" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
-  Periksa Atribut Layer
+  Kode: {{modalRDTR.kode}}
 </div>
-
 <mat-dialog-content>
-    <p> {{modalArticle}} </p>
+  <p> Zona RDTR: {{modalRDTR.zona}}</p>
+  <p> Sub-Zona RDTR: {{modalRDTR.sub_zona}}</p>
+  <p> Pola Ruang: {{modalRDTR.pola_ruang}}</p>
+  <p> Tipe Bidang Tanah: {{modalBidang.TIPE}}</p>
+  <p> Luas Bidang Tanah: {{modalBidang.luas}} (m)</p>
  </mat-dialog-content>
 <mat-dialog-actions fxLayoutAlign="end">
-  <button mat-raised-button (click)="closeDialog()">Tidak</button>
-  <button mat-raised-button [mat-dialog-close]='true' color="primary">Ya</button>
+  <button *ngIf="isLoggedIn" mat-raised-button (click)="closeA()" color="primary">Periksa</button>
+  <button mat-raised-button (click)="closeB()" >Tutup</button>
 </mat-dialog-actions>

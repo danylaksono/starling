@@ -9,29 +9,31 @@ import OlGeoJSON from 'ol/format/GeoJSON';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { WarningSnackbarService } from './../dialog/warning-snackbar.service';
 import { Overlay } from 'ol';
+import { MainqueryService } from './mainquery.service';
+
+
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class HighlightfeatureService {
-  @ViewChild('popup', { static: false }) container: ElementRef;
-  @ViewChild('popupcloser', { static: false }) closer: ElementRef;
-  @ViewChild('popupcontent', { static: false }) content: ElementRef;
 
   popup: any;
   VectorLayer: OlVectorLayer;
   overlay: Overlay;
+  
 
   constructor(
     private warning: WarningSnackbarService,
+    private query: MainqueryService,
     public dialog: MatDialog
   ) { }
 
  
   checkFeature(features, coordinate, map) {
-    this.popup = new Popup();
-    map.addOverlay(this.popup);
+    //this.popup = new Popup();
+    //map.addOverlay(this.popup);
 
     /*
 
@@ -57,7 +59,9 @@ export class HighlightfeatureService {
         
     var ketRDTR = features.features[0].properties;
     var ketBidang = features.features[1].properties;
-    //console.log(features);
+    //console.log(ketBidang);
+    //console.log(ketRDTR);
+    //console.log(coordinate);
 
     if (features) {
       if (features.numberReturned > 2) {
@@ -65,7 +69,7 @@ export class HighlightfeatureService {
       } else if (features.numberReturned < 2) {
         this.warning.open('Data bidang tanah atau RDTR tidak tersedia');
       } else {       
-        this.openModal();
+        this.openModalShowAttribute(ketRDTR, ketBidang);
 
         /*
         this.popup.show(coordinate, 
@@ -126,27 +130,51 @@ export class HighlightfeatureService {
   } // highlight selected feature
 
 
-  openModal() {
+  openModalShowAttribute(rdtr, bidang) {
     let dialogConfig = new MatDialogConfig();
     dialogConfig = {
       disableClose : true,
       autoFocus : true,
-      height : '400px',
-      width : '600px',
+      //height : '200px',
+      width : '450px',
       hasBackdrop: false      
     }
     dialogConfig.data = {
-      id: 1,
-      title: 'Log Out Admin',
-      article: 'Keluar dari Mode Administator?'
+      id: 2,
+      title: 'Keterangan RDTR dan Bidang',
+      dataRDTR: rdtr,
+      dataBidang: bidang
+      //article: 'Keluar dari Mode Administator?'
 
     };
     const dialogRef = this.dialog.open(LayerattributeComponent, dialogConfig);
+    //dialogRef.closeAll();
     dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        console.log(result);
+      if (result === 'A') {
+        // handle A button close
+        console.log('A');
+        this.query.openModal(rdtr, bidang);
       }
+    
+      if (result === 'B') {
+        // handle B button close
+        console.log('B');
+      }
+
+      //if (result) {
+        //console.log(result);
+        
+        
+      //}
     });
   } //opendialog
 
 }
+
+/*
+const closedA$ = dialogRef.afterClosed().pipe(filter(result => result === 'A'));
+const closedB$ = dialogRef.afterClosed().pipe(filter(result => result === 'B'));
+
+closedA$.subscribe( // handle A);
+closedB$.subscribe( // handle B);
+*/

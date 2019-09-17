@@ -1,4 +1,5 @@
 
+
 import { Component, OnInit, NgZone, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 
 import OlMap from 'ol/Map';
@@ -26,6 +27,8 @@ import { WarningSnackbarService } from './../dialog/warning-snackbar.service';
 import { HighlightfeatureService } from '../service/highlightfeature.service'
 import { CookieService } from 'ngx-cookie-service';
 import { AuthService } from './../service/auth.service';
+
+
 
 
 
@@ -61,6 +64,7 @@ export class MapsComponent implements OnInit, AfterViewInit {
     private overlaylayers: OverlaylayerService,
     private checkattribute: CheckattributeService,
     private dataitbx: DataitbxService,
+    
     private daftarkegiatan: DaftarkegiatanService,
     private dialog: MatDialog,
     private hightlight: HighlightfeatureService,
@@ -73,10 +77,6 @@ export class MapsComponent implements OnInit, AfterViewInit {
 
 
   ngOnInit() {
-
-    
-
-
 
     //getting itbx data
     //console.log(this.dataitbx.getITBX());
@@ -153,7 +153,7 @@ export class MapsComponent implements OnInit, AfterViewInit {
 
     setTimeout(() => {
       this.isLoggedIn = this.auth.isSignedIn();
-      console.log(this.isLoggedIn);
+      //console.log(this.isLoggedIn);
     }, 1000
     )
 
@@ -178,7 +178,7 @@ export class MapsComponent implements OnInit, AfterViewInit {
     // =========MAIN EVENT ONCLICK================
     this.map.on('click', (evt) => {
       // test call modal
-      //this.openModal(this.list);
+      
 
       var viewResolution = /** @type {number} */ (this.view.getResolution());
       var url = this.wmsSource.getGetFeatureInfoUrl(
@@ -195,9 +195,9 @@ export class MapsComponent implements OnInit, AfterViewInit {
           this.clickedfeature = res;
           //this.checkFeature(this.clickedfeature, evt.coordinate);
           this.hightlight.checkFeature(this.clickedfeature, evt.coordinate, this.map);
+          });
 
-        }
-      );
+        
 
       //this.checkattribute.getClosestFeature(evt.coordinate);
       //this.checkattribute.displaySnap(evt.coordinate);
@@ -240,7 +240,7 @@ export class MapsComponent implements OnInit, AfterViewInit {
     };
     const dialogRef = this.dialog.open(CekizinComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
-      console.log("Dialog closed")
+      //console.log("Dialog closed")
       console.log(result)
     });
   }

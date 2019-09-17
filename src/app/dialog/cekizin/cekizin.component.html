@@ -1,22 +1,24 @@
-<h2 mat-dialog-title cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>{{modalTitle}}</h2>
+<h4 mat-dialog-title cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>{{modalTitle}}</h4>
 
 <mat-dialog-content>
-    <p> {{modalArticle}} </p>
+  
+  <p> Pola Ruang: {{rdtr.pola_ruang}}</p>
+  <p> Luas Bidang Tanah: {{bidang.luas}} (m)</p>
   <form class="example-form">
     <mat-form-field class="example-full-width">
-      <input type="text" placeholder="Pick one" aria-label="Number" matInput [formControl]='myControl'
+      <input type="text" placeholder="Ketik atau pilih jenis kegiatan" aria-label="Number" matInput [formControl]='myControl'
         [matAutocomplete]="auto">
       <mat-autocomplete #auto="matAutocomplete">
-        <mat-option *ngFor="let option of filteredOptions | async" [value]="modalList">
-          {{modalList}}
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+          {{option}}
         </mat-option>
       </mat-autocomplete>
     </mat-form-field>
   </form>
 
 </mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-button mat-dialog-close>No</button>
+<mat-dialog-actions fxLayoutAlign="end">
+  <button mat-button mat-dialog-close color="primary">Cek Perizinan</button>
   <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog.-->
-  <button mat-button [mat-dialog-close]='true'>Yes</button>
+  <button mat-button [mat-dialog-close]='true'>Tutup</button>
 </mat-dialog-actions>

@@ -27,17 +27,20 @@ export class CekizinComponent implements OnInit {
   modalTitle: string;
   modalArticle: string;
   modalList: string[];
+  rdtr: any;
+  bidang: any;
 
   //form autocomplete
   myControl = new FormControl();
-  options: string[] = ['One', 'Two', 'Three'];
   filteredOptions: Observable<string[]>;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
     this.modalTitle = data.title;
     this.modalArticle = data.article;
     this.modalList = data.list;
-    //console.log(data)
+    this.rdtr = data.rdtr;
+    this.bidang = data.bidang;
+    //console.log(this.modalList);
   }
 
   ngOnInit() {
@@ -50,7 +53,7 @@ export class CekizinComponent implements OnInit {
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
-    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+    return this.modalList.filter(option => option.toLowerCase().includes(filterValue));
   }
 
 }
