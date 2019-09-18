@@ -21,7 +21,7 @@ export class MainqueryService {
     this.daftarkegiatan.getKegiatan().subscribe(
       res => {
         this.list = res;
-        console.log(this.list);
+       // console.log(this.list);
       }
     );
 

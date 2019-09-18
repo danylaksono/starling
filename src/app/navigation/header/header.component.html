@@ -13,14 +13,14 @@
   </button>
 
   <button  matTooltip="Masuk sebagai admin"
-  *ngIf="!isLoggedIn" mat-icon-button routerLink="/login" aria-label="sitaru admin">
+  *ngIf="!(isLoggedIn | async)" mat-icon-button routerLink="/login" aria-label="sitaru admin">
     <mat-icon  class="unlogged-icon" aria-hidden="false" aria-label="user verified icon">person
     </mat-icon>
   </button>
 
 
   <button  matTooltip="Administrator Sitaru"
-  *ngIf="isLoggedIn" mat-icon-button [matMenuTriggerFor]="menu" aria-label="sitaru admin">
+  *ngIf="(isLoggedIn | async)" mat-icon-button [matMenuTriggerFor]="menu" aria-label="sitaru admin">
     <mat-icon  class="logged-icon" aria-hidden="false" aria-label="user verified icon">verified_user
     </mat-icon>
   </button>

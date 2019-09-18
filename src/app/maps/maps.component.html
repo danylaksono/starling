@@ -11,8 +11,8 @@
       </li>
     </ul>
 
-    <ul role="tablist">
-      <li *ngIf="isLoggedIn"><a href="#settings" role="tab"><i class="fa fa-gear"></i></a></li>
+    <ul *ngIf="(isLoggedIn | async)" role="tablist">
+      <li><a href="http://peta.jogjakota.go.id:8080/geoserver" role="tab"><i class="fa fa-gear"></i></a></li>
     </ul>
   </div>
 

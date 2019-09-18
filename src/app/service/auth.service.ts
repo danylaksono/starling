@@ -2,6 +2,7 @@ import { Injectable, Output, EventEmitter } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 
 @Injectable({
@@ -11,9 +12,10 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 export class AuthService {
 
+  
   public jwt: string;
   public currentUser: string;
-  private isOpen: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  private isLoggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject(this.hasToken());
 
   @Output() loggedin = new EventEmitter();
 
@@ -22,6 +24,9 @@ export class AuthService {
     private cookie: CookieService
   ) { }
 
+  private hasToken() : boolean {
+    return !!this.cookie.get(this.currentUser);
+  }
 
 
   createAccount(credentials) {
@@ -36,7 +41,7 @@ export class AuthService {
       //this.jwt = res.token;
       //localStorage.setItem('currentUser', res.token);
       this.cookie.set('currentUser', res.token, 0.25);
-      this.isSignedIn();
+      this.isLoggedInSubject.next(true);
     });
 
   } //signin
@@ -44,15 +49,19 @@ export class AuthService {
   
   logOut() {
     this.cookie.delete('currentUser');
-    this.isSignedIn();
+    this.isLoggedInSubject.next(false);
+    //this.isSignedIn();
     //this.loggedin.emit(this.isSignedIn);
     //localStorage.removeItem('currentUser');
   } //logout
 
 
-  popupIsOpen(): Observable<any> {
-    return this.isOpen.asObservable();
-  }
+
+  isLoggedIn() : Observable<boolean> {
+    return this.isLoggedInSubject.asObservable();
+   }
+
+
 
 
   isSignedIn() {
@@ -78,3 +87,6 @@ export class AuthService {
 
 
 }
+
+
+//based on https://netbasal.com/angular-2-persist-your-login-status-with-behaviorsubject-45da9ec43243

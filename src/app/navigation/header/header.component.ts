@@ -7,6 +7,7 @@ import { NgModule, } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import {Router} from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -23,7 +24,7 @@ import {Router} from '@angular/router';
 
 export class HeaderComponent implements OnInit {
 
-  isLoggedIn: Boolean = false;
+  isLoggedIn : Observable<boolean>;
   currentUser: String;
 
   @Output() public sidenavToggle = new EventEmitter();
@@ -33,7 +34,9 @@ export class HeaderComponent implements OnInit {
     public dialog: MatDialog,
     private auth: AuthService,
     private router: Router
-  ) { }
+  ) { 
+    this.isLoggedIn = auth.isLoggedIn();
+  }
 
 
   openModal(list) {
@@ -66,27 +69,16 @@ export class HeaderComponent implements OnInit {
 
   logOut() {
     this.auth.logOut();
-    this.isLoggedIn = false;
+    
   }
 
   checkLogin = () => {
     const signedIn = this.auth.isSignedIn();
     //this.currentUser = this.cookie.get('currentUser');
-    if (signedIn) {
-      this.isLoggedIn = true;
-    }
-
   }
 
 
   ngOnInit() {
-    setTimeout(() => {
-      this.isLoggedIn = this.auth.isSignedIn();
-      console.log(this.isLoggedIn);
-      this.checkLogin();
-    }, 1000
-    )
-
   }
 
 

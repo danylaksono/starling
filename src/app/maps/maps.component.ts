@@ -27,10 +27,7 @@ import { WarningSnackbarService } from './../dialog/warning-snackbar.service';
 import { HighlightfeatureService } from '../service/highlightfeature.service'
 import { CookieService } from 'ngx-cookie-service';
 import { AuthService } from './../service/auth.service';
-
-
-
-
+import { Observable } from "rxjs";
 
 
 @Component({
@@ -49,7 +46,9 @@ export class MapsComponent implements OnInit, AfterViewInit {
   wmsSource: TileWMS;
   VectorLayer: OlVectorLayer;
   public popup_is_open = false;
-  isLoggedIn: Boolean = false;
+  //isLoggedIn: Boolean = false;
+
+  isLoggedIn : Observable<boolean>;
 
   basemap: any[];
   overlay: {};
@@ -64,7 +63,6 @@ export class MapsComponent implements OnInit, AfterViewInit {
     private overlaylayers: OverlaylayerService,
     private checkattribute: CheckattributeService,
     private dataitbx: DataitbxService,
-    
     private daftarkegiatan: DaftarkegiatanService,
     private dialog: MatDialog,
     private hightlight: HighlightfeatureService,
@@ -72,6 +70,7 @@ export class MapsComponent implements OnInit, AfterViewInit {
     private cookie: CookieService,
     private auth: AuthService
   ) {
+    this.isLoggedIn = auth.isLoggedIn();
   } // constructor
 
 
@@ -151,12 +150,13 @@ export class MapsComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
 
+    /*
     setTimeout(() => {
       this.isLoggedIn = this.auth.isSignedIn();
       //console.log(this.isLoggedIn);
     }, 1000
     )
-
+    */
 
     // for ol to work: set target in afterviewinit
     this.map.setTarget('map');
