@@ -2,13 +2,37 @@
   Kode: {{modalRDTR.kode}}
 </div>
 <mat-dialog-content>
+  <table mat-table [dataSource]="dataSource">
+
+    <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="position">
+      <th style="display: none" mat-header-cell *matHeaderCellDef> Atribut </th>
+      <td mat-cell *matCellDef="let element"> <strong> {{element.atribut}} </strong></td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th style="display: none" mat-header-cell *matHeaderCellDef> Keterangan </th>
+      <td mat-cell *matCellDef="let element"> {{element.keterangan}} </td>
+    </ng-container>
+    <tr style="display: none" mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <!-- 
+
   <p> Zona RDTR: {{modalRDTR.zona}}</p>
   <p> Sub-Zona RDTR: {{modalRDTR.sub_zona}}</p>
-  <p> Pola Ruang: {{modalRDTR.pola_ruang}}</p>
+  <p> Status Kawasan: {{modalRDTR.pola_ruang}}</p>
   <p> Tipe Bidang Tanah: {{modalBidang.TIPE}}</p>
   <p> Luas Bidang Tanah: {{modalBidang.luas}} (m)</p>
- </mat-dialog-content>
+  -->
+
+</mat-dialog-content>
 <mat-dialog-actions fxLayoutAlign="end">
   <button *ngIf="isLoggedIn" mat-raised-button (click)="closeA()" color="primary">Periksa</button>
-  <button mat-raised-button (click)="closeB()" >Tutup</button>
+  <button mat-raised-button (click)="closeB()">Tutup</button>
 </mat-dialog-actions>

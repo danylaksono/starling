@@ -34,13 +34,13 @@
       </h1>
       <div style="padding-top:10px">
         <mat-accordion>
-          <mat-expansion-panel>
+          <mat-expansion-panel (opened)="panelOpenState1 = true" (closed)="panelOpenState1 = false">
             <mat-expansion-panel-header>
               <mat-panel-title>
                 Pola Ruang RDTR
               </mat-panel-title>
               <mat-panel-description>
-                Klik untuk membuka legenda
+                  Klik untuk {{panelOpenState1 ? 'menutup' : 'membuka'}} legenda
               </mat-panel-description>
             </mat-expansion-panel-header>
             <div>
@@ -48,13 +48,13 @@
                 src="http://peta.jogjakota.go.id:8080/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=sitaru:pola_ruang_rdtr">
             </div>
           </mat-expansion-panel>
-          <mat-expansion-panel>
+          <mat-expansion-panel (opened)="panelOpenState2 = true" (closed)="panelOpenState2 = false">
             <mat-expansion-panel-header>
               <mat-panel-title>
                 Bidang Tanah
               </mat-panel-title>
               <mat-panel-description>
-                Klik untuk membuka legenda
+                Klik untuk {{panelOpenState2 ? 'menutup' : 'membuka'}} legenda
               </mat-panel-description>
             </mat-expansion-panel-header>
             <div>

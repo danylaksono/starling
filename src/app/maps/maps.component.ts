@@ -45,10 +45,12 @@ export class MapsComponent implements OnInit, AfterViewInit {
   view: OlView;
   wmsSource: TileWMS;
   VectorLayer: OlVectorLayer;
-  public popup_is_open = false;
+
   //isLoggedIn: Boolean = false;
 
   isLoggedIn : Observable<boolean>;
+  panelOpenState1 = true;
+  panelOpenState2 = false;
 
   basemap: any[];
   overlay: {};

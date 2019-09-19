@@ -1,3 +1,11 @@
 mat-dialog-title {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
+
+table {
+    width: 100%;
+  }
+
+table thead {
+    display:none !important;
+  }

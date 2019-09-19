@@ -136,7 +136,7 @@ export class HighlightfeatureService {
       disableClose : true,
       autoFocus : true,
       //height : '200px',
-      width : '450px',
+      width : '600px',
       hasBackdrop: false      
     }
     dialogConfig.data = {
