@@ -1,4 +1,4 @@
-import { LoginComponent } from './Auth/login/login.component';
+
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -7,6 +7,7 @@ import { MainViewComponent } from './main-view/main-view.component';
 import { SipertaComponent } from './siperta/siperta.component';
 import { LandingComponent } from './landing/landing.component';
 import { SignUpComponent } from './Auth/sign-up/sign-up.component';
+import { LoginComponent } from './Auth/login/login.component';
 
 const routes: Routes = [
   { 

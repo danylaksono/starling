@@ -1,21 +1,21 @@
 <div fxFill class="container">
 
   <div fxLayoutGap="1%" fxLayout="row" style="padding: 20px" fxLayoutAlign="end">
-      <div>
-        <button matTooltip="Kembali ke Peta" mat-fab color="accent" routerLink="/home">
-          <mat-icon>arrow_back</mat-icon>
-        </button>
-      </div>
-      <div>
-        <button matTooltip="Halaman Depan" mat-fab color="primary" routerLink="">
-          <mat-icon>home</mat-icon>
-        </button>
-      </div>  
+    <div>
+      <button matTooltip="Kembali ke Peta" mat-fab color="accent" routerLink="/home">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+    </div>
+    <div>
+      <button matTooltip="Halaman Depan" mat-fab color="primary" routerLink="">
+        <mat-icon>home</mat-icon>
+      </button>
+    </div>
   </div>
   <div fxLayout="row" style="padding: 20px"></div>
   <div class="main-card" fxLayout="row wrap" fxLayoutAlign="center center" style="padding: 20px" fxLayoutWrap
     fxLayoutGap="5%">
-    
+
 
     <div fxFlex="30%" class="loginbox">
       <mat-card>
@@ -35,14 +35,15 @@
             <!-->mat-form-field class="example-full-width">
               <textarea matInput placeholder="Leave a comment"></textarea>
             </!-->
-          </form>
-        </mat-card-content>
-        <mat-card-actions fxLayoutAlign="end">
-          <button (click)="signIn()" mat-raised-button color="primary">LOGIN</button>
-          <!--button (click)="testRoute()" mat-raised-button color="primary">TEST</!--button>
+
+            <mat-card-actions fxLayoutAlign="end">
+              <button (click)="signIn()" mat-raised-button color="primary">LOGIN</button>
+              <!--button (click)="testRoute()" mat-raised-button color="primary">TEST</!--button>
           <button (click)="logout()" mat-raised-button color="primary">LOGOUT</button>
           <button (click)="toggleSignup()" mat-raised-button color="primary">DAFTAR</button-->
-        </mat-card-actions>
+            </mat-card-actions>
+          </form>
+        </mat-card-content>
       </mat-card>
     </div>
 

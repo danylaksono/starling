@@ -42,8 +42,8 @@ export class MainqueryService {
     dialogConfig = {
       disableClose: true,
       autoFocus: true,
-      //height : '200px',
-      width: '450px',
+      //height : '500px',
+      width: '600px',
       hasBackdrop: false
     }
     dialogConfig.data = {
@@ -56,7 +56,7 @@ export class MainqueryService {
     const dialogRef = this.dialog.open(CekizinComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
       //console.log("Dialog closed")
-      console.log(result)
+      //console.log(result)
     });
 
   }

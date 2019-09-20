@@ -12,11 +12,10 @@ import { Overlay } from 'ol';
 import { MainqueryService } from './mainquery.service';
 
 
-
-
 @Injectable({
   providedIn: 'root'
 })
+
 export class HighlightfeatureService {
 
   popup: any;
@@ -70,17 +69,7 @@ export class HighlightfeatureService {
         this.warning.open('Data bidang tanah atau RDTR tidak tersedia');
       } else {       
         this.openModalShowAttribute(ketRDTR, ketBidang);
-
-        /*
-        this.popup.show(coordinate, 
-        '<h3>Bidang Tanah </h3>' + '<br>' +
-        'Zona RDTR: '+  ketRDTR.zona +  '<br>' +
-         'Tipe: ' + ketBidang.TIPE +  '<br>' +
-         'Luas Bidang (m<sup>2</sup>): ' + ketBidang.luas + '<br>' +
-         '<button mat-raised-button color="primary" (click)=check()> Cek Bidang Ini </button>'
-          
-          ); */
-          
+         
         //this.overlay.setPosition(coordinate);
         this.highlightSelected(features, map);
       }
@@ -133,7 +122,7 @@ export class HighlightfeatureService {
   openModalShowAttribute(rdtr, bidang) {
     let dialogConfig = new MatDialogConfig();
     dialogConfig = {
-      disableClose : true,
+      disableClose : false,
       autoFocus : true,
       //height : '200px',
       width : '600px',

@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
 
 
   toggleSignup() {
-    console.log("sini");
+    //console.log("sini");
       this.showSignup = !this.showSignup;
   }
 

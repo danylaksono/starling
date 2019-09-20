@@ -1,5 +1,9 @@
+import { DataitbxService } from './../../service/dataitbx.service';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './../../service/auth.service';
+
+
+
 
 @Component({
   selector: 'app-sign-up',
@@ -15,11 +19,12 @@ export class SignUpComponent implements OnInit {
   public jwt: string;
 
   constructor(
-    private auth: AuthService
+    private auth: AuthService,
+    private itbx: DataitbxService
   ) { }
 
   getUser(){
-    this.auth.isSignedIn();
+    //this.itbx.getITBX();
   }
 
   createAccount(){

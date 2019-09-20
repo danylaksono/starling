@@ -11,7 +11,6 @@ import { map } from 'rxjs/operators';
 
 
 export class AuthService {
-
   
   public jwt: string;
   public currentUser: string;
@@ -50,6 +49,7 @@ export class AuthService {
   logOut() {
     this.cookie.delete('currentUser');
     this.isLoggedInSubject.next(false);
+    
     //this.isSignedIn();
     //this.loggedin.emit(this.isSignedIn);
     //localStorage.removeItem('currentUser');
@@ -58,10 +58,15 @@ export class AuthService {
 
 
   isLoggedIn() : Observable<boolean> {
+    const isExist = this.cookie.get('currentUser');
+    if (isExist) {
+      this.isLoggedInSubject.next(true);
+    } else {
+      this.isLoggedInSubject.next(false);
+    }
+    //console.log(this.isLoggedInSubject.asObservable());
     return this.isLoggedInSubject.asObservable();
    }
-
-
 
 
   isSignedIn() {

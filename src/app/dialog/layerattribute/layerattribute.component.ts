@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { MaterialModule } from '../../material/material.module';
 import { MAT_DIALOG_DEFAULT_OPTIONS, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { AuthService } from '../../service/auth.service';
+import { Observable } from 'rxjs';
 
 
 
@@ -36,7 +37,7 @@ export class LayerattributeComponent implements OnInit {
   modalTitle: string;
   modalRDTR: any;
   modalBidang: any;
-  isLoggedIn: Boolean = false;
+  isLoggedIn : Observable<boolean>;
   displayedColumns: string[] = ['position', 'name'];
   dataSource: dataPolaBidang[];
 
@@ -54,12 +55,15 @@ export class LayerattributeComponent implements OnInit {
       {atribut: 'Jenis Hak', keterangan: data.dataBidang.TIPE},
       {atribut: 'Luas Bidang Tanah (m2)', keterangan: Math.round(data.dataBidang.luas)}
     ];
+
+    
     
     this.modalTitle = data.title;
     this.modalRDTR = data.dataRDTR;
     this.modalBidang = data.dataBidang;
-    this.isLoggedIn = auth.isSignedIn();
+    this.isLoggedIn = auth.isLoggedIn();
     this.dataSource =  ELEMENT_DATA;
+    
     
   }
 

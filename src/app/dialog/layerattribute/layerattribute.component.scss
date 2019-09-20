@@ -9,3 +9,10 @@ table {
 table thead {
     display:none !important;
   }
+
+  
+.dialogTitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

@@ -39,7 +39,7 @@ export class HeaderComponent implements OnInit {
   }
 
 
-  openModal(list) {
+  openModal() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
@@ -71,12 +71,6 @@ export class HeaderComponent implements OnInit {
     this.auth.logOut();
     
   }
-
-  checkLogin = () => {
-    const signedIn = this.auth.isSignedIn();
-    //this.currentUser = this.cookie.get('currentUser');
-  }
-
 
   ngOnInit() {
   }

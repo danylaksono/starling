@@ -1,5 +1,12 @@
-<div mat-dialog-title color="primary" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
-  Kode: {{modalRDTR.kode}}
+<div class="dialogTitle" mat-dialog-title color="primary" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+  <span cdkDragHandle>
+      Kode: {{modalRDTR.kode}}
+  </span>
+   
+  <button  matTooltip="tutup" mat-icon-button [mat-dialog-close]='true'>
+      <mat-icon>close</mat-icon>
+    </button>
+  
 </div>
 <mat-dialog-content>
   <table mat-table [dataSource]="dataSource">
@@ -33,6 +40,6 @@
 
 </mat-dialog-content>
 <mat-dialog-actions fxLayoutAlign="end">
-  <button *ngIf="isLoggedIn" mat-raised-button (click)="closeA()" color="primary">Periksa</button>
-  <button mat-raised-button (click)="closeB()">Tutup</button>
+  <button *ngIf="(isLoggedIn | async)" mat-raised-button (click)="closeA()" color="primary">Periksa</button>
+  <!--button mat-raised-button (click)="closeB()">Tutup</button-->
 </mat-dialog-actions>
