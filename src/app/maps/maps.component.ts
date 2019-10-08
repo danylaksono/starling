@@ -1,5 +1,3 @@
-
-
 import { Component, OnInit, NgZone, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 
 import OlMap from 'ol/Map';
@@ -10,7 +8,7 @@ import OlVectorLayer from 'ol/layer/Vector';
 import TileWMS from 'ol/source/TileWMS';
 import * as Control from 'ol/control';
 import { Sidebar } from 'ol/control.js';
-import SearchNominatim from 'ol-ext/control/SearchNominatim';
+//import SearchNominatim from 'ol-ext/control/SearchNominatim';
 import LayerSwitcher from 'ol-ext/control/LayerSwitcher';
 import { fromLonLat } from 'ol/proj';
 
@@ -46,10 +44,14 @@ export class MapsComponent implements OnInit, AfterViewInit {
   wmsSource: TileWMS;
   VectorLayer: OlVectorLayer;
 
+  linkServer: string = 'https://geoserver.jogjakota.go.id/geoserver/';
+  linkWMS: string = this.linkServer + 'sitaru/wms';
+
+
   //isLoggedIn: Boolean = false;
 
   isLoggedIn : Observable<boolean>;
-  panelOpenState1 = true;
+  panelOpenState1 = false;
   panelOpenState2 = false;
 
   basemap: any[];
@@ -78,7 +80,6 @@ export class MapsComponent implements OnInit, AfterViewInit {
 
 
   ngOnInit() {
-
     //getting itbx data
     //console.log(this.dataitbx.getITBX());
     this.daftarkegiatan.getKegiatan().subscribe(
@@ -94,11 +95,11 @@ export class MapsComponent implements OnInit, AfterViewInit {
 
     // for get featureinfo
     this.wmsSource = new TileWMS({
-      url: 'http://peta.jogjakota.go.id:8080/geoserver/sitaru/wms',
+      url: this.linkWMS,
       params: {
         'LAYERS': 'sitaru:sitaru2',
         'FORMAT': 'image/png8',
-        'TILED': false,
+        'TILED': true,
         'VERSION': '1.1.1',
       },
       serverType: 'geoserver',
@@ -107,7 +108,7 @@ export class MapsComponent implements OnInit, AfterViewInit {
 
     this.view = new OlView({
       center: fromLonLat([110.3650042, -7.8049497]),
-      zoom: 17,
+      zoom: 16
       //projection: 'EPSG:4326'
     });
 
@@ -133,6 +134,7 @@ export class MapsComponent implements OnInit, AfterViewInit {
     this.map.addControl(scale);
 
 
+    /*
     // Search control
     const search = new SearchNominatim();
     // Move to the position on selection in the control list
@@ -144,6 +146,8 @@ export class MapsComponent implements OnInit, AfterViewInit {
       });
     });
     this.map.addControl(search);
+
+    */
 
 
 
@@ -161,7 +165,7 @@ export class MapsComponent implements OnInit, AfterViewInit {
     */
 
     // for ol to work: set target in afterviewinit
-    this.map.setTarget('map');
+    //this.map.setTarget('map');
 
     var toc = this.switcher.nativeElement; // getting switcher DOM    
     //LayerSwitcher.renderPanel(this.map, toc); // should be located in ngAfterViewInit instead of onInit

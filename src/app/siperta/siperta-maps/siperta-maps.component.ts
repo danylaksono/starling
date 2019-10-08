@@ -51,7 +51,7 @@ export class SipertaMapsComponent implements OnInit {
 
     // for get featureinfo
     this.wmsSource = new TileWMS({
-      url: 'http://localhost:8080/geoserver/siperta/wms',
+      url: 'https://geoserver.jogjakota.go.id/geoserver/siperta/wms',
       params: {
         'LAYERS': 'siperta:LAHAN_PEMKOT_YOGYAKARTA',
         'FORMAT': 'image/png8',

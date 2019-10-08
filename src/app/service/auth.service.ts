@@ -2,7 +2,7 @@ import { Injectable, Output, EventEmitter } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+//import { map } from 'rxjs/operators';
 
 
 @Injectable({
@@ -11,7 +11,6 @@ import { map } from 'rxjs/operators';
 
 
 export class AuthService {
-  
   public jwt: string;
   public currentUser: string;
   private isLoggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject(this.hasToken());
@@ -29,33 +28,29 @@ export class AuthService {
 
 
   createAccount(credentials) {
-    this.http.post('http://localhost:3000/users', credentials).subscribe((res) => {
+    this.http.post('api/users', credentials).subscribe((res) => {
       //console.log(res);
     });
   }
 
   signIn(credentials) {
-    this.http.post('http://localhost:3000/auth', credentials).subscribe((res: any) => {
+    const authUrl='https://sitaru-arsip.jogjakota.go.id/auth/local';
+    this.http.post(authUrl, credentials).subscribe((res: any) => {
+    //this.http.post('api/auth', credentials).subscribe((res: any) => {
+
       //console.log(res);
       //this.jwt = res.token;
       //localStorage.setItem('currentUser', res.token);
       this.cookie.set('currentUser', res.token, 0.25);
       this.isLoggedInSubject.next(true);
     });
-
   } //signin
 
   
   logOut() {
     this.cookie.delete('currentUser');
     this.isLoggedInSubject.next(false);
-    
-    //this.isSignedIn();
-    //this.loggedin.emit(this.isSignedIn);
-    //localStorage.removeItem('currentUser');
   } //logout
-
-
 
   isLoggedIn() : Observable<boolean> {
     const isExist = this.cookie.get('currentUser');

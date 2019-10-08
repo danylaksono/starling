@@ -12,7 +12,7 @@
     </ul>
 
     <ul *ngIf="(isLoggedIn | async)" role="tablist">
-      <li><a href="http://peta.jogjakota.go.id:8080/geoserver" target="_blank" role="tab"><i class="fa fa-gear"></i></a></li>
+      <li><a href="https://geoserver.jogjakota.go.id/geoserver" target="_blank" role="tab"><i class="fa fa-gear"></i></a></li>
     </ul>
   </div>
 
@@ -45,7 +45,7 @@
             </mat-expansion-panel-header>
             <div>
               <img
-                src="http://peta.jogjakota.go.id:8080/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=sitaru:pola_ruang_rdtr">
+                src="https://geoserver.jogjakota.go.id/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=sitaru:pola_ruang_rdtr">
             </div>
           </mat-expansion-panel>
           <mat-expansion-panel (opened)="panelOpenState2 = true" (closed)="panelOpenState2 = false">
@@ -59,7 +59,7 @@
             </mat-expansion-panel-header>
             <div>
               <img
-                src="http://peta.jogjakota.go.id:8080/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=sitaru:bidang_tanah_tujuh_edit">
+                src="https://geoserver.jogjakota.go.id/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=sitaru:bidang_tanah_tujuh_edit">
             </div>
           </mat-expansion-panel>
         </mat-accordion>

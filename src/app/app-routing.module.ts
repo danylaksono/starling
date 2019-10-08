@@ -27,7 +27,8 @@ const routes: Routes = [
     path: 'signup', 
     component: SignUpComponent
   },
-  { path: '', component: LandingComponent}
+  { path: '', component: LandingComponent},
+  { path: '**', redirectTo: '' }
 
 ];
 

@@ -23,7 +23,7 @@ export class DataitbxService {
     let params = new HttpParams().set('skrk', kode).set('kegiatan', kegiatan);
 
     //console.log(params.toString());
-    return this.http.get("http://sitaru.jogjakota.go.id/api/skrks/query", { params })
+    return this.http.get("https://sitaru-arsip.jogjakota.go.id/api/skrks/query", { params })
       //.subscribe((res) => {
       .pipe(
         tap(data => { data })

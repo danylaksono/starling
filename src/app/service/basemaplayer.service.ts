@@ -29,7 +29,8 @@ export class BasemaplayerService {
         title: 'OpenStreetMap (OSM)',
         baseLayer:true,
         visible: false,
-        projection: 'EPSG:3857',
+        //projection: 'EPSG:3857',
+        preload: Infinity,
         source: new SourceOSM()
       }),
       new LayerTile({
@@ -37,6 +38,7 @@ export class BasemaplayerService {
         title: 'ESRI World Imagery',
         baseLayer:true,
         visible: true,
+        preload: Infinity,
         source: new XYZ({
           //@ts-ignore
           url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',

@@ -2,13 +2,21 @@ import { Injectable } from '@angular/core';
 import LayerGroup from 'ol/layer/Group';
 import LayerTile from 'ol/layer/Tile';
 import SourceWMS from 'ol/source/TileWMS';
-import SourceOSM from 'ol/source/OSM';
 
 
 @Injectable({
   providedIn: 'root'
 })
+
+
 export class OverlaylayerService {
+
+
+  //linkGeoserver: string = 'http://geoportal.ppids.ft.ugm.ac.id/geoserver/sitaru/wms';
+  linkGeoserver: string = 'https://geoserver.jogjakota.go.id/geoserver/sitaru/wms';
+
+  
+
   public overlay =  new LayerGroup({
     //@ts-ignore
     title: 'Layer Peta',
@@ -19,9 +27,9 @@ export class OverlaylayerService {
         title: 'Bidang Tanah',       
         visible: true,
         opacity: 0.6,
+        preload: Infinity,
         source: new SourceWMS({
-          //url: 'http://geoportal.ppids.ft.ugm.ac.id/geoserver/sitaru/wms',
-          url: 'http://peta.jogjakota.go.id:8080/geoserver/sitaru/wms', 
+          url: this.linkGeoserver, 
           params: {'LAYERS': 'sitaru:bidang_tanah_tujuh_edit', 'TILED': true},
           serverType: 'geoserver',
           transition: 0
@@ -31,10 +39,10 @@ export class OverlaylayerService {
       new LayerTile({
         //@ts-ignore
         title: 'Rencana Detil Tata Ruang',       
-        visible: true,
+        visible: false,
         opacity: 0.7,
         source: new SourceWMS({
-          url: 'http://peta.jogjakota.go.id:8080/geoserver/sitaru/wms', 
+          url: this.linkGeoserver, 
           params: {'LAYERS': 'sitaru:pola_ruang_rdtr', 'TILED': true},
           serverType: 'geoserver',
           transition: 0
@@ -45,7 +53,8 @@ export class OverlaylayerService {
         title: 'Jaringan Jalan',       
         visible: true,
         source: new SourceWMS({
-          url: 'http://peta.jogjakota.go.id:8080/geoserver/sitaru/wms', 
+          url: this.linkGeoserver, 
+          //params: {'LAYERS': 'sitaru:jalan_gsb', 'TILED': true},
           params: {'LAYERS': 'sitaru:jalan_gsb', 'TILED': true},
           serverType: 'geoserver',
           transition: 0

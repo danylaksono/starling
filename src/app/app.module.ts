@@ -1,3 +1,4 @@
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -31,7 +32,6 @@ import { LayerattributeComponent } from './dialog/layerattribute/layerattribute.
 
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,11 +49,15 @@ import { LayerattributeComponent } from './dialog/layerattribute/layerattribute.
     YesnoComponent,
     LayerattributeComponent
     
+    
+    
   ],
   entryComponents: [
     CekizinComponent,
     YesnoComponent,
     LayerattributeComponent
+
+    
   ],
   imports: [
     BrowserModule,
@@ -67,6 +71,7 @@ import { LayerattributeComponent } from './dialog/layerattribute/layerattribute.
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule
+    
     
 
   ],
