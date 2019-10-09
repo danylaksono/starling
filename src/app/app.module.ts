@@ -28,6 +28,7 @@ import { LoginComponent } from './Auth/login/login.component';
 import { SignUpComponent } from './Auth/sign-up/sign-up.component';
 import { YesnoComponent } from './dialog/yesno/yesno.component';
 import { LayerattributeComponent } from './dialog/layerattribute/layerattribute.component';
+import { DialogIntensitasComponent } from './dialog/dialog-intensitas/dialog-intensitas.component';
 
 
 
@@ -47,7 +48,8 @@ import { LayerattributeComponent } from './dialog/layerattribute/layerattribute.
     LoginComponent,
     SignUpComponent,
     YesnoComponent,
-    LayerattributeComponent
+    LayerattributeComponent,
+    DialogIntensitasComponent
     
     
     
@@ -55,7 +57,8 @@ import { LayerattributeComponent } from './dialog/layerattribute/layerattribute.
   entryComponents: [
     CekizinComponent,
     YesnoComponent,
-    LayerattributeComponent
+    LayerattributeComponent,
+    DialogIntensitasComponent
 
     
   ],

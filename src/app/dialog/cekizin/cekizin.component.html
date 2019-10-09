@@ -28,14 +28,14 @@
         </form>
         <button mat-raised-button (click)="resetPencarian()" color="primary">Hapus Pencarian</button>
         <!--button-- mat-raised-button (click)="cekPerizinan(kegiatan)" color="primary">Cek Izin</!button-->
-
-
       </div>
+
       <div *ngIf="showKesimpulan" fxFlex fxLayoutAlign="center center">
         <mat-card>
           <!--mat-icon style="text-align: center" class="icon-display">{{styleKesimpulan.icon}}</!mat-icon-->
           <img style="width:200px; height:200px" src={{styleKesimpulan.gambar}} />
-          <button (click)="cek(rdtr.kode)" [style.color] ="styleKesimpulan.color" mat-flat-button>
+          <button (click)="closeA(kegiatan, styleKesimpulan.itbx)"  [style.color] ="styleKesimpulan.color" mat-flat-button>
+              
             <mat-icon> send </mat-icon>
             <i> Cek Intensitas </i>
             

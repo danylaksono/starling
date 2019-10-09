@@ -12,7 +12,8 @@ import {
   MatTooltipModule,
   MatRippleModule,
   MatExpansionModule,
-  MatTableModule
+  MatTableModule,
+  MatSliderModule
 
 } from '@angular/material';
 import {MatDialogModule} from '@angular/material/dialog';
@@ -42,7 +43,8 @@ import {MatMenuModule} from '@angular/material/menu';
     MatTooltipModule,
     MatRippleModule,
     MatExpansionModule,
-    MatTableModule
+    MatTableModule,
+    MatSliderModule
     
   ],
   exports: [
@@ -63,7 +65,8 @@ import {MatMenuModule} from '@angular/material/menu';
     MatTooltipModule,
     MatRippleModule,
     MatExpansionModule,
-    MatTableModule
+    MatTableModule,
+    MatSliderModule
   ]
 })
 export class MaterialModule { }

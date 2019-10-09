@@ -76,6 +76,9 @@ export class HighlightfeatureService {
     }
   }; //check feature
 
+
+
+  //======= clear selected highlight =======
   clearHighlight(map){
     if (this.VectorLayer) {
       map.removeLayer(this.VectorLayer);
@@ -141,13 +144,13 @@ export class HighlightfeatureService {
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'A') {
         // handle A button close
-        console.log('A');
-        this.query.openModal(rdtr, bidang);
+        //console.log('A');
+        this.query.openModalCekIzin(rdtr, bidang);
       }
     
       if (result === 'B') {
         // handle B button close
-        console.log('B');
+        //console.log('B');
       }
 
       //if (result) {

@@ -4,13 +4,11 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { NgModule } from '@angular/core';
 import { MaterialModule } from '../../material/material.module';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material';
 
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-
-
-
 
 
 @Component({
@@ -40,6 +38,7 @@ export class CekizinComponent implements OnInit {
   kesimpulan: string = 'Klik Cek Perizinan';
   showKesimpulan = false;
   styleKesimpulan = {
+    itbx: '',
     color: '',
     icon: '',
     gambar: ''
@@ -52,6 +51,7 @@ export class CekizinComponent implements OnInit {
   filteredOptions: Observable<string[]>;
 
   constructor(
+    public dialogRef: MatDialogRef<CekizinComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private itbx: DataitbxService,
     private cekintensitas: CekintensitasService
@@ -82,6 +82,7 @@ export class CekizinComponent implements OnInit {
     this.kesimpulan = 'Klik Cek Perizinan';
     this.kegiatan = '';
     this.styleKesimpulan = {
+      itbx: '',
       color: '',
       icon: '',
       gambar: ''
@@ -95,7 +96,6 @@ export class CekizinComponent implements OnInit {
 
 
   cek = (kode) => {
-    
     console.log('kodeeee', kode)
     this.pemanfaatan = {
       luasTanah: 100
@@ -111,36 +111,40 @@ export class CekizinComponent implements OnInit {
         //console.log('Pemanfaatan Diizinkan');
         this.kesimpulan = 'Pemanfaatan Diizinkan';
         this.styleKesimpulan = {
+          itbx: 'I',
           color: 'green',
           icon: 'check',
-          gambar: 'assets/images/diizinkan.png'
+          gambar: 'assets/images/diizinkan.svg'
         }
         break;
       case 'T':
         //console.log('Pemanfaatan Diizinkan Secara Terbatas');
         this.kesimpulan = 'Pemanfaatan Diizinkan Secara Terbatas';
         this.styleKesimpulan = {
+          itbx: 'T',
           color: 'yellow',
           icon: 'fullscreen',
-          gambar: 'assets/images/diizinkanterbatas.png'
+          gambar: 'assets/images/diizinkanterbatas.svg'
         }
         break;
       case 'B':
         //console.log('Pemanfaatan Memerlukan Izin Penggunaan Bersyarat');
         this.kesimpulan = 'Pemanfaatan Memerlukan Izin Penggunaan Bersyarat';
         this.styleKesimpulan = {
+          itbx: 'B',
           color: 'aqua',
           icon: 'info',
-          gambar: 'assets/images/diizinkanbersyarat.png'
+          gambar: 'assets/images/diizinkanbersyarat.svg'
         }
         break;
       case 'X':
         //console.log('Pemanfaatan Tidak Diizinkan');
         this.kesimpulan = 'Pemanfaatan Tidak Diizinkan';
         this.styleKesimpulan = {
+          itbx: 'X',
           color: 'red',
           icon: 'block',
-          gambar: 'assets/images/tidakdiizinkan.png'
+          gambar: 'assets/images/tidakdiizinkan.svg'
         }
         break;
 
@@ -148,9 +152,29 @@ export class CekizinComponent implements OnInit {
         this.kesimpulan = 'Klik Cek Perizinan';
         break;
     }
+  } //hasil itbx
+
+
+  
+
+  closeA(kegiatan, kesimpulan) {
+    let hasilCekIzin = {
+      kegiatan: kegiatan,
+      kesimpulan: kesimpulan
+    }
+    this.closeDialog('A', hasilCekIzin)
   }
 
 
+  closeDialog(button: 'A' | 'B', hasilCekIzin) {
+    if (button == 'A'){
+      this.dialogRef.close(hasilCekIzin);
+    } else {
+      this.dialogRef.close(button);
+    }
+
+    
+  }
 
 
 
