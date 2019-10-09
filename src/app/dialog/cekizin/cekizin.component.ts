@@ -1,3 +1,4 @@
+import { CekintensitasService } from './../../service/cekintensitas.service';
 import { DataitbxService } from './../../service/dataitbx.service';
 import { Component, Inject, OnInit } from '@angular/core';
 import { NgModule } from '@angular/core';
@@ -7,6 +8,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+
+
 
 
 
@@ -38,8 +41,11 @@ export class CekizinComponent implements OnInit {
   showKesimpulan = false;
   styleKesimpulan = {
     color: '',
-    icon : '',
+    icon: '',
     gambar: ''
+  }
+  pemanfaatan = {
+    luasTanah: 0
   }
   //form autocomplete
   myControl = new FormControl();
@@ -47,7 +53,8 @@ export class CekizinComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private itbx: DataitbxService
+    private itbx: DataitbxService,
+    private cekintensitas: CekintensitasService
   ) {
     this.modalTitle = data.title;
     this.modalArticle = data.article;
@@ -55,7 +62,7 @@ export class CekizinComponent implements OnInit {
     this.rdtr = data.rdtr;
     this.bidang = data.bidang;
     this.luas = Math.round(this.bidang.luas);
-    //console.log(this.rdtr);
+    //console.log('RDTRRRR', this.rdtr);
   }
 
   //cek izin using rest API skrk
@@ -70,33 +77,38 @@ export class CekizinComponent implements OnInit {
       )
   }
 
-  resetPencarian(){
+  resetPencarian() {
     this.showKesimpulan = false;
     this.kesimpulan = 'Klik Cek Perizinan';
     this.kegiatan = '';
-    this.styleKesimpulan = {  
+    this.styleKesimpulan = {
       color: '',
       icon: '',
       gambar: ''
     }
   }
 
-  onChange(x){    
-    console.log(x);
-    let valueX: any;
-    this.myControl.valueChanges.pipe(
-      map(value => valueX = value)
-    );
-   console.log("selected law: " + valueX);
+  onChange(event) {
+    //console.log(event.option.value);
+    this.cekPerizinan(event.option.value);
+  }
 
+
+  cek = (kode) => {
+    
+    console.log('kodeeee', kode)
+    this.pemanfaatan = {
+      luasTanah: 100
+    }
+    //this.cekintensitas.cekIntensitas(this.pemanfaatan, kode);
   }
 
   //function for returning class of ITBX
   hasilITBX(hasil) {
-    console.log(hasil);
+    //console.log(hasil);
     switch (hasil) {
       case 'I':
-        console.log('Pemanfaatan Diizinkan');
+        //console.log('Pemanfaatan Diizinkan');
         this.kesimpulan = 'Pemanfaatan Diizinkan';
         this.styleKesimpulan = {
           color: 'green',
@@ -105,7 +117,7 @@ export class CekizinComponent implements OnInit {
         }
         break;
       case 'T':
-        console.log('Pemanfaatan Diizinkan Secara Terbatas');
+        //console.log('Pemanfaatan Diizinkan Secara Terbatas');
         this.kesimpulan = 'Pemanfaatan Diizinkan Secara Terbatas';
         this.styleKesimpulan = {
           color: 'yellow',
@@ -114,7 +126,7 @@ export class CekizinComponent implements OnInit {
         }
         break;
       case 'B':
-        console.log('Pemanfaatan Memerlukan Izin Penggunaan Bersyarat');
+        //console.log('Pemanfaatan Memerlukan Izin Penggunaan Bersyarat');
         this.kesimpulan = 'Pemanfaatan Memerlukan Izin Penggunaan Bersyarat';
         this.styleKesimpulan = {
           color: 'aqua',
@@ -123,7 +135,7 @@ export class CekizinComponent implements OnInit {
         }
         break;
       case 'X':
-        console.log('Pemanfaatan Tidak Diizinkan');
+        //console.log('Pemanfaatan Tidak Diizinkan');
         this.kesimpulan = 'Pemanfaatan Tidak Diizinkan';
         this.styleKesimpulan = {
           color: 'red',
@@ -132,9 +144,9 @@ export class CekizinComponent implements OnInit {
         }
         break;
 
-      default: 
-      this.kesimpulan = 'Klik Cek Perizinan';
-      break;
+      default:
+        this.kesimpulan = 'Klik Cek Perizinan';
+        break;
     }
   }
 
@@ -149,7 +161,7 @@ export class CekizinComponent implements OnInit {
         startWith(''),
         map(value => this._filter(value))
       );
-      console.log(this.filteredOptions);
+    //console.log(this.filteredOptions);
   }
 
   private _filter(value: string): string[] {

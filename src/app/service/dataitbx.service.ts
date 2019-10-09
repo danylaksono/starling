@@ -18,7 +18,7 @@ export class DataitbxService {
   }
 
   getITBX(kode, kegiatan) {
-    console.log(kode, kegiatan);
+    //console.log(kode, kegiatan);
 
     let params = new HttpParams().set('skrk', kode).set('kegiatan', kegiatan);
 
