@@ -1,6 +1,6 @@
 import { LayerattributeComponent } from './../dialog/layerattribute/layerattribute.component';
 import { Injectable, ElementRef, ViewChild } from '@angular/core';
-import Popup from 'ol-popup';
+//import Popup from 'ol-popup';
 import { Fill, Stroke, Style } from 'ol/style';
 import OlVectorSource from 'ol/source/Vector';
 import OlVectorLayer from 'ol/layer/Vector';

@@ -35,9 +35,11 @@ export class CekizinComponent implements OnInit {
   kegiatan: string;
   selected: any;
   kesimpulan: string = 'Klik Cek Perizinan';
+  showKesimpulan = false;
   styleKesimpulan = {
     color: '',
-    icon : ''
+    icon : '',
+    gambar: ''
   }
   //form autocomplete
   myControl = new FormControl();
@@ -53,11 +55,12 @@ export class CekizinComponent implements OnInit {
     this.rdtr = data.rdtr;
     this.bidang = data.bidang;
     this.luas = Math.round(this.bidang.luas);
-    console.log(this.rdtr);
+    //console.log(this.rdtr);
   }
 
   //cek izin using rest API skrk
   cekPerizinan(kegiatan) {
+    this.showKesimpulan = true;
     //console.log(kegiatan);
     //console.log(this.itbx.getITBX(this.rdtr.kode, kegiatan));
     this.itbx.getITBX(this.rdtr.kode, kegiatan)
@@ -68,11 +71,13 @@ export class CekizinComponent implements OnInit {
   }
 
   resetPencarian(){
+    this.showKesimpulan = false;
     this.kesimpulan = 'Klik Cek Perizinan';
     this.kegiatan = '';
     this.styleKesimpulan = {  
       color: '',
-      icon: ''
+      icon: '',
+      gambar: ''
     }
   }
 
@@ -93,33 +98,37 @@ export class CekizinComponent implements OnInit {
       case 'I':
         console.log('Pemanfaatan Diizinkan');
         this.kesimpulan = 'Pemanfaatan Diizinkan';
-        this.styleKesimpulan ={
+        this.styleKesimpulan = {
           color: 'green',
-          icon: 'check'
+          icon: 'check',
+          gambar: 'assets/images/diizinkan.png'
         }
         break;
       case 'T':
         console.log('Pemanfaatan Diizinkan Secara Terbatas');
         this.kesimpulan = 'Pemanfaatan Diizinkan Secara Terbatas';
-        this.styleKesimpulan ={
+        this.styleKesimpulan = {
           color: 'yellow',
-          icon: 'fullscreen'
+          icon: 'fullscreen',
+          gambar: 'assets/images/diizinkanterbatas.png'
         }
         break;
       case 'B':
         console.log('Pemanfaatan Memerlukan Izin Penggunaan Bersyarat');
         this.kesimpulan = 'Pemanfaatan Memerlukan Izin Penggunaan Bersyarat';
-        this.styleKesimpulan ={
+        this.styleKesimpulan = {
           color: 'aqua',
-          icon: 'info'
+          icon: 'info',
+          gambar: 'assets/images/diizinkanbersyarat.png'
         }
         break;
       case 'X':
         console.log('Pemanfaatan Tidak Diizinkan');
         this.kesimpulan = 'Pemanfaatan Tidak Diizinkan';
-        this.styleKesimpulan ={
+        this.styleKesimpulan = {
           color: 'red',
-          icon: 'block'
+          icon: 'block',
+          gambar: 'assets/images/tidakdiizinkan.png'
         }
         break;
 

@@ -8,12 +8,11 @@
   </button>
 </div>
 
-
 <mat-dialog-content>
   <div fxFill class="container">
       <div fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutWrap fxLayoutGap="10%">
 
-      <div fxFlex="50%">
+      <div fxFlex>
           <p> Pola Ruang: {{rdtr.pola_ruang}}</p>
           <p> Luas Bidang Tanah: {{luas}} (m2)</p>
           <form class="example-form">
@@ -28,10 +27,11 @@
             </mat-form-field>
           </form>
       </div>
-      <div fxFlex="40%">
-          <mat-card [ngStyle]="{'backgroundColor': styleKesimpulan.color }">
-            <mat-icon style="text-align: center" class="icon-display">{{styleKesimpulan.icon}}</mat-icon>
-            <p style="text-align: right">{{kesimpulan}}</p>
+      <div *ngIf="showKesimpulan"  fxFlex fxLayoutAlign="center center">
+          <mat-card>
+            <!--mat-icon style="text-align: center" class="icon-display">{{styleKesimpulan.icon}}</!mat-icon-->
+            <img style="width:200px; height:200px" src={{styleKesimpulan.gambar}}/>
+            <!--p-- style="text-align: right">{{kesimpulan}}</!--p-->
           </mat-card>
       </div>
 
