@@ -6,11 +6,21 @@
 @import '../node_modules/sidebar-v2/css/ol3-sidebar.css';   
 @import '../node_modules/ol-ext/control/LayerSwitcher.css'; 
 @import '../node_modules/ol-popup/src/ol-popup.css'; 
+@import '../node_modules/ol-ext/control/search.css'; 
 
 
 //@import 'https://viglino.github.io/ol-ext/examples/control/map.switcher2.css';
 
-
+.ol-search ul {
+  color: #333;
+  font-size:0.85em;
+  max-width: 21em;
+}
+.ol-search ul i {
+  display: block;
+  color: #333;
+  font-size:0.85em;
+}
 
 html, body { 
   height: 100%; 

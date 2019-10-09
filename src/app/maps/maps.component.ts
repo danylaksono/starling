@@ -4,13 +4,18 @@ import OlMap from 'ol/Map';
 import OlXYZ from 'ol/source/XYZ';
 import OlTileLayer from 'ol/layer/Tile';
 import OlView from 'ol/View';
+import * as Extent from 'ol/Extent';
 import OlVectorLayer from 'ol/layer/Vector';
 import TileWMS from 'ol/source/TileWMS';
 import * as Control from 'ol/control';
 import { Sidebar } from 'ol/control.js';
-//import SearchNominatim from 'ol-ext/control/SearchNominatim';
+import SearchNominatim from 'ol-ext/control/SearchNominatim';
 import LayerSwitcher from 'ol-ext/control/LayerSwitcher';
 import { fromLonLat } from 'ol/proj';
+import OlGeoJSON from 'ol/format/GeoJSON';
+import { Fill, Circle, Stroke, Style } from 'ol/style';
+import OlVectorSource from 'ol/source/Vector';
+
 
 
 //components & services
@@ -43,6 +48,7 @@ export class MapsComponent implements OnInit, AfterViewInit {
   view: OlView;
   wmsSource: TileWMS;
   VectorLayer: OlVectorLayer;
+  sLayer: OlVectorLayer;
 
   linkServer: string = 'https://geoserver.jogjakota.go.id/geoserver/';
   linkWMS: string = this.linkServer + 'sitaru/wms';
@@ -50,7 +56,7 @@ export class MapsComponent implements OnInit, AfterViewInit {
 
   //isLoggedIn: Boolean = false;
 
-  isLoggedIn : Observable<boolean>;
+  isLoggedIn: Observable<boolean>;
   panelOpenState1 = false;
   panelOpenState2 = false;
 
@@ -134,20 +140,71 @@ export class MapsComponent implements OnInit, AfterViewInit {
     this.map.addControl(scale);
 
 
-    /*
+
     // Search control
-    const search = new SearchNominatim();
+    let search = new SearchNominatim(
+      {	//target: $(".options").get(0),
+        polygon: true,
+        reverse: true,
+        position: true	// Search, with priority to geo position
+      });
+    // Current selection
+    this.sLayer = new OlVectorLayer({
+      source: new OlVectorSource(),
+      style: new Style({
+        image: new Circle({
+          radius: 5,
+          stroke: new Stroke({
+            color: 'rgb(255,165,0)',
+            width: 3
+          }),
+          fill: new Fill({
+            color: 'rgba(255,165,0,.3)'
+          })
+        }),
+        stroke: new Stroke({
+          color: 'rgb(255,165,0)',
+          width: 3
+        }),
+        fill: new Fill({
+          color: 'rgba(255,165,0,.3)'
+        })
+      })
+    });
+    this.map.addLayer(this.sLayer);
+
+    this.map.addControl(search);
     // Move to the position on selection in the control list
     search.on('select', (e) => {
-      // console.log(e);
-      this.map.getView().animate({
-        center: e.coordinate,
-        zoom: Math.max(this.map.getView().getZoom(), 16)
-      });
+      console.log(e);
+      this.sLayer.getSource().clear();
+      // Check if we get a geojson to describe the search
+      if (e.search.geojson) {
+        var format = new OlGeoJSON();
+        var f = format.readFeature(e.search.geojson, { dataProjection: "EPSG:4326", featureProjection: this.map.getView().getProjection() });
+        this.sLayer.getSource().addFeature(f);
+        var view = this.map.getView();
+        var resolution = view.getResolutionForExtent(f.getGeometry().getExtent(), this.map.getSize());
+        var zoom = view.getZoomForResolution(resolution);
+        var center = Extent.getCenter(f.getGeometry().getExtent());
+        // redraw before zoom
+        setTimeout(function () {
+          view.animate({
+            center: center,
+            zoom: Math.min(zoom, 16)
+          });
+        }, 100);
+      }
+      else {
+        this.map.getView().animate({
+          center: e.coordinate,
+          zoom: Math.max(this.map.getView().getZoom(), 16)
+        });
+      }
     });
-    this.map.addControl(search);
 
-    */
+
+
 
 
 
@@ -184,7 +241,7 @@ export class MapsComponent implements OnInit, AfterViewInit {
     // =========MAIN EVENT ONCLICK================
     this.map.on('click', (evt) => {
       // test call modal
-      
+
 
       var viewResolution = /** @type {number} */ (this.view.getResolution());
       var url = this.wmsSource.getGetFeatureInfoUrl(
@@ -201,9 +258,9 @@ export class MapsComponent implements OnInit, AfterViewInit {
           this.clickedfeature = res;
           //this.checkFeature(this.clickedfeature, evt.coordinate);
           this.hightlight.checkFeature(this.clickedfeature, evt.coordinate, this.map);
-          });
+        });
 
-        
+
 
       //this.checkattribute.getClosestFeature(evt.coordinate);
       //this.checkattribute.displaySnap(evt.coordinate);
@@ -231,6 +288,7 @@ export class MapsComponent implements OnInit, AfterViewInit {
 
   clearSelected() {
     this.hightlight.clearHighlight(this.map);
+    this.sLayer.getSource().clear();
   }
 
 
