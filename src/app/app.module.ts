@@ -29,6 +29,7 @@ import { SignUpComponent } from './Auth/sign-up/sign-up.component';
 import { YesnoComponent } from './dialog/yesno/yesno.component';
 import { LayerattributeComponent } from './dialog/layerattribute/layerattribute.component';
 import { DialogIntensitasComponent } from './dialog/dialog-intensitas/dialog-intensitas.component';
+import { HalamanCetakComponent } from './dialog/halaman-cetak/halaman-cetak.component';
 
 
 
@@ -49,7 +50,8 @@ import { DialogIntensitasComponent } from './dialog/dialog-intensitas/dialog-int
     SignUpComponent,
     YesnoComponent,
     LayerattributeComponent,
-    DialogIntensitasComponent
+    DialogIntensitasComponent,
+    HalamanCetakComponent
     
     
     

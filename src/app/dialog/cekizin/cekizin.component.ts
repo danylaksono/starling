@@ -160,7 +160,8 @@ export class CekizinComponent implements OnInit {
   closeA(kegiatan, kesimpulan) {
     let hasilCekIzin = {
       kegiatan: kegiatan,
-      kesimpulan: kesimpulan
+      kesimpulan: kesimpulan,
+      kode: this.data.rdtr.kode
     }
     this.closeDialog('A', hasilCekIzin)
   }

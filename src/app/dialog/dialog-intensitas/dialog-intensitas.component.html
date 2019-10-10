@@ -9,45 +9,58 @@
 </div>
 
 <mat-dialog-content>
-  <div fxFill class="container">
-    <div fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutWrap fxLayoutGap="10%">
+  <mat-card>
+    <mat-card-content>
+      <section class="example-section">
+        <mat-form-field class="example-margin">
+          <input matInput type="number" placeholder="Luas Tanah" [(ngModel)]="rencanaPemanfaatan.luasTanah">
+        </mat-form-field>
+        <mat-form-field class="example-margin">
+          <input matInput type="number" placeholder="Luas Bangunan" [(ngModel)]="rencanaPemanfaatan.luasBangunan">
+        </mat-form-field>
+      </section>
+      <p> Tinggi Bangunan (m<sup>2</sup>)</p>
+      <section class="example-section">
+        <mat-slider class="example-margin" [max]="300" [min]="0" [step]="1"
+          [thumbLabel]="rencanaPemanfaatan.tinggiBangunan" [(ngModel)]="rencanaPemanfaatan.tinggiBangunan"></mat-slider>
+        <input style="max-width:50px" class="example-margin" matInput disabled
+          [(ngModel)]="rencanaPemanfaatan.tinggiBangunan">
+      </section>
 
-      <div fxFlex>
+      <p> Jumlah Lantai </p>
+      <section class="example-section">
+        <mat-slider class="example-margin" [(ngModel)]="rencanaPemanfaatan.jmlLantai" [max]="40" [min]="1" [step]="1"
+          [thumbLabel]="rencanaPemanfaatan.jmlLantai">
+        </mat-slider>
+        <input style="max-width:50px" class="example-margin" matInput disabled
+          [(ngModel)]="rencanaPemanfaatan.jmlLantai">
+      </section>
+    </mat-card-content>
+    <button mat-raised-button (click)="cekIzinPemanfaatan(rencanaPemanfaatan)" color="primary">Cek Izin
+      Pemanfaatan</button>
 
-        <h3 class="example-h2">Rencana Pemanfaatan Ruang</h3>
+  </mat-card>
+  <mat-card *ngIf="showRencana" class="result">
+    <h3 class="example-h2">Ketentuan Pemanfaatan Ruang</h3>
+    <section class="example-section">
+        <p class="example-margin"> <i> {{ketentuanPemanfaatan.Keterangan}}  m<sup>2</sup></i> </p>
+      </section>
+    <section class="example-section">
+      <p class="example-margin"><strong> KDB: </strong></p>
+      <p class="example-margin"> <i> {{ketentuanPemanfaatan.KDB}}  </i> </p>
+    </section>
+    <section class="example-section">
+      <p class="example-margin"> <strong> KLB: </strong></p>
+      <p class="example-margin"> <i>  {{ketentuanPemanfaatan.KLB}}  </i> </p>
+    </section>
+    <section class="example-section">
+      <p class="example-margin"> <strong> KDH:  </strong></p>
+      <p class="example-margin"> <i>  {{ketentuanPemanfaatan.KDH}}  m<sup>2</sup>  </i></p>
+    </section>
+    <section class="example-section">
+      <p class="example-margin"> <strong> Tinggi:  </strong></p>
+      <p class="example-margin"> <i>  {{ketentuanPemanfaatan.Tinggi}}  </i> </p>
+    </section>
+  </mat-card>
 
-        <section class="example-section">
-          <mat-form-field class="example-margin">
-            <input matInput type="number" placeholder="Luas Tanah" [(ngModel)]="rencanaPemanfaatan.luasTanah">
-          </mat-form-field>
-          <mat-form-field class="example-margin">
-            <input matInput type="number" placeholder="Luas Bangunan" [(ngModel)]="rencanaPemanfaatan.luasBangunan">
-          </mat-form-field>
-        </section>
-        <section class="example-section">
-          <mat-form-field class="example-margin">
-            <mat-slider [(ngModel)]="rencanaPemanfaatan.tinggiBangunan"></mat-slider>
-
-          </mat-form-field>
-
-          <mat-slider [(ngModel)]="rencanaPemanfaatan.jmlLantai" class="example-margin" [max]="40" [min]="1" [step]="1"
-            [thumbLabel]="rencanaPemanfaatan.jmlLantai">
-          </mat-slider>
-
-        </section>
-
-
-
-
-      </div>
-      <div *ngIf="showRencana" fxFlex>
-        <h3 class="example-h2">Ketentuan Pemanfaatan Ruang</h3>
-
-        <section class="example-section">
-          <p>hasil KDB KRB KLB</p>
-        </section>
-
-      </div>
-    </div>
-  </div>
 </mat-dialog-content>

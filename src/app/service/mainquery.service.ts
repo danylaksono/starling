@@ -97,10 +97,6 @@ export class MainqueryService {
     });
   }
 
-
-
-
-
   ngOnInit() {
 
 
