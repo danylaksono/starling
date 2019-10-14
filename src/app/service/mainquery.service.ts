@@ -48,7 +48,7 @@ export class MainqueryService {
       disableClose: true,
       autoFocus: true,
       //height : '500px',
-      width: '600px',
+      //width: '600px',
       hasBackdrop: false
     }
     dialogConfig.data = {

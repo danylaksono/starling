@@ -1,4 +1,5 @@
 
+
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -8,16 +9,25 @@ import { SipertaComponent } from './siperta/siperta.component';
 import { LandingComponent } from './landing/landing.component';
 import { SignUpComponent } from './Auth/sign-up/sign-up.component';
 import { LoginComponent } from './Auth/login/login.component';
+import { HalamanCetakComponent } from './dialog/halaman-cetak/halaman-cetak.component';
+
+
 
 const routes: Routes = [
   { 
     path: 'home', 
     component: MainViewComponent,
-    children: [] // put children route here { path: '', component: LoginComponent },
+    children: [
+     // { path: 'print', component: HalamanCetakComponent }
+    ] // put children route here { path: '', component: LoginComponent },
   },
   { 
     path: 'siperta', 
     component: SipertaComponent
+  },
+  { 
+    path: 'print', 
+    component: HalamanCetakComponent
   },
   { 
     path: 'login', 
@@ -27,8 +37,8 @@ const routes: Routes = [
     path: 'signup', 
     component: SignUpComponent
   },
-  { path: '', component: LandingComponent},
-  { path: '**', redirectTo: '' }
+  { path: '', component: LandingComponent}
+  //{ path: '**', redirectTo: '' }
 
 ];
 

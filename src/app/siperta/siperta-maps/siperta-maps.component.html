@@ -1,39 +1,60 @@
 <div id="sipertamap" class="map sidebar-map"></div>
 
 <div id="sidebar" class="sidebar collapsed">
-    <!-- Nav tabs -->
-    <div class="sidebar-tabs">
-      <ul role="tablist">
-        <li><a href="#home" role="tab"><i class="fa fa-map"></i></a></li>
-        <li><a href="#profile" role="tab"><i class="fa fa-object-ungroup"></i></a></li>
-        
-      </ul>
-  
-      <ul role="tablist">
-        <li><a href="#settings" role="tab"><i class="fa fa-gear"></i></a></li>
-      </ul>
-    </div>
-  
-    <!-- Tab panes -->
-    <div class="sidebar-content">
-      <div class="sidebar-pane" id="home">
-        <h1 class="sidebar-header">
-          Daftar Layer
+  <!-- Nav tabs -->
+  <div class="sidebar-tabs">
+    <ul role="tablist">
+      <li><a href="#home" role="tab"><i class="fa fa-map"></i></a></li>
+      <li><a matTooltip="Legenda" href="#profile" role="tab"><i class="fa fa-image"></i></a></li>
+      <li><a matTooltip="Hapus seleksi" (click)="clearSelected()" target="_blank"><i class="fa fa-eraser"></i></a></li>
+
+    </ul>
+
+    <ul role="tablist">
+      <li><a href="#settings" role="tab"><i class="fa fa-gear"></i></a></li>
+    </ul>
+  </div>
+
+  <!-- Tab panes -->
+  <div class="sidebar-content">
+    <div class="sidebar-pane" id="home">
+      <h1 class="sidebar-header">
+        Daftar Layer
+        <span class="sidebar-close"><i class="fa fa-caret-right"></i></span>
+      </h1>
+      <!-- THE layer switcher https://viglino.github.io/ol-ext/examples/control/map.switcher.html -->
+      <div #switcher2 id="layers" class="layer-switcher">
+        <div></div>
+      </div>
+
+      <div class="sidebar-pane" id="profile">
+        <h1 class="sidebar-header">Legenda
           <span class="sidebar-close"><i class="fa fa-caret-right"></i></span>
         </h1>
-        <!-- THE layer switcher https://viglino.github.io/ol-ext/examples/control/map.switcher.html -->
-        <div #switcher2 id="layers" class="layer-switcher">
-            <div></div>
+        <div style="padding-top:10px">
+          <mat-accordion>
+            <mat-expansion-panel (opened)="panelOpenState2 = true" (closed)="panelOpenState2 = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Bidang Tanah
+                </mat-panel-title>
+                <mat-panel-description>
+                  Klik untuk {{panelOpenState2 ? 'menutup' : 'membuka'}} legenda
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <div>
+                <img
+                  src="https://geoserver.jogjakota.go.id/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=sitaru:bidang_tanah_tujuh_edit">
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
         </div>
-  
-      <div class="sidebar-pane" id="profile">
-        <h1 class="sidebar-header">Profile<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
       </div>
-  
+
       <div class="sidebar-pane" id="messages">
         <h1 class="sidebar-header">Messages<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
       </div>
-  
+
       <div class="sidebar-pane" id="settings">
         <h1 class="sidebar-header">Settings<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
       </div>

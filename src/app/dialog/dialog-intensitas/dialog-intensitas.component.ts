@@ -5,8 +5,6 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { map, tap } from 'rxjs/operators';
 
-import { HalamanCetakComponent } from './../halaman-cetak/halaman-cetak.component';
-
 
 
 
@@ -19,6 +17,7 @@ import { HalamanCetakComponent } from './../halaman-cetak/halaman-cetak.componen
 @NgModule({
   imports: [
     MaterialModule
+
   ]
 })
 
@@ -45,8 +44,8 @@ export class DialogIntensitasComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<DialogIntensitasComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private http: HttpClient,
-    private cetak: HalamanCetakComponent
+    private http: HttpClient
+    
   ) {
     this.rencanaPemanfaatan.luasTanah = Math.round(data.luas);
     //console.log('datanya', data);

@@ -30,6 +30,7 @@ import { YesnoComponent } from './dialog/yesno/yesno.component';
 import { LayerattributeComponent } from './dialog/layerattribute/layerattribute.component';
 import { DialogIntensitasComponent } from './dialog/dialog-intensitas/dialog-intensitas.component';
 import { HalamanCetakComponent } from './dialog/halaman-cetak/halaman-cetak.component';
+import { DialogAttributeComponent } from './siperta/dialog/dialog-attribute/dialog-attribute.component';
 
 
 
@@ -51,7 +52,8 @@ import { HalamanCetakComponent } from './dialog/halaman-cetak/halaman-cetak.comp
     YesnoComponent,
     LayerattributeComponent,
     DialogIntensitasComponent,
-    HalamanCetakComponent
+    HalamanCetakComponent,
+    DialogAttributeComponent
     
     
     
@@ -60,7 +62,8 @@ import { HalamanCetakComponent } from './dialog/halaman-cetak/halaman-cetak.comp
     CekizinComponent,
     YesnoComponent,
     LayerattributeComponent,
-    DialogIntensitasComponent
+    DialogIntensitasComponent,
+    DialogAttributeComponent
 
     
   ],

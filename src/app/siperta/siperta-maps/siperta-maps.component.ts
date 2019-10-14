@@ -1,4 +1,5 @@
 
+
 import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 
 
@@ -6,7 +7,10 @@ import OlMap from 'ol/Map';
 import OlXYZ from 'ol/source/XYZ';
 import OlTileLayer from 'ol/layer/Tile';
 import OlView from 'ol/View';
+import { Fill, Stroke, Style } from 'ol/style';
+import OlVectorSource from 'ol/source/Vector';
 import OlVectorLayer from 'ol/layer/Vector';
+import OlGeoJSON from 'ol/format/GeoJSON';
 import TileWMS from 'ol/source/TileWMS';
 import * as Control from 'ol/control';
 import { Sidebar } from 'ol/control.js';
@@ -14,10 +18,14 @@ import SearchNominatim from 'ol-ext/control/SearchNominatim';
 import LayerSwitcher from 'ol-ext/control/LayerSwitcher';
 import { fromLonLat } from 'ol/proj';
 
-
+import { DialogAttributeComponent } from './../dialog/dialog-attribute/dialog-attribute.component';
+import { MatDialog, MatDialogConfig } from '@angular/material';
 import { BasemaplayerService } from '../../service/basemaplayer.service';
 import { SipertaoverlayService } from './../../service/sipertaoverlay.service';
 import { CheckattributeService } from '../../service/checkattribute.service';
+
+
+
 
 @Component({
   selector: 'app-siperta-maps',
@@ -37,6 +45,7 @@ export class SipertaMapsComponent implements OnInit {
   overlay: {};
   list: any[];
   clickedfeature: any[];
+  panelOpenState2 = false;
 
   @ViewChild('switcher2', { static: false }) switcher2: ElementRef;
 
@@ -44,7 +53,8 @@ export class SipertaMapsComponent implements OnInit {
     public basemaplayers: BasemaplayerService,
     public overlaylayers: SipertaoverlayService,
     private checkattribute: CheckattributeService,
-
+    public dialog: MatDialog
+    
   ) { }
 
   ngOnInit() {
@@ -110,7 +120,7 @@ export class SipertaMapsComponent implements OnInit {
     this.map.addControl(switcher);
 
     this.map.on('click', (evt) => {
-      console.log('cl')
+      //console.log('cl')
 
       var viewResolution = /** @type {number} */ (this.view.getResolution());
       var url = this.wmsSource.getGetFeatureInfoUrl(
@@ -126,16 +136,97 @@ export class SipertaMapsComponent implements OnInit {
         res => {
           this.clickedfeature = res;
           //this.checkFeature(this.clickedfeature, evt.coordinate);
-          console.log(this.clickedfeature);
+          //console.log(this.clickedfeature);
+          this.highlightSelected(this.clickedfeature, this.map);
+          this.openModalShowAttribute(this.clickedfeature);
         }
       );
     });
-
-
-
-
-
   } //afterview
+
+
+  highlightSelected(feature, map) {
+    if (this.VectorLayer) {
+      map.removeLayer(this.VectorLayer);
+    }
+    var geom = feature.features[0];
+    var format = new OlGeoJSON({
+      dataProjection: 'EPSG:3857',
+      featureProjection: 'EPSG:3857',
+      geometryName: 'the_geom'
+    });
+    var vectorSource = new OlVectorSource({
+      features: format.readFeatures(geom)
+    });
+    var style = new Style({
+      fill: new Fill({
+        color: 'yellow'
+      }),
+      stroke: new Stroke({
+        color: 'red',
+        width: 2
+      })
+    });
+    this.VectorLayer = new OlVectorLayer({
+      source: vectorSource,
+      style: style,
+      renderMode: 'image',
+      //@ts-ignore
+      title: 'Aset Terpilih',
+      name: 'Selected'
+      //map: this.map
+    });
+    map.addLayer(this.VectorLayer);
+    map.render();
+  } // highlight selected feature
+
+
+  //======= clear selected highlight =======
+  clearSelected(){
+    if (this.VectorLayer) {
+      this.map.removeLayer(this.VectorLayer);
+    }
+  } // clear selection
+
+
+  //=========== open attribute ===========
+  
+  openModalShowAttribute(data) {
+    let dialogConfig = new MatDialogConfig();
+    dialogConfig = {
+      disableClose : false,
+      autoFocus : true,
+      //height : '200px',
+      width : '600px',
+      hasBackdrop: false      
+    }
+    dialogConfig.data = {
+      id: 2,
+      title: 'Keterangan Aset',
+      atribut: data
+
+    };
+    const dialogRef = this.dialog.open(DialogAttributeComponent, dialogConfig);
+    //dialogRef.closeAll();
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'A') {
+        // handle A button close
+        console.log('A');
+        //this.query.openModalCekIzin(rdtr, bidang);
+      }
+    
+      if (result === 'B') {
+        // handle B button close
+        console.log('B');
+      }
+
+      //if (result) {
+        //console.log(result);
+        
+        
+      //}
+    });
+  } //opendialog
 
 
 
