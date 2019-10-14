@@ -54,7 +54,7 @@ export class SipertaMapsComponent implements OnInit {
     public overlaylayers: SipertaoverlayService,
     private checkattribute: CheckattributeService,
     public dialog: MatDialog
-    
+
   ) { }
 
   ngOnInit() {
@@ -137,8 +137,14 @@ export class SipertaMapsComponent implements OnInit {
           this.clickedfeature = res;
           //this.checkFeature(this.clickedfeature, evt.coordinate);
           //console.log(this.clickedfeature);
-          this.highlightSelected(this.clickedfeature, this.map);
-          this.openModalShowAttribute(this.clickedfeature);
+          //@ts-ignore
+          if (this.clickedfeature.numberReturned == 0) {
+            this.clearSelected()
+          } else {
+            this.highlightSelected(this.clickedfeature, this.map);
+            this.openModalShowAttribute(this.clickedfeature);
+          }
+
         }
       );
     });
@@ -182,7 +188,7 @@ export class SipertaMapsComponent implements OnInit {
 
 
   //======= clear selected highlight =======
-  clearSelected(){
+  clearSelected() {
     if (this.VectorLayer) {
       this.map.removeLayer(this.VectorLayer);
     }
@@ -190,15 +196,15 @@ export class SipertaMapsComponent implements OnInit {
 
 
   //=========== open attribute ===========
-  
+
   openModalShowAttribute(data) {
     let dialogConfig = new MatDialogConfig();
     dialogConfig = {
-      disableClose : false,
-      autoFocus : true,
+      disableClose: false,
+      autoFocus: true,
       //height : '200px',
-      width : '600px',
-      hasBackdrop: false      
+      //width: '600px',
+      hasBackdrop: false
     }
     dialogConfig.data = {
       id: 2,
@@ -214,16 +220,16 @@ export class SipertaMapsComponent implements OnInit {
         console.log('A');
         //this.query.openModalCekIzin(rdtr, bidang);
       }
-    
+
       if (result === 'B') {
         // handle B button close
         console.log('B');
       }
 
       //if (result) {
-        //console.log(result);
-        
-        
+      //console.log(result);
+
+
       //}
     });
   } //opendialog

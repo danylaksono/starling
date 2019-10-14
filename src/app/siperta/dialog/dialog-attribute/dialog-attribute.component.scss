@@ -16,3 +16,15 @@ table thead {
   justify-content: space-between;
   align-items: center;
 }
+
+mat-button-toggle-group {
+  width: 80%;
+}
+
+mat-button-toggle {
+  flex: 1 1 100%;
+  box-sizing: border-box;
+  align-items: center;
+  flex-direction: row;
+  display: flex;
+}

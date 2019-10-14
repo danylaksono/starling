@@ -148,12 +148,33 @@ export class MapsComponent implements OnInit, AfterViewInit {
         reverse: true,
         position: true	// Search, with priority to geo position
       });
-    // Current selection
-    this.sLayer = new OlVectorLayer({
-      source: new OlVectorSource(),
-      style: new Style({
-        image: new Circle({
-          radius: 5,
+
+
+
+    this.map.addControl(search);
+    // Move to the position on selection in the control list
+    search.on('select', (e) => {
+
+      if (this.sLayer) {
+        this.map.removeLayer(this.sLayer);
+      }
+
+      // Current selection
+      this.sLayer = new OlVectorLayer({
+        //@ts-ignore
+        title: 'Hasil Pencarian',
+        source: new OlVectorSource(),
+        style: new Style({
+          image: new Circle({
+            radius: 5,
+            stroke: new Stroke({
+              color: 'rgb(255,165,0)',
+              width: 3
+            }),
+            fill: new Fill({
+              color: 'rgba(255,165,0,.3)'
+            })
+          }),
           stroke: new Stroke({
             color: 'rgb(255,165,0)',
             width: 3
@@ -161,22 +182,11 @@ export class MapsComponent implements OnInit, AfterViewInit {
           fill: new Fill({
             color: 'rgba(255,165,0,.3)'
           })
-        }),
-        stroke: new Stroke({
-          color: 'rgb(255,165,0)',
-          width: 3
-        }),
-        fill: new Fill({
-          color: 'rgba(255,165,0,.3)'
         })
-      })
-    });
-    this.map.addLayer(this.sLayer);
-
-    this.map.addControl(search);
-    // Move to the position on selection in the control list
-    search.on('select', (e) => {
-      console.log(e);
+      });
+      this.map.addLayer(this.sLayer);
+      this.map.render();
+      //console.log(e);
       this.sLayer.getSource().clear();
       // Check if we get a geojson to describe the search
       if (e.search.geojson) {
@@ -256,8 +266,14 @@ export class MapsComponent implements OnInit, AfterViewInit {
       this.checkattribute.getResponse(url).subscribe(
         res => {
           this.clickedfeature = res;
+          //console.log(this.clickedfeature);
+          //@ts-ignore
+          if (this.clickedfeature.numberReturned <= 1) {
+            this.clearSelected()
+          } else {
           //this.checkFeature(this.clickedfeature, evt.coordinate);
           this.hightlight.checkFeature(this.clickedfeature, evt.coordinate, this.map);
+          }
         });
 
 
@@ -288,7 +304,7 @@ export class MapsComponent implements OnInit, AfterViewInit {
 
   clearSelected() {
     this.hightlight.clearHighlight(this.map);
-    this.sLayer.getSource().clear();
+    this.map.removeLayer(this.sLayer);
   }
 
 
