@@ -14,7 +14,9 @@ import {
   MatExpansionModule,
   MatTableModule,
   MatSliderModule,
-  MatButtonToggleModule
+  MatButtonToggleModule,
+  //MatSort,
+  //MatTableDataSource
 
 } from '@angular/material';
 import {MatDialogModule} from '@angular/material/dialog';
@@ -46,7 +48,9 @@ import {MatMenuModule} from '@angular/material/menu';
     MatExpansionModule,
     MatTableModule,
     MatSliderModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    //MatSort,
+    //MatTableDataSource
     
   ],
   exports: [
@@ -69,7 +73,9 @@ import {MatMenuModule} from '@angular/material/menu';
     MatExpansionModule,
     MatTableModule,
     MatSliderModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    //MatSort,
+    //MatTableDataSource
   ]
 })
 export class MaterialModule { }

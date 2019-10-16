@@ -7,10 +7,10 @@
       <li><a href="#home" role="tab"><i class="fa fa-map"></i></a></li>
       <li><a matTooltip="Legenda" href="#profile" role="tab"><i class="fa fa-image"></i></a></li>
       <li><a matTooltip="Hapus seleksi" (click)="clearSelected()" target="_blank"><i class="fa fa-eraser"></i></a></li>
-
+      <li *ngIf="(isLoggedIn | async)"><a matTooltip="Buka Atribut" (click)="openAttributeBankTanah()" target="_blank"><i class="fa fa-table"></i></a></li>
     </ul>
 
-    <ul role="tablist">
+    <ul *ngIf="(isLoggedIn | async)" role="tablist">
       <li><a href="#settings" role="tab"><i class="fa fa-gear"></i></a></li>
     </ul>
   </div>
@@ -56,7 +56,7 @@
       <h1 class="sidebar-header">Messages<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
     </div>
 
-    <div class="sidebar-pane" id="settings">
+    <div  class="sidebar-pane" id="settings">
       <h1 class="sidebar-header">Settings<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
     </div>
 

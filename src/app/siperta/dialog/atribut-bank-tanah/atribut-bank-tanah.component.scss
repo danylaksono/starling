@@ -1,0 +1,30 @@
+mat-dialog-title {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+
+table {
+    width: 100%;
+  }
+
+table thead {
+    display:none !important;
+  }
+
+  
+.dialogTitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+mat-button-toggle-group {
+  width: 80%;
+}
+
+mat-button-toggle {
+  flex: 1 1 100%;
+  box-sizing: border-box;
+  align-items: center;
+  flex-direction: row;
+  display: flex;
+}

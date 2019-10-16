@@ -1,5 +1,3 @@
-
-
 import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 
 
@@ -7,7 +5,7 @@ import OlMap from 'ol/Map';
 import OlXYZ from 'ol/source/XYZ';
 import OlTileLayer from 'ol/layer/Tile';
 import OlView from 'ol/View';
-import { Fill, Stroke, Style } from 'ol/style';
+import { Fill, Circle, Stroke, Style } from 'ol/style';
 import OlVectorSource from 'ol/source/Vector';
 import OlVectorLayer from 'ol/layer/Vector';
 import OlGeoJSON from 'ol/format/GeoJSON';
@@ -17,12 +15,20 @@ import { Sidebar } from 'ol/control.js';
 import SearchNominatim from 'ol-ext/control/SearchNominatim';
 import LayerSwitcher from 'ol-ext/control/LayerSwitcher';
 import { fromLonLat } from 'ol/proj';
+import * as Extent from 'ol/Extent';
+import { Observable } from "rxjs";
 
+
+
+// components and services
 import { DialogAttributeComponent } from './../dialog/dialog-attribute/dialog-attribute.component';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { BasemaplayerService } from '../../service/basemaplayer.service';
 import { SipertaoverlayService } from './../../service/sipertaoverlay.service';
 import { CheckattributeService } from '../../service/checkattribute.service';
+import { AuthService } from 'src/app/service/auth.service';
+import { AtributBankTanahComponent } from '../dialog/atribut-bank-tanah/atribut-bank-tanah.component';
+
 
 
 
@@ -40,12 +46,15 @@ export class SipertaMapsComponent implements OnInit {
   view: OlView;
   wmsSource: TileWMS;
   VectorLayer: OlVectorLayer;
+  isLoggedIn: Observable<boolean>;
+
 
   basemap: any[];
   overlay: {};
   list: any[];
   clickedfeature: any[];
   panelOpenState2 = false;
+  sLayer: OlVectorLayer;
 
   @ViewChild('switcher2', { static: false }) switcher2: ElementRef;
 
@@ -53,9 +62,11 @@ export class SipertaMapsComponent implements OnInit {
     public basemaplayers: BasemaplayerService,
     public overlaylayers: SipertaoverlayService,
     private checkattribute: CheckattributeService,
-    public dialog: MatDialog
-
-  ) { }
+    public dialog: MatDialog,
+    private auth: AuthService,
+  ) { 
+    this.isLoggedIn = auth.isLoggedIn();
+  }
 
   ngOnInit() {
 
@@ -98,13 +109,88 @@ export class SipertaMapsComponent implements OnInit {
     this.map.addControl(sidebar);
     this.map.addControl(scale);
 
+    
+
+
+    // Search control
+    let search = new SearchNominatim(
+      {	//target: $(".options").get(0),
+        polygon: true,
+        reverse: true,
+        position: true	// Search, with priority to geo position
+      });
+
+
+
+    this.map.addControl(search);
+    // Move to the position on selection in the control list
+    search.on('select', (e) => {
+
+      if (this.sLayer) {
+        this.map.removeLayer(this.sLayer);
+      }
+
+      // Current selection
+      this.sLayer = new OlVectorLayer({
+        //@ts-ignore
+        title: 'Hasil Pencarian',
+        source: new OlVectorSource(),
+        style: new Style({
+          image: new Circle({
+            radius: 5,
+            stroke: new Stroke({
+              color: 'rgb(255,165,0)',
+              width: 3
+            }),
+            fill: new Fill({
+              color: 'rgba(255,165,0,.3)'
+            })
+          }),
+          stroke: new Stroke({
+            color: 'rgb(255,165,0)',
+            width: 3
+          }),
+          fill: new Fill({
+            color: 'rgba(255,165,0,.3)'
+          })
+        })
+      });
+      this.map.addLayer(this.sLayer);
+      this.map.render();
+      //console.log(e);
+      this.sLayer.getSource().clear();
+      // Check if we get a geojson to describe the search
+      if (e.search.geojson) {
+        var format = new OlGeoJSON();
+        var f = format.readFeature(e.search.geojson, { dataProjection: "EPSG:4326", featureProjection: this.map.getView().getProjection() });
+        this.sLayer.getSource().addFeature(f);
+        var view = this.map.getView();
+        var resolution = view.getResolutionForExtent(f.getGeometry().getExtent(), this.map.getSize());
+        var zoom = view.getZoomForResolution(resolution);
+        var center = Extent.getCenter(f.getGeometry().getExtent());
+        // redraw before zoom
+        setTimeout(function () {
+          view.animate({
+            center: center,
+            zoom: Math.min(zoom, 16)
+          });
+        }, 100);
+      }
+      else {
+        this.map.getView().animate({
+          center: e.coordinate,
+          zoom: Math.max(this.map.getView().getZoom(), 16)
+        });
+      }
+    });
+
 
   } //oninit
 
 
   ngAfterViewInit() {
     // for ol to work: set target in afterviewinit
-    this.map.setTarget('sipertamap');
+    //this.map.setTarget('sipertamap');
 
     var toc = this.switcher2.nativeElement; // getting switcher DOM    
     //LayerSwitcher.renderPanel(this.map, toc); // should be located in ngAfterViewInit instead of onInit
@@ -144,7 +230,6 @@ export class SipertaMapsComponent implements OnInit {
             this.highlightSelected(this.clickedfeature, this.map);
             this.openModalShowAttribute(this.clickedfeature);
           }
-
         }
       );
     });
@@ -189,14 +274,14 @@ export class SipertaMapsComponent implements OnInit {
 
   //======= clear selected highlight =======
   clearSelected() {
-    if (this.VectorLayer) {
+    if (this.VectorLayer || this.sLayer) {
       this.map.removeLayer(this.VectorLayer);
+      this.map.removeLayer(this.sLayer);
     }
   } // clear selection
 
 
-  //=========== open attribute ===========
-
+  //=========== open attribute aset pemkot ===========
   openModalShowAttribute(data) {
     let dialogConfig = new MatDialogConfig();
     dialogConfig = {
@@ -220,19 +305,43 @@ export class SipertaMapsComponent implements OnInit {
         console.log('A');
         //this.query.openModalCekIzin(rdtr, bidang);
       }
-
-      if (result === 'B') {
-        // handle B button close
-        console.log('B');
-      }
-
       //if (result) {
       //console.log(result);
-
-
       //}
     });
-  } //opendialog
+  } //opendialog aset
+
+  //=========== open attribute bank tanah ===========
+  openAttributeBankTanah() {
+    let dialogConfig = new MatDialogConfig();
+    dialogConfig = {
+      disableClose: false,
+      autoFocus: true,
+      //height: '500px',
+      width: '100%',
+      //width: '100%',
+      //position: { bottom: '0', right:'0' },
+      hasBackdrop: false
+    }
+    dialogConfig.data = {
+      id: 2,
+      title: 'Atribut Bank Tanah',
+      atribut: 'data'
+
+    };
+    const dialogRef = this.dialog.open(AtributBankTanahComponent, dialogConfig);
+    //dialogRef.closeAll();
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'A') {
+        // handle A button close
+        //console.log('A');
+        //this.query.openModalCekIzin(rdtr, bidang);
+      }
+      //if (result) {
+      //console.log(result);
+      //}
+    });
+  } //opendialog bank tanah
 
 
 

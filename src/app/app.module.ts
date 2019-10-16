@@ -9,6 +9,7 @@ import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { MaterialModule } from './material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatPaginatorModule } from '@angular/material/paginator'
 
 
 import { CookieService } from 'ngx-cookie-service';
@@ -31,6 +32,8 @@ import { LayerattributeComponent } from './dialog/layerattribute/layerattribute.
 import { DialogIntensitasComponent } from './dialog/dialog-intensitas/dialog-intensitas.component';
 import { HalamanCetakComponent } from './dialog/halaman-cetak/halaman-cetak.component';
 import { DialogAttributeComponent } from './siperta/dialog/dialog-attribute/dialog-attribute.component';
+import { AtributBankTanahComponent } from './siperta/dialog/atribut-bank-tanah/atribut-bank-tanah.component';
+
 
 
 
@@ -53,7 +56,9 @@ import { DialogAttributeComponent } from './siperta/dialog/dialog-attribute/dial
     LayerattributeComponent,
     DialogIntensitasComponent,
     HalamanCetakComponent,
-    DialogAttributeComponent
+    DialogAttributeComponent,
+    AtributBankTanahComponent
+    
     
     
     
@@ -63,7 +68,8 @@ import { DialogAttributeComponent } from './siperta/dialog/dialog-attribute/dial
     YesnoComponent,
     LayerattributeComponent,
     DialogIntensitasComponent,
-    DialogAttributeComponent
+    DialogAttributeComponent,
+    AtributBankTanahComponent
 
     
   ],
@@ -78,7 +84,8 @@ import { DialogAttributeComponent } from './siperta/dialog/dialog-attribute/dial
     MatDialogModule,
     FormsModule,
     ReactiveFormsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatPaginatorModule
     
     
 

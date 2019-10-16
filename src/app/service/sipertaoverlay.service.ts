@@ -29,7 +29,6 @@ export class SipertaoverlayService {
           params: {'LAYERS': 'sitaru:bidang_tanah_tujuh_edit', 'TILED': true},
           serverType: 'geoserver',
           transition: 0
-          
         })
       }),
       new LayerTile({
@@ -54,6 +53,18 @@ export class SipertaoverlayService {
           params: {'LAYERS': 'siperta:LAHAN_PEMKOT_YOGYAKARTA'},
           serverType: 'geoserver',
           transition: 0          
+        })
+      }),
+      new LayerTile({
+        //@ts-ignore
+        title: 'Bank Tanah',       
+        visible: true,
+        preload: Infinity,
+        source: new SourceWMS({
+          url: 'https://geoserver.jogjakota.go.id/geoserver/sitaru/wms',
+          params: {'LAYERS': 'sitaru:banktanah', 'TILED': true},
+          serverType: 'geoserver',
+          transition: 0
         })
       })
     ]

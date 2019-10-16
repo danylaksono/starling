@@ -5,6 +5,8 @@ import { MAT_DIALOG_DEFAULT_OPTIONS, MAT_DIALOG_DATA, MatDialogRef } from '@angu
 import { WarningSnackbarService } from 'src/app/dialog/warning-snackbar.service';
 
 
+
+
  
 
 
@@ -49,6 +51,7 @@ export class DialogAttributeComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<DialogAttributeComponent>,
     private warning: WarningSnackbarService,
+    
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) {
     this.atribut = data.atribut.features[0].properties;
@@ -107,6 +110,7 @@ export class DialogAttributeComponent implements OnInit {
 
     checkFixPhoto(fotourl){
       const extension = fotourl.substr(-3);
+
       if (extension != 'jpg') {
         if(fotourl.substr(-1) == '/') {
           this.warning.open('Foto Tidak Ditemukan!');
@@ -116,12 +120,6 @@ export class DialogAttributeComponent implements OnInit {
           this.showFoto = fotourl + '.jpg';
         }
       }
-
-
-
-
-
-
     }
 
 
@@ -144,6 +142,8 @@ export class DialogAttributeComponent implements OnInit {
 
   ngOnInit() {
     this.showFoto = this.fotoDepan;
+
+    
   }
 
 }

@@ -10,10 +10,6 @@ import { retry, catchError } from 'rxjs/operators';
 
 export class DataitbxService {
 
-
-
-
-
   constructor(private http: HttpClient) {
   }
 
