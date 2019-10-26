@@ -14,9 +14,11 @@ import * as Control from 'ol/control';
 import { Sidebar } from 'ol/control.js';
 import SearchNominatim from 'ol-ext/control/SearchNominatim';
 import LayerSwitcher from 'ol-ext/control/LayerSwitcher';
-import { fromLonLat } from 'ol/proj';
+import { fromLonLat, transform } from 'ol/proj';
 import * as Extent from 'ol/Extent';
 import { Observable } from "rxjs";
+import {easeIn, easeOut} from 'ol/easing';
+
 
 
 
@@ -64,7 +66,7 @@ export class SipertaMapsComponent implements OnInit {
     private checkattribute: CheckattributeService,
     public dialog: MatDialog,
     private auth: AuthService,
-  ) { 
+  ) {
     this.isLoggedIn = auth.isLoggedIn();
   }
 
@@ -109,7 +111,7 @@ export class SipertaMapsComponent implements OnInit {
     this.map.addControl(sidebar);
     this.map.addControl(scale);
 
-    
+
 
 
     // Search control
@@ -302,7 +304,7 @@ export class SipertaMapsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'A') {
         // handle A button close
-        console.log('A');
+        //console.log('A');
         //this.query.openModalCekIzin(rdtr, bidang);
       }
       //if (result) {
@@ -330,6 +332,15 @@ export class SipertaMapsComponent implements OnInit {
 
     };
     const dialogRef = this.dialog.open(AtributBankTanahComponent, dialogConfig);
+
+    const sub = dialogRef.componentInstance.onZoom.subscribe(
+      ($event) => {
+        //console.log($event);
+        this.zoomToLatLng($event.lat, $event.long);
+
+      }
+    )
+
     //dialogRef.closeAll();
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'A') {
@@ -341,7 +352,17 @@ export class SipertaMapsComponent implements OnInit {
       //console.log(result);
       //}
     });
-  } //opendialog bank tanah
+  } //opendialog bank tanahT
+
+  zoomToLatLng(lat, long) {
+    //this.map.getView().setCenter(transform([long, lat],'EPSG:4326','EPSG:3857'));
+    console.log('lat', lat);
+    console.log('long', long);
+    this.map.getView().setCenter(fromLonLat([Number(long), Number(lat)]));
+    this.map.getView().setZoom(18);
+
+  }
+
 
 
 

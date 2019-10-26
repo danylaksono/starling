@@ -45,6 +45,18 @@ export class SipertaoverlayService {
       }),
       new LayerTile({
         //@ts-ignore
+        title: 'Rencana Detil Tata Ruang',       
+        visible: true,
+        preload: Infinity,
+        source: new SourceWMS({
+          url: 'https://geoserver.jogjakota.go.id/geoserver/sitaru/wms',
+          params: {'LAYERS': 'sitaru:pola_ruang_rdtr'},
+          serverType: 'geoserver',
+          transition: 0
+        })
+      }),
+      new LayerTile({
+        //@ts-ignore
         title: 'Lahan Pemkot',       
         visible: true,
         preload: Infinity,

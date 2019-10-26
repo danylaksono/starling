@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, ViewChild } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild, EventEmitter } from '@angular/core';
 import { NgModule } from '@angular/core';
 import { MaterialModule } from 'src/app/material/material.module';
 import { MAT_DIALOG_DEFAULT_OPTIONS, MAT_DIALOG_DATA, MatDialogRef, MatTableDataSource, MatPaginator, MatPaginatorModule } from '@angular/material';
@@ -68,6 +68,8 @@ export class AtributBankTanahComponent implements OnInit {
   atribut;
   datasource;
 
+  onZoom = new EventEmitter;
+
   dataAtribut: dataAtribut[];
   displayedColumns: string[] = ['kodeberkas', 'tanggalpermohonan', 'kategori', 'namapemiliktanah', 'status', 'action'];
   list: {};
@@ -95,8 +97,12 @@ export class AtributBankTanahComponent implements OnInit {
     }
   }
 
-  zoomTo(){
+  zoomTo(lat, long){
     console.log('zoomTo');
+    this.onZoom.emit({lat:lat, long: long});
+
+
+
   }
 
   ngOnInit() {
