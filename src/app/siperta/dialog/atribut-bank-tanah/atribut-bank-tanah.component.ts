@@ -71,7 +71,36 @@ export class AtributBankTanahComponent implements OnInit {
   onZoom = new EventEmitter;
 
   dataAtribut: dataAtribut[];
-  displayedColumns: string[] = ['kodeberkas', 'tanggalpermohonan', 'kategori', 'namapemiliktanah', 'status', 'action'];
+  displayedColumns: string[] = 
+  ['kodeberkas',
+   'tanggalpermohonan',
+   'kodekategori',
+   'kategori',
+   'subkategori',
+   'namapemiliktanah', 
+   'telppemilik', 
+   'alamattanah', 
+   'kodekelurahan', 
+   'kelurahan', 
+   'kodekecamatan', 
+   'kecamatan', 
+   'luassertifikatpenawaran', 
+   'luaspembebasanpenawaran', 
+   'hargatanahpenawaran', 
+   'hargabangunanpenawaran', 
+   'totalhargapenawaran', 
+   'nomorsertifikat', 
+   'nomorsugs', 
+   'keterangan', 
+   'penganggaran', 
+   'kodestatus', 
+   'status', 
+   'luasukurulang', 
+   'hargarealisasi', 
+   'hargabangunan', 
+   'totalhargarealisasi', 
+   'nomorsertifikatpemkot', 
+   'action'];
   list: {};
 
   constructor(

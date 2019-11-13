@@ -9,8 +9,8 @@
 
 </div>
 <mat-dialog-content>
-  <div fxFill class="container">
-    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="6px grid">
+  <div fxFill class="container" style="overflow-x: hidden;">
+    <div fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="6px grid" style="overflow-x: hidden;">
 
       <div fxFlex="50">
         <table mat-table [dataSource]="dataAtribut">
@@ -29,8 +29,8 @@
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
       </div>
-      <div fxFlex="50" fxLayout="column" fxLayoutAlign="center center">
-        <img src={{showFoto}} style="max-width: 400px; padding: 20px"/>
+      <div fxFlex="50" fxLayout="column" fxLayoutAlign="start center">
+        <img (click)="openFoto(showFoto)" src={{showFoto}} style="max-width: 400px; padding: 20px; cursor:pointer"/>
         <mat-button-toggle-group #group="matButtonToggleGroup" (change)="onValChange($event.value)">
           <mat-button-toggle value="depan">
             Depan
@@ -42,6 +42,12 @@
             Samping
           </mat-button-toggle>
         </mat-button-toggle-group>
+        <div style="width:100%; padding: 10px" >
+          <button color="primary" mat-raised-button style="width:100%;" (click)="onValChange('srtk')" > 
+            Foto SRTK </button>
+        </div>
+        
+        
       </div>
     </div>
   </div>

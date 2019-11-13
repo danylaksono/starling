@@ -47,6 +47,7 @@ export class SipertaoverlayService {
         //@ts-ignore
         title: 'Rencana Detil Tata Ruang',       
         visible: true,
+        opacity: 0.6,
         preload: Infinity,
         source: new SourceWMS({
           url: 'https://geoserver.jogjakota.go.id/geoserver/sitaru/wms',
