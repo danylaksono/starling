@@ -1,8 +1,12 @@
 import { AuthService } from './../../service/auth.service';
 import { Component, NgModule, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Location, CommonModule } from '@angular/common';
+import { Router, ActivatedRoute } from '@angular/router';
+import { WarningSnackbarService } from 'src/app/dialog/warning-snackbar.service';
+import { first } from 'rxjs/operators';
+
+
 
 @NgModule({
   imports: [
@@ -24,12 +28,18 @@ export class LoginComponent implements OnInit {
   public jwt: string;
   public showSignup: Boolean = true;
   public user: string;
+  returnUrl: string;
+  isLoggedIn: Boolean;
   
 
   constructor(
     private http: HttpClient,
+    private location: Location,
     private router: Router,
-    private auth: AuthService) { }
+    private route: ActivatedRoute,
+    private auth: AuthService
+    
+    ) { }
 
 
   toggleSignup() {
@@ -44,15 +54,52 @@ export class LoginComponent implements OnInit {
       password: this.signInPassword
     }
     this.auth.signIn(credentials);
+    setTimeout(() => {
+      this.auth.isLoggedIn()
+      .pipe(first())
+      .subscribe(
+        data => {
+          //console.log(data);
+          if (data){
+            this.router.navigateByUrl(this.returnUrl);  
+          } 
+          // else {     warning('server autentikasi bermasalah, silahkan coba lagi)          }          
+        },
+        error => {
+          console.log('error');
+        }
+      );  
+
+    }, 1000    
+    );
+    
+    
+    
+
+    
+    
+    
+    //console.log(credentials);
+
+    
     //const cookieExist: boolean = this.cookie.check('currentUser');
     //if (cookieExist){
-      this.router.navigateByUrl('/home');
+      //this.router.navigateByUrl('/home');
+      //https://medium.com/@ryanchenkie_40935/angular-authentication-using-route-guards-bf7a4ca13ae3
     //};
   }
 
 
+  goBack() {
+    this.location.back();
+  }
+
 
   ngOnInit() {
+    this.auth.logOut();
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home';
+    console.log(this.returnUrl);
+    //console.log(this.location.path());
   }
 
 }
@@ -76,4 +123,6 @@ testRoute() {
   this.auth.isSignedIn();
 }
 
+
+// https://www.tektutorialshub.com/angular/angular-location-service/
 */

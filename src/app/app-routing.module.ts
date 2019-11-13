@@ -10,7 +10,7 @@ import { LandingComponent } from './landing/landing.component';
 import { SignUpComponent } from './Auth/sign-up/sign-up.component';
 import { LoginComponent } from './Auth/login/login.component';
 import { HalamanCetakComponent } from './dialog/halaman-cetak/halaman-cetak.component';
-
+import { AuthGuardGuard } from './Auth/auth-guard.guard';
 
 
 const routes: Routes = [
@@ -23,7 +23,8 @@ const routes: Routes = [
   },
   { 
     path: 'siperta', 
-    component: SipertaComponent
+    component: SipertaComponent,
+    canActivate: [AuthGuardGuard]
   },
   { 
     path: 'print', 

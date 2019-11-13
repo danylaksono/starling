@@ -2,7 +2,7 @@
 
   <div fxLayoutGap="1%" fxLayout="row" style="padding: 20px" fxLayoutAlign="end">
     <div>
-      <button matTooltip="Kembali ke Peta" mat-fab color="accent" routerLink="/home">
+      <button matTooltip="Kembali ke Peta" mat-fab color="accent" (click)="goBack()" >
         <mat-icon>arrow_back</mat-icon>
       </button>
     </div>

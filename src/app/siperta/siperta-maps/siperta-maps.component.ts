@@ -40,6 +40,7 @@ import { AtributBankTanahComponent } from '../dialog/atribut-bank-tanah/atribut-
   templateUrl: './siperta-maps.component.html',
   styleUrls: ['./siperta-maps.component.scss']
 })
+
 export class SipertaMapsComponent implements OnInit {
 
   map: OlMap;

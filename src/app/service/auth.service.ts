@@ -2,6 +2,8 @@ import { Injectable, Output, EventEmitter } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { WarningSnackbarService } from '../dialog/warning-snackbar.service';
+
 //import { map } from 'rxjs/operators';
 
 
@@ -19,10 +21,11 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private cookie: CookieService
+    private cookie: CookieService,
+    private warning: WarningSnackbarService
   ) { }
 
-  private hasToken() : boolean {
+  private hasToken(): boolean {
     return !!this.cookie.get(this.currentUser);
   }
 
@@ -34,25 +37,38 @@ export class AuthService {
   }
 
   signIn(credentials) {
-    const authUrl='https://sitaru-arsip.jogjakota.go.id/auth/local';
+    
+    const authUrl = 'https://sitaru-arsip.jogjakota.go.id/auth/local';
     this.http.post(authUrl, credentials).subscribe((res: any) => {
-    //this.http.post('api/auth', credentials).subscribe((res: any) => {
-
-      //console.log(res);
+      //this.http.post('api/auth', credentials).subscribe((res: any) => {
       //this.jwt = res.token;
       //localStorage.setItem('currentUser', res.token);
-      this.cookie.set('currentUser', res.token, 0.25);
-      this.isLoggedInSubject.next(true);
-    });
+      
+        this.cookie.set('currentUser', res.token, 0.25);
+        this.isLoggedInSubject.next(true);
+      
+    },
+      error => {
+        //console.log('oops', error.error.message)
+        this.warning.open(error.error.message);
+    
+      }
+
+      
+
+    );
+
+    
+
   } //signin
 
-  
+
   logOut() {
     this.cookie.delete('currentUser');
     this.isLoggedInSubject.next(false);
   } //logout
 
-  isLoggedIn() : Observable<boolean> {
+  isLoggedIn(): Observable<boolean> {
     const isExist = this.cookie.get('currentUser');
     if (isExist) {
       this.isLoggedInSubject.next(true);
@@ -61,7 +77,7 @@ export class AuthService {
     }
     //console.log(this.isLoggedInSubject.asObservable());
     return this.isLoggedInSubject.asObservable();
-   }
+  }
 
 
   isSignedIn() {
