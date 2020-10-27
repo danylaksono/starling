@@ -33,7 +33,7 @@ export class AuthGuardGuard implements CanActivate {
       .subscribe(
         res => {
           //this.isLoggedIn = res;
-          console.log(res);
+          //console.log(res);
           if (!res) {
             //console.log('inside', res);
             // not logged in

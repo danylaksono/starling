@@ -20,11 +20,11 @@ import OlVectorSource from 'ol/source/Vector';
 
 //components & services
 import { MatDialog, MatDialogConfig } from '@angular/material';
-import { CekizinComponent } from './../dialog/cekizin/cekizin.component';
+//import { CekizinComponent } from './../dialog/cekizin/cekizin.component';
 import { BasemaplayerService } from '../service/basemaplayer.service';
 import { OverlaylayerService } from './../service/overlaylayer.service';
 import { CheckattributeService } from './../service/checkattribute.service';
-import { DataitbxService } from './../service/dataitbx.service';
+//import { DataitbxService } from './../service/dataitbx.service';
 import { DaftarkegiatanService } from '../service/daftarkegiatan.service';
 import { WarningSnackbarService } from './../dialog/warning-snackbar.service';
 import { HighlightfeatureService } from '../service/highlightfeature.service'
@@ -72,9 +72,9 @@ export class MapsComponent implements OnInit, AfterViewInit {
     public basemaplayers: BasemaplayerService,
     private overlaylayers: OverlaylayerService,
     private checkattribute: CheckattributeService,
-    private dataitbx: DataitbxService,
+    //private dataitbx: DataitbxService,
     private daftarkegiatan: DaftarkegiatanService,
-    private dialog: MatDialog,
+    //private dialog: MatDialog,
     private hightlight: HighlightfeatureService,
     private warning: WarningSnackbarService,
     private cookie: CookieService,
@@ -307,6 +307,7 @@ export class MapsComponent implements OnInit, AfterViewInit {
     this.map.removeLayer(this.sLayer);
   }
 
+  /*
 
   openModal(list) {
     const dialogConfig = new MatDialogConfig();
@@ -326,7 +327,7 @@ export class MapsComponent implements OnInit, AfterViewInit {
   }
 
 
-
+*/
 
 
   /*

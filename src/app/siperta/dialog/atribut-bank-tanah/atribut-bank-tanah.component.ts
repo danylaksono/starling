@@ -6,7 +6,6 @@ import { WarningSnackbarService } from 'src/app/dialog/warning-snackbar.service'
 import { BankTanahDataService } from '../../services/bank-tanah-data.service';
 
 
-
 export interface dataAtribut {
   no;
   kodeberkas: string;

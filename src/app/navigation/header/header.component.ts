@@ -26,6 +26,7 @@ export class HeaderComponent implements OnInit {
 
   isLoggedIn : Observable<boolean>;
   currentUser: String;
+  currentPath: String;
 
   @Output() public sidenavToggle = new EventEmitter();
 
@@ -39,6 +40,7 @@ export class HeaderComponent implements OnInit {
   }
 
 
+  
   openModal() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
@@ -73,6 +75,18 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (this.router.url == '/home') {
+      console.log('Sitaru');
+      this.currentPath = 'Sitaru';
+    } else 
+    if (this.router.url == '/siperta') {
+      console.log('Siperta');
+      this.currentPath = 'Siperta';
+    } else {
+      console.log('Simpancang');
+    }
+
+
   }
 
 

@@ -1,4 +1,4 @@
-import { CekintensitasService } from './../../service/cekintensitas.service';
+//import { CekintensitasService } from './../../service/cekintensitas.service';
 import { DataitbxService } from './../../service/dataitbx.service';
 import { Component, Inject, OnInit } from '@angular/core';
 import { NgModule } from '@angular/core';
@@ -54,7 +54,7 @@ export class CekizinComponent implements OnInit {
     public dialogRef: MatDialogRef<CekizinComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private itbx: DataitbxService,
-    private cekintensitas: CekintensitasService
+    //private cekintensitas: CekintensitasService
   ) {
     this.modalTitle = data.title;
     this.modalArticle = data.article;

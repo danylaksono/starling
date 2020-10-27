@@ -50,6 +50,7 @@ export class LoginComponent implements OnInit {
 
   signIn() {
     let credentials = {
+      strategy: 'local',
       email: this.signInEmail,
       password: this.signInPassword
     }
@@ -66,7 +67,7 @@ export class LoginComponent implements OnInit {
           // else {     warning('server autentikasi bermasalah, silahkan coba lagi)          }          
         },
         error => {
-          console.log('error');
+          //console.log('error');
         }
       );  
 
