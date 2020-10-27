@@ -1,7 +1,9 @@
 import { Component, OnInit, Inject, ViewChild, EventEmitter } from '@angular/core';
 import { NgModule } from '@angular/core';
 import { MaterialModule } from 'src/app/material/material.module';
-import { MAT_DIALOG_DEFAULT_OPTIONS, MAT_DIALOG_DATA, MatDialogRef, MatTableDataSource, MatPaginator, MatPaginatorModule } from '@angular/material';
+import { MAT_DIALOG_DEFAULT_OPTIONS, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { WarningSnackbarService } from 'src/app/dialog/warning-snackbar.service';
 import { BankTanahDataService } from '../../services/bank-tanah-data.service';
 

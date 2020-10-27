@@ -2,7 +2,7 @@
 import { Injectable, ViewChild, ElementRef } from '@angular/core';
 
 import { DaftarkegiatanService } from '../service/daftarkegiatan.service';
-import { MatDialog, MatDialogConfig } from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CekizinComponent } from '../dialog/cekizin/cekizin.component';
 import { DialogIntensitasComponent } from '../dialog/dialog-intensitas/dialog-intensitas.component';
 

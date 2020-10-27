@@ -3,8 +3,8 @@ import { DataitbxService } from './../../service/dataitbx.service';
 import { Component, Inject, OnInit } from '@angular/core';
 import { NgModule } from '@angular/core';
 import { MaterialModule } from '../../material/material.module';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { MatDialog, MatDialogConfig } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';

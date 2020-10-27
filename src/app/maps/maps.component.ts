@@ -19,7 +19,7 @@ import OlVectorSource from 'ol/source/Vector';
 
 
 //components & services
-import { MatDialog, MatDialogConfig } from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CekizinComponent } from './../dialog/cekizin/cekizin.component';
 import { BasemaplayerService } from '../service/basemaplayer.service';
 import { OverlaylayerService } from './../service/overlaylayer.service';

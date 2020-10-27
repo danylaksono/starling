@@ -24,7 +24,7 @@ import {easeIn, easeOut} from 'ol/easing';
 
 // components and services
 import { DialogAttributeComponent } from './../dialog/dialog-attribute/dialog-attribute.component';
-import { MatDialog, MatDialogConfig } from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { BasemaplayerService } from '../../service/basemaplayer.service';
 import { SipertaoverlayService } from './../../service/sipertaoverlay.service';
 import { CheckattributeService } from '../../service/checkattribute.service';

@@ -5,7 +5,7 @@ import { MaterialModule } from '../../material/material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgModule, } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { MatDialog, MatDialogConfig } from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import {Router} from '@angular/router';
 import { Observable } from 'rxjs';
 

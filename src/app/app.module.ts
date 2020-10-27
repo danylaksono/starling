@@ -19,7 +19,7 @@ import { LandingComponent } from './landing/landing.component';
 import { MapsComponent } from './maps/maps.component';
 import { NavComponent } from './nav/nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatDialogModule } from "@angular/material";
+import { MatDialogModule } from "@angular/material/dialog";
 import { HeaderComponent } from './navigation/header/header.component';
 import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
 import { CekizinComponent } from './dialog/cekizin/cekizin.component';

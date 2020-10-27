@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { NgModule } from '@angular/core';
 import { MaterialModule } from '../../material/material.module';
-import { MAT_DIALOG_DEFAULT_OPTIONS, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DEFAULT_OPTIONS, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { AuthService } from '../../service/auth.service';
 import { Observable } from 'rxjs';
 

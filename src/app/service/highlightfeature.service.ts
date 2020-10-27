@@ -6,7 +6,7 @@ import OlVectorSource from 'ol/source/Vector';
 import OlVectorLayer from 'ol/layer/Vector';
 import OlGeoJSON from 'ol/format/GeoJSON';
 
-import { MatDialog, MatDialogConfig } from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { WarningSnackbarService } from './../dialog/warning-snackbar.service';
 import { Overlay } from 'ol';
 import { MainqueryService } from './mainquery.service';
