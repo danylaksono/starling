@@ -66,7 +66,7 @@ export class MapsComponent implements OnInit, AfterViewInit {
   clickedfeature: any[];
 
 
-  @ViewChild('switcher', { static: false }) switcher: ElementRef;
+  @ViewChild('switcher') switcher: ElementRef;
 
   constructor(
     public basemaplayers: BasemaplayerService,

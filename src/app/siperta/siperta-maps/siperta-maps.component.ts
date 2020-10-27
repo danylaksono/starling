@@ -59,7 +59,7 @@ export class SipertaMapsComponent implements OnInit {
   panelOpenState2 = false;
   sLayer: OlVectorLayer;
 
-  @ViewChild('switcher2', { static: false }) switcher2: ElementRef;
+  @ViewChild('switcher2') switcher2: ElementRef;
 
   constructor(
     public basemaplayers: BasemaplayerService,
