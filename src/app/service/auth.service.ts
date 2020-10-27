@@ -1,4 +1,4 @@
-import { Injectable, Output, EventEmitter } from '@angular/core';
+import { Injectable, Output, EventEmitter, Directive } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -7,6 +7,7 @@ import { WarningSnackbarService } from '../dialog/warning-snackbar.service';
 //import { map } from 'rxjs/operators';
 
 
+@Directive()
 @Injectable({
   providedIn: 'root'
 })
