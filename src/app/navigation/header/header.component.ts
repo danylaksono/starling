@@ -15,12 +15,14 @@ import { Observable } from 'rxjs';
   styleUrls: ['./header.component.scss']
 })
 
+/*
 @NgModule({
   imports: [
     MaterialModule,
     FlexLayoutModule
   ]
 })
+*/
 
 export class HeaderComponent implements OnInit {
 
@@ -72,7 +74,7 @@ export class HeaderComponent implements OnInit {
     
   }
 
-  ngOnInit() {
+  ngOnInit():void {
   }
 
 

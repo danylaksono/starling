@@ -17,12 +17,13 @@ import { map, startWith } from 'rxjs/operators';
   styleUrls: ['./cekizin.component.scss']
 })
 
+/*
 @NgModule({
   imports: [
     MaterialModule
   ]
 })
-
+*/
 
 export class CekizinComponent implements OnInit {
 

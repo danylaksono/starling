@@ -1,0 +1,3 @@
+[submodule "backend"]
+	path = backend
+	url = https://github.com/davellanedam/node-express-mongodb-jwt-rest-api-skeleton.git

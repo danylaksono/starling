@@ -7,12 +7,13 @@ import { WarningSnackbarService } from 'src/app/dialog/warning-snackbar.service'
 import { first } from 'rxjs/operators';
 
 
-
+/*
 @NgModule({
   imports: [
     CommonModule
   ]
 })
+*/
 
 @Component({
   selector: 'app-login',
@@ -59,6 +60,7 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
+          //this.router.navigateByUrl(this.returnUrl);
           //console.log(data);
           if (data){
             this.router.navigateByUrl(this.returnUrl);  

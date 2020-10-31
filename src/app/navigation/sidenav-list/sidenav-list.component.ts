@@ -8,13 +8,13 @@ import { MaterialModule } from '../../material/material.module';
   styleUrls: ['./sidenav-list.component.scss']
 })
 
-
+/*
 @NgModule({
   imports: [
     MaterialModule
-
   ]
 })
+*/
 
 export class SidenavListComponent implements OnInit {
 

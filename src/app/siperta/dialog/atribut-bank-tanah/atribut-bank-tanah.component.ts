@@ -46,15 +46,19 @@ export interface dataAtribut {
 }
 
 
+/*
+
 @NgModule({
   providers: [
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: true } }
-  ],
-  imports: [
-    MaterialModule,
-    MatPaginatorModule
   ]
+
+  //imports: [
+  //  MaterialModule,
+  //  MatPaginatorModule
+  //]
 })
+*/
 
 @Component({
   selector: 'app-atribut-bank-tanah',

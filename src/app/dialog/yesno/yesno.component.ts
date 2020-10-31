@@ -9,13 +9,14 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./yesno.component.scss']
 })
 
+/*
 
 @NgModule({
   imports: [
     MaterialModule
   ]
 })
-
+*/
 
 export class YesnoComponent implements OnInit {
   
@@ -39,7 +40,7 @@ export class YesnoComponent implements OnInit {
 
 
 
-  ngOnInit() {
+  ngOnInit():void {
   }
 
 }

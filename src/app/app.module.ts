@@ -41,6 +41,7 @@ import { AtributBankTanahComponent } from './siperta/dialog/atribut-bank-tanah/a
 @NgModule({
   declarations: [
     AppComponent,
+    
     MainViewComponent,
     LandingComponent,
     MapsComponent,
@@ -59,7 +60,7 @@ import { AtributBankTanahComponent } from './siperta/dialog/atribut-bank-tanah/a
     DialogAttributeComponent,
     AtributBankTanahComponent
     
-    
+     
     
     
   ],

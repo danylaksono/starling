@@ -4,12 +4,6 @@ import { MaterialModule } from 'src/app/material/material.module';
 import { MAT_DIALOG_DEFAULT_OPTIONS, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { WarningSnackbarService } from 'src/app/dialog/warning-snackbar.service';
 
-
-
-
-
-
-
 export interface dataAtribut {
   atribut: string;
   keterangan: any;
@@ -22,17 +16,16 @@ export interface dataAtribut {
   styleUrls: ['./dialog-attribute.component.scss']
 })
 
-
-
+/*
 @NgModule({
   providers: [
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: true } }
   ],
-  imports: [
-    MaterialModule
-  ]
+  //imports: [
+  //  MaterialModule
+  //]
 })
-
+*/
 
 export class DialogAttributeComponent implements OnInit {
 

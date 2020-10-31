@@ -6,30 +6,27 @@ import { AuthService } from '../../service/auth.service';
 import { Observable } from 'rxjs';
 
 
-
 export interface dataPolaBidang {
   atribut: string;
   keterangan: any;
 }
 
+/*
+@NgModule({
+  providers: [
+    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: true } }
+  ]
+  //imports: [
+  //  MaterialModule
+  //]
+})
+*/
 
 @Component({
   selector: 'app-layerattribute',
   templateUrl: './layerattribute.component.html',
   styleUrls: ['./layerattribute.component.scss']
 })
-
-
-
-@NgModule({
-  providers: [
-    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: true } }
-  ],
-  imports: [
-    MaterialModule
-  ]
-})
-
 
 export class LayerattributeComponent implements OnInit {
 

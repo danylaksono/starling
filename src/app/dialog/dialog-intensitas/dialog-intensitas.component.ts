@@ -6,7 +6,14 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { map, tap } from 'rxjs/operators';
 
 
+/*
+@NgModule({
+  imports: [
+    MaterialModule
 
+  ]
+})
+*/
 
 @Component({
   selector: 'app-dialog-intensitas',
@@ -14,12 +21,6 @@ import { map, tap } from 'rxjs/operators';
   styleUrls: ['./dialog-intensitas.component.scss']
 })
 
-@NgModule({
-  imports: [
-    MaterialModule
-
-  ]
-})
 
 
 export class DialogIntensitasComponent implements OnInit {

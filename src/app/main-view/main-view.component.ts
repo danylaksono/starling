@@ -10,19 +10,20 @@ import { MaterialModule } from '../material/material.module';
   styleUrls: ['./main-view.component.scss']
 })
 
-@NgModule({
-  imports: [
-    MaterialModule
 
-  ]
-})
+
+//@NgModule({
+//  imports: [
+//    MaterialModule
+
+ // ]
+//})
 
 
 export class MainViewComponent implements OnInit {
-
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit():void {
   }
 
 }

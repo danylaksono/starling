@@ -8,11 +8,11 @@ import { Component, OnInit, NgModule } from '@angular/core';
   styleUrls: ['./landing.component.scss']
 })
 
-@NgModule({
-  imports: [
-    MaterialModule
-  ]
-})
+//@NgModule({
+//  imports: [
+//    MaterialModule
+//  ]
+//})
 
 
 export class LandingComponent implements OnInit {
@@ -25,7 +25,7 @@ export class LandingComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit():void {
   }
 
 }

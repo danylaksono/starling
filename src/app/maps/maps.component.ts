@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, NgZone, AfterViewInit, ElementRef, ViewChild, Directive } from '@angular/core';
 
 import OlMap from 'ol/Map';
 import OlXYZ from 'ol/source/XYZ';
@@ -17,7 +17,6 @@ import { Fill, Circle, Stroke, Style } from 'ol/style';
 import OlVectorSource from 'ol/source/Vector';
 
 
-
 //components & services
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CekizinComponent } from './../dialog/cekizin/cekizin.component';
@@ -33,12 +32,12 @@ import { AuthService } from './../service/auth.service';
 import { Observable } from "rxjs";
 
 
+
 @Component({
   selector: 'app-maps',
   templateUrl: './maps.component.html',
   styleUrls: ['./maps.component.scss']
 })
-
 
 export class MapsComponent implements OnInit, AfterViewInit {
 
@@ -66,7 +65,7 @@ export class MapsComponent implements OnInit, AfterViewInit {
   clickedfeature: any[];
 
 
-  @ViewChild('switcher') switcher: ElementRef;
+  
 
   constructor(
     public basemaplayers: BasemaplayerService,
@@ -234,18 +233,18 @@ export class MapsComponent implements OnInit, AfterViewInit {
     // for ol to work: set target in afterviewinit
     //this.map.setTarget('map');
 
-    var toc = this.switcher.nativeElement; // getting switcher DOM    
+    //var toc = this.switcher.nativeElement; // getting switcher DOM    
     //LayerSwitcher.renderPanel(this.map, toc); // should be located in ngAfterViewInit instead of onInit
 
     // Add a layer switcher outside the map
-    var switcher = new LayerSwitcher(
-      {
-        target: toc,
-        show_progress: true,
-        extent: true
+    //var switcher = new LayerSwitcher(
+    //  {
+    //    target: toc,
+    //    show_progress: true,
+    //    extent: true
 
-      });
-    this.map.addControl(switcher);
+    //  });
+    //this.map.addControl(switcher);
 
 
     // =========MAIN EVENT ONCLICK================
