@@ -16,3 +16,16 @@ table thead {
   justify-content: space-between;
   align-items: center;
 }
+
+.flex-grid {
+  display: flex;
+}
+.col {
+  flex: 1;
+}
+
+@media (max-width: 400px) {
+  .flex-grid {
+    display: block;
+  }
+}

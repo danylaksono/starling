@@ -1,8 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 
 
+
+
 // node module's css-es need to be added here instead of to each component
-@import '../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css';
+//@import '../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css';
+//@import 'https://fonts.googleapis.com/icon?family=Material+Icons';
 @import '../node_modules/sidebar-v2/css/ol3-sidebar.css';   
 @import '../node_modules/ol-ext/control/LayerSwitcher.css'; 
 @import '../node_modules/ol-popup/src/ol-popup.css'; 
@@ -10,6 +13,12 @@
 
 
 //@import 'https://viglino.github.io/ol-ext/examples/control/map.switcher2.css';
+
+.sidebar-tabs {
+  background-color: rgb(103 58 183 / 69%) !important;
+  right:0 !important;
+}
+
 
 .ol-search ul {
   color: #333;
@@ -20,6 +29,10 @@
   display: block;
   color: #333;
   font-size:0.85em;
+}
+
+.ol-attribution button {
+  margin-right: 1.5em !important;
 }
 
 html, body { 

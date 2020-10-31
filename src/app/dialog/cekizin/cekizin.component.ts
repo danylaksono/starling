@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { MaterialModule } from '../../material/material.module';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';

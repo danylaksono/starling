@@ -1,5 +1,7 @@
+import { AuthService } from './../../service/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { NgModule } from '@angular/core';
+import { Observable } from 'rxjs';
 import { MaterialModule } from '../../material/material.module';
 
 @Component({
@@ -18,7 +20,15 @@ import { MaterialModule } from '../../material/material.module';
 
 export class SidenavListComponent implements OnInit {
 
-  constructor() { }
+
+  isLoggedIn : Observable<boolean>;
+
+  constructor(
+    private auth: AuthService
+  ) { 
+    this.isLoggedIn = auth.isLoggedIn();
+  }
+
 
   ngOnInit() {
   }

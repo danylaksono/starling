@@ -39,8 +39,9 @@ export class AuthService {
 
   signIn(credentials) {
     
-    const authUrl = 'https://sitaru-arsip.jogjakota.go.id/auth/local';
+    const authUrl = 'http://localhost:3000/login/';
     this.http.post(authUrl, credentials).subscribe((res: any) => {
+      console.log(res);
       //this.http.post('api/auth', credentials).subscribe((res: any) => {
       //this.jwt = res.token;
       //localStorage.setItem('currentUser', res.token);

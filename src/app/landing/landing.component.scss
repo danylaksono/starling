@@ -1,3 +1,72 @@
+.welcome {
+  //background-color: white;
+  background-color: rgba(255,255,255,0.8);
+  //width: 20%;
+  flex: 1 1 100%; 
+  box-sizing: border-box; 
+  //max-width: 33%;"
+  height: 100vh;
+  overflow: auto;
+}
+
+
+video {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -100;
+  transform: translateX(-50%) translateY(-50%);
+  background-size: cover;
+  transition: 1s opacity;
+}
+
+.container {
+  justify-content: space-between;
+  background-image: url("../../assets/images/kencana.jpg");
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.title{
+  color: black;
+  opacity: 1;
+}
+
+.ripple-container {
+  background-color: white;
+  cursor: pointer;
+  text-align: center;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+
+  -webkit-user-drag: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+
+
+
+/*
+
 html,
 body {
   overflow: hidden !important;
@@ -11,7 +80,6 @@ body {
   top: 0;
   left: 0;
   height: 100%;
-  /* Center and scale the image nicely */
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -26,7 +94,7 @@ body {
 .welcome {
   background-color: white;
   opacity: 0.8;
-  //width: 1000px;
+
 }
 
 .ripple-container {
@@ -34,9 +102,6 @@ body {
   cursor: pointer;
   text-align: center;
 
-  //width: 200px;
-//  min-height: 100px;
-  //line-height: 200px;
 
   user-select: none;
   -webkit-user-select: none;
@@ -46,3 +111,4 @@ body {
   -webkit-user-drag: none;
   -webkit-tap-highlight-color: transparent;
 }
+*/

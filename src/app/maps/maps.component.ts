@@ -64,6 +64,8 @@ export class MapsComponent implements OnInit, AfterViewInit {
   list: any[];
   clickedfeature: any[];
 
+  @ViewChild('switcher', { static: false }) switcher: ElementRef;
+
 
   
 
@@ -233,18 +235,18 @@ export class MapsComponent implements OnInit, AfterViewInit {
     // for ol to work: set target in afterviewinit
     //this.map.setTarget('map');
 
-    //var toc = this.switcher.nativeElement; // getting switcher DOM    
+    var toc = this.switcher.nativeElement; // getting switcher DOM    
     //LayerSwitcher.renderPanel(this.map, toc); // should be located in ngAfterViewInit instead of onInit
 
     // Add a layer switcher outside the map
-    //var switcher = new LayerSwitcher(
-    //  {
-    //    target: toc,
-    //    show_progress: true,
-    //    extent: true
+    var switcher = new LayerSwitcher(
+      {
+        target: toc,
+        show_progress: true,
+        extent: true
 
-    //  });
-    //this.map.addControl(switcher);
+      });
+    this.map.addControl(switcher);
 
 
     // =========MAIN EVENT ONCLICK================
@@ -371,7 +373,7 @@ export class MapsComponent implements OnInit, AfterViewInit {
       fill: new Fill({
         color: 'yellow'
       }),
-      stroke: new Stroke({
+        stroke: new Stroke({
         color: 'red',
         width: 2
       })

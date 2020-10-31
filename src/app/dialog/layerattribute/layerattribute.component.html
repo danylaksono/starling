@@ -1,6 +1,6 @@
 <div class="dialogTitle" mat-dialog-title color="primary" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
   <span cdkDragHandle>
-      Kode: {{modalRDTR.kode}}
+      Keterangan Bidang Tanah
   </span>
    
   <button  matTooltip="tutup" mat-icon-button [mat-dialog-close]='true'>
@@ -8,27 +8,52 @@
     </button>
   
 </div>
-<mat-dialog-content>
-  <table mat-table [dataSource]="dataSource">
 
-    <!--- Note that these columns can be defined in any order.
-              The actual rendered columns are set as a property on the row definition" -->
 
-    <!-- Position Column -->
-    <ng-container matColumnDef="position">
-      <th style="display: none" mat-header-cell *matHeaderCellDef> Atribut </th>
-      <td mat-cell *matCellDef="let element"> <strong> {{element.atribut}} </strong></td>
-    </ng-container>
+<mat-dialog-content cdkDragHandle cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+  <div fxLayout="row" fxLayoutAlign="space-between center" >
+    <div class="flex-grid">
+      <div fxFlex="70">
+        <table mat-table [dataSource]="dataSource">
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <th style="display: none" mat-header-cell *matHeaderCellDef> Keterangan </th>
-      <td mat-cell *matCellDef="let element"> {{element.keterangan}} </td>
-    </ng-container>
-    <tr style="display: none" mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
+          <!--- Note that these columns can be defined in any order.
+                    The actual rendered columns are set as a property on the row definition" -->
+      
+          <!-- Position Column -->
+          <ng-container matColumnDef="position">
+            <th style="display: none" mat-header-cell *matHeaderCellDef> Atribut </th>
+            <td mat-cell *matCellDef="let element"> <strong> {{element.atribut}} </strong></td>
+          </ng-container>
+      
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th style="display: none" mat-header-cell *matHeaderCellDef> Keterangan </th>
+            <td mat-cell *matCellDef="let element"> {{element.keterangan}} </td>
+          </ng-container>
+          <tr style="display: none" mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+      <div fxFlex="10">
 
+      </div>
+      <div fxFlex="20">
+        <div fxLayout="column" fxLayoutAlign="center end">
+
+          <p >
+            Kode:
+          </p>
+          <h1  style="text-align: center;">
+            {{modalRDTR.kode}}
+          </h1>
+           
+      </div>
+      </div>
+    </div>
+    
+  
+  </div>
+  
   <!-- 
 
   <p> Zona RDTR: {{modalRDTR.zona}}</p>

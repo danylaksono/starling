@@ -1,3 +1,48 @@
+
+
+
+  <div fxLayout="column" fxLayoutAlign="space-around center" fxLayoutGap="10" fxLayoutWrap>
+    <div fxFlex>
+      <h3 class="mat-h3" fxLayoutAlign="center">Sistem Informasi Tata Ruang </h3>
+      <h4 class="mat-h4" fxLayoutAlign="center">Kota Yogyakarta </h4>
+      <span fxLayoutAlign="center">
+        <img class="sidebar-logo" src="../../../assets/images/logo.png">
+      </span>
+    </div>
+    
+  </div>
+
+
+
+  <mat-nav-list>
+    <a mat-list-item routerLink="/">
+        <mat-icon> home </mat-icon>
+        <p mat-line> Halaman Depan</p>
+      </a>
+    <h3 mat-subheader>Menu Aplikasi</h3>
+    
+    <a mat-list-item  routerLink="/home">
+      <mat-icon> map </mat-icon>
+      <p mat-line> Sitaru</p>
+    </a>
+    <a mat-list-item routerLink="/siperta">
+      <mat-icon> corporate_fare </mat-icon>
+      <p mat-line> Siperta</p>
+    </a>
+    <a mat-list-item  routerLink="/pengaduan">
+      <mat-icon> emoji_transportation </mat-icon>
+      <p mat-line> Simpancang</p>
+    </a>
+  </mat-nav-list>
+  <mat-nav-list *ngIf="(isLoggedIn | async)">
+      <h3 mat-subheader>Administrasi</h3>
+      <a mat-list-item routerLink="/cekaduan">
+        <mat-icon> assignment </mat-icon>
+        <p mat-line> Lihat Pengaduan</p>
+      </a>
+    </mat-nav-list>
+
+<!--
 <mat-nav-list>
   <a mat-list-item routerLink="/">
       <mat-icon>home</mat-icon> <span class="nav-caption">Halaman Depan</span>
@@ -9,6 +54,8 @@
       <mat-icon>account_balance</mat-icon><span class="nav-caption">Siperta</span>
   </a>
 </mat-nav-list>
+-->
+
 
 
 

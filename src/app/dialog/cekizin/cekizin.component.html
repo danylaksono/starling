@@ -1,4 +1,4 @@
-<div class="dialogTitle" mat-dialog-title cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+<!--div-- class="dialogTitle" mat-dialog-title cdkDrag cdkDragRootElement=".cdk-overlay-pane">
   <span style="width: 100%;" cdkDragHandle>
     Cek Perizinan
   </span>
@@ -6,9 +6,9 @@
   <button matTooltip="tutup" mat-icon-button [mat-dialog-close]='true'>
     <mat-icon>close</mat-icon>
   </button>
-</div>
+</!--div-->
 
-<mat-dialog-content>
+<mat-dialog-content dkDragHandle cdkDrag cdkDragRootElement=".cdk-overlay-pane">
   <div fxFill class="container">
     <div fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutWrap fxLayoutGap="10%">
 
