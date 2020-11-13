@@ -1,6 +1,6 @@
-# Sitaru v.2
+# Starling v.2
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.1.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.0.
 
 ## NOTES ON DEVELOPMENT
 
