@@ -10,10 +10,12 @@ import SourceOSM from 'ol/source/OSM';
 })
 export class OverlaylayerService {
   public overlay =  new LayerGroup({
+    // @ts-ignore
     title: 'Layer Peta',
     openInLayerSwitcher: true,
     layers: [
       new LayerTile({
+        // @ts-ignore
         title: 'Rencana Detil Tata Ruang',       
         visible: true,
         source: new SourceWMS({
@@ -24,6 +26,7 @@ export class OverlaylayerService {
         })
       }),
       new LayerTile({
+        // @ts-ignore
         title: 'OSM',       
         visible: false,
         source: new SourceOSM()
