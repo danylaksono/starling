@@ -15,7 +15,7 @@ import { Sidebar } from 'ol/control.js';
 import SearchNominatim from 'ol-ext/control/SearchNominatim';
 import LayerSwitcher from 'ol-ext/control/LayerSwitcher';
 import { fromLonLat, transform } from 'ol/proj';
-import * as Extent from 'ol/Extent';
+import * as Extent from 'ol/extent';
 import { Observable } from "rxjs";
 import {easeIn, easeOut} from 'ol/easing';
 

@@ -4,7 +4,7 @@ import OlMap from 'ol/Map';
 import OlXYZ from 'ol/source/XYZ';
 import OlTileLayer from 'ol/layer/Tile';
 import OlView from 'ol/View';
-import * as Extent from 'ol/Extent';
+import * as Extent from 'ol/extent';
 import OlVectorLayer from 'ol/layer/Vector';
 import TileWMS from 'ol/source/TileWMS';
 import * as Control from 'ol/control';
