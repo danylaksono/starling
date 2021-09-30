@@ -11,9 +11,9 @@ import OlVectorLayer from 'ol/layer/Vector';
 import OlGeoJSON from 'ol/format/GeoJSON';
 import TileWMS from 'ol/source/TileWMS';
 import * as Control from 'ol/control';
-import { Sidebar } from 'ol/control.js';
-import SearchNominatim from 'ol-ext/control/SearchNominatim';
-import LayerSwitcher from 'ol-ext/control/LayerSwitcher';
+// import { Sidebar } from 'ol/control.js';
+// import SearchNominatim from 'ol-ext/control/SearchNominatim';
+// import LayerSwitcher from 'ol-ext/control/LayerSwitcher';
 import { fromLonLat, transform } from 'ol/proj';
 import * as Extent from 'ol/extent';
 import { Observable } from "rxjs";
@@ -107,24 +107,25 @@ export class SipertaMapsComponent implements OnInit {
       view: this.view
     });
 
-    var sidebar = new Sidebar({ element: 'sidebar', position: 'right' });
+    // var sidebar = new Sidebar({ element: 'sidebar', position: 'right' });
     var scale = new Control.ScaleLine;
-    this.map.addControl(sidebar);
+    // this.map.addControl(sidebar);
     this.map.addControl(scale);
 
 
 
 
     // Search control
+    /*
     let search = new SearchNominatim(
       {	//target: $(".options").get(0),
         polygon: true,
         reverse: true,
         position: true	// Search, with priority to geo position
       });
+    */  
 
-
-
+    /*  
     this.map.addControl(search);
     // Move to the position on selection in the control list
     search.on('select', (e) => {
@@ -186,6 +187,7 @@ export class SipertaMapsComponent implements OnInit {
         });
       }
     });
+    */
 
 
   } //oninit
@@ -195,10 +197,11 @@ export class SipertaMapsComponent implements OnInit {
     // for ol to work: set target in afterviewinit
     //this.map.setTarget('sipertamap');
 
-    var toc = this.switcher2.nativeElement; // getting switcher DOM    
+    // var toc = this.switcher2.nativeElement; // getting switcher DOM    
     //LayerSwitcher.renderPanel(this.map, toc); // should be located in ngAfterViewInit instead of onInit
 
     // Add a layer switcher outside the map
+    /*
     var switcher = new LayerSwitcher(
       {
         target: toc,
@@ -207,6 +210,7 @@ export class SipertaMapsComponent implements OnInit {
 
       });
     this.map.addControl(switcher);
+    */
 
     this.map.on('click', (evt) => {
       //console.log('cl')

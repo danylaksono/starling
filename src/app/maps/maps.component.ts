@@ -8,11 +8,11 @@ import * as Extent from 'ol/extent';
 import OlVectorLayer from 'ol/layer/Vector';
 import TileWMS from 'ol/source/TileWMS';
 import * as Control from 'ol/control';
-import { Sidebar } from 'ol/control.js';
-import SearchNominatim from 'ol-ext/control/SearchNominatim';
-import LayerSwitcher from 'ol-ext/control/LayerSwitcher';
+// import { Sidebar } from 'ol/control.js';
+// import SearchNominatim from 'ol-ext/control/SearchNominatim';
+// import LayerSwitcher from 'ol-ext/control/LayerSwitcher';
 import { fromLonLat } from 'ol/proj';
-import OlGeoJSON from 'ol/format/GeoJSON';
+import OlGeoJSON from 'ol/format/GeoJSON';  
 import { Fill, Circle, Stroke, Style } from 'ol/style';
 import OlVectorSource from 'ol/source/Vector';
 
@@ -135,25 +135,26 @@ export class MapsComponent implements OnInit, AfterViewInit {
 
 
     // map sidebar
-    var sidebar = new Sidebar({ element: 'sidebar', position: 'right' });
+    // var sidebar = new Sidebar({ element: 'sidebar', position: 'right' });
     var scale = new Control.ScaleLine;
-    this.map.addControl(sidebar);
+    // this.map.addControl(sidebar);
     this.map.addControl(scale);
 
 
 
     // Search control
-    let search = new SearchNominatim(
-      {	//target: $(".options").get(0),
-        polygon: true,
-        reverse: true,
-        position: true	// Search, with priority to geo position
-      });
+    // let search = new SearchNominatim(
+    //      {	//target: $(".options").get(0),
+    //    polygon: true,
+    //    reverse: true,
+    //    position: true	// Search, with priority to geo position
+    //  });
 
 
 
-    this.map.addControl(search);
+    //  this.map.addControl(search);
     // Move to the position on selection in the control list
+    /*
     search.on('select', (e) => {
 
       if (this.sLayer) {
@@ -213,6 +214,7 @@ export class MapsComponent implements OnInit, AfterViewInit {
         });
       }
     });
+    */
 
 
 
@@ -235,10 +237,11 @@ export class MapsComponent implements OnInit, AfterViewInit {
     // for ol to work: set target in afterviewinit
     //this.map.setTarget('map');
 
-    var toc = this.switcher.nativeElement; // getting switcher DOM    
+    // var toc = this.switcher.nativeElement; // getting switcher DOM    
     //LayerSwitcher.renderPanel(this.map, toc); // should be located in ngAfterViewInit instead of onInit
 
     // Add a layer switcher outside the map
+    /*
     var switcher = new LayerSwitcher(
       {
         target: toc,
@@ -247,6 +250,7 @@ export class MapsComponent implements OnInit, AfterViewInit {
 
       });
     this.map.addControl(switcher);
+    */
 
 
     // =========MAIN EVENT ONCLICK================

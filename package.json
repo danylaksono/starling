@@ -19,7 +19,7 @@
     "@angular/flex-layout": "^10.0.0-beta.32",
     "@angular/forms": "^13.0.0-next.8",
     "@angular/material": "^12.2.8",
-    "@angular/platform-browser": "~13.0.0-next.8",
+    "@angular/platform-browser": "*",
     "@angular/platform-browser-dynamic": "~13.0.0-next.8",
     "@angular/router": "~13.0.0-next.8",
     "@ngrx/effects": "^12.4.0",
@@ -34,7 +34,7 @@
     "rxjs": "^6.6.3",
     "sidebar-v2": "github:umbe1987/sidebar-v2#ol5-sidebar",
     "tslib": "^2.0.0",
-    "zone.js": "~0.11.4"
+    "zone.js": "*"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~12.2.7",
